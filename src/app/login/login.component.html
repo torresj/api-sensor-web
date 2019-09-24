@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title class="login-title">Log in</mat-card-title>
+    </mat-card-header>
+
+    <form class="login-form">
+      <mat-card-content>
+        <mat-form-field class="user-login" color="primary">
+          <input matInput color="primary" placeholder="Username" />
+        </mat-form-field>
+
+        <mat-form-field class="pass-login">
+          <input matInput placeholder="Password" />
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button color="primary" class="btn-block">
+        Log in
+      </button>
+    </form>
+  </mat-card>
+</div>
