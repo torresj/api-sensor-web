@@ -2,3 +2,33 @@
   background-color: rgba(87, 147, 83, 0.92);
   color: white;
 }
+
+footer {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+}
+
+footer a img {
+  margin: 0 5px;
+}
+
+.copy-left {
+  display: inline-block;
+  text-align: right;
+  margin: 0px;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: “FlipH”;
+}
