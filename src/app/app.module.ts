@@ -4,8 +4,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from "./app-routing.module";
-import { LayoutComponent } from "./layout/layout.component";
-import { LoginComponent } from "./login/login.component";
+import { LayoutComponent } from "./components/layout/layout.component";
+import { LoginComponent } from "./components/login/login.component";
 
 // Material
 import { MatInputModule } from "@angular/material/input";
@@ -18,9 +18,11 @@ import { MatMenuModule } from "@angular/material/menu";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { AlertComponent } from './components/alert/alert.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [LayoutComponent, LoginComponent],
+  declarations: [LayoutComponent, LoginComponent, AlertComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

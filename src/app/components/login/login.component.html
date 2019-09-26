@@ -4,7 +4,7 @@
       <mat-card-title class="login-title">Log in</mat-card-title>
     </mat-card-header>
 
-    <form class="login-form">
+    <form class="login-form" (ngSubmit)="onSubmit()">
       <mat-card-content>
         <mat-form-field class="user-login example-full-width" color="primary">
           <input matInput color="primary" placeholder="Username" />
