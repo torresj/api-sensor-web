@@ -2,10 +2,14 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { LayoutComponent } from "./components/layout/layout.component";
 import { LoginComponent } from "./components/login/login.component";
+import { JwtInterceptor } from "./interceptors/jwt.interceptor";
+import { ErrorInterceptor } from "./interceptors/error.interceptor";
+import { AppConfig } from "./app.config";
 
 // Material
 import { MatInputModule } from "@angular/material/input";
@@ -18,11 +22,16 @@ import { MatMenuModule } from "@angular/material/menu";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { AlertComponent } from './components/alert/alert.component';
-import { HomeComponent } from './components/home/home.component';
+import { AlertComponent } from "./components/alert/alert.component";
+import { HomeComponent } from "./components/home/home.component";
 
 @NgModule({
-  declarations: [LayoutComponent, LoginComponent, AlertComponent, HomeComponent],
+  declarations: [
+    LayoutComponent,
+    LoginComponent,
+    AlertComponent,
+    HomeComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,9 +45,14 @@ import { HomeComponent } from './components/home/home.component';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    AppConfig
+  ],
   bootstrap: [LayoutComponent]
 })
 export class AppModule {}
