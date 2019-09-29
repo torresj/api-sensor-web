@@ -4,4 +4,5 @@ import { Injectable } from "@angular/core";
 export class AppConfig {
   readonly baseApiUrl: string = "https://easydom.es:8443/services/api/";
   readonly loginPath: string = "login";
+  readonly userLoggedPath: string = "v1/users/logged";
 }

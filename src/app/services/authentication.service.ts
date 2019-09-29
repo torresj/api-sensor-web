@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 
 import { User } from "../models/user";
 import { AppConfig } from "../app.config";
@@ -23,8 +23,26 @@ export class AuthenticationService {
   }
 
   login(username, password) {
+    this.http
+      .post<any>(
+        this.appConfig.baseApiUrl + this.appConfig.loginPath,
+        {
+          username,
+          password
+        },
+        {
+          headers: new HttpHeaders().set("Content-Type", "application/json"),
+          observe: "response"
+        }
+      )
+      .subscribe(res => {
+        console.log(res.headers.get("Authorization"));
+      });
+  }
+
+  getUser(username: string, password: string) {
     return this.http
-      .post<any>(this.appConfig.baseApiUrl + this.appConfig.loginPath, {
+      .post<any>(this.appConfig.baseApiUrl + this.appConfig.userLoggedPath, {
         username,
         password
       })

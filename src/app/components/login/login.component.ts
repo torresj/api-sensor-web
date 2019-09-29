@@ -53,9 +53,12 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService
-      .login(this.fields.username.value, this.fields.password.value)
-      .pipe(first())
+    this.authenticationService.login(
+      this.fields.username.value,
+      this.fields.password.value
+    );
+    /*this.authenticationService
+      .getUser(this.fields.username.value, this.fields.password.value)
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
@@ -64,6 +67,6 @@ export class LoginComponent implements OnInit {
           this.alertService.error(error);
           this.loading = false;
         }
-      );
+      );*/
   }
 }
