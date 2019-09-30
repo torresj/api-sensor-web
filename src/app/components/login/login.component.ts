@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
   loading = false;
+  error = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,20 +54,21 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.login(
-      this.fields.username.value,
-      this.fields.password.value
-    );
-    /*this.authenticationService
-      .getUser(this.fields.username.value, this.fields.password.value)
+    this.authenticationService
+      .login(this.fields.username.value, this.fields.password.value)
+      .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
+          if (this.returnUrl) {
+            this.router.navigate([this.returnUrl]);
+          } else {
+            this.router.navigate(["/"]);
+          }
         },
         error => {
-          this.alertService.error(error);
+          this.error = error;
           this.loading = false;
         }
-      );*/
+      );
   }
 }

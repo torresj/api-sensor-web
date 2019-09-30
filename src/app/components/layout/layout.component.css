@@ -32,3 +32,19 @@ footer a img {
   filter: FlipH;
   -ms-filter: “FlipH”;
 }
+
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.logout {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}

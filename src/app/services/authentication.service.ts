@@ -22,27 +22,9 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(username, password) {
-    this.http
-      .post<any>(
-        this.appConfig.baseApiUrl + this.appConfig.loginPath,
-        {
-          username,
-          password
-        },
-        {
-          headers: new HttpHeaders().set("Content-Type", "application/json"),
-          observe: "response"
-        }
-      )
-      .subscribe(res => {
-        console.log(res.headers.get("Authorization"));
-      });
-  }
-
-  getUser(username: string, password: string) {
+  login(username: string, password: string) {
     return this.http
-      .post<any>(this.appConfig.baseApiUrl + this.appConfig.userLoggedPath, {
+      .post<any>(this.appConfig.baseApiUrl + this.appConfig.loginPath, {
         username,
         password
       })

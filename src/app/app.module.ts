@@ -19,6 +19,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -36,6 +37,7 @@ import { HomeComponent } from "./components/home/home.component";
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatMenuModule,
     MatDialogModule,
     MatInputModule,

@@ -1,6 +1,16 @@
 <mat-toolbar class="mat-elevation-z5 app-header">
   <mat-toolbar-row>
     <span>Easydom</span>
+    <span class="fill-remaining-space"></span>
+    <button
+      mat-icon-button
+      matTooltip="Log out"
+      matTooltipPosition="before"
+      [className]="isLogged() ? 'logout tooltip' : 'hidden'"
+      (click)="logout()"
+    >
+      <img src="assets/images/logout.png" height="40px" />
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
 
