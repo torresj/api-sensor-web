@@ -83,3 +83,9 @@
 .login-title {
   color: #673ab7;
 }
+
+.error {
+  text-align: center;
+  padding-top: 1rem;
+  margin-bottom: -2rem;
+}

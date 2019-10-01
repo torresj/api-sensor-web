@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map, tap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 
 import { User } from "../models/user";
 import { AppConfig } from "../app.config";
@@ -9,6 +9,7 @@ import { AppConfig } from "../app.config";
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
+  public error: string;
   public currentUser: Observable<User>;
 
   constructor(private http: HttpClient, private appConfig: AppConfig) {
@@ -16,6 +17,7 @@ export class AuthenticationService {
       JSON.parse(localStorage.getItem("currentUser"))
     );
     this.currentUser = this.currentUserSubject.asObservable();
+    this.error = "";
   }
 
   public get currentUserValue(): User {

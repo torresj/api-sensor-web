@@ -11,17 +11,18 @@
             matInput
             color="primary"
             formControlName="username"
-            placeholder="Username"
+            placeholder="Usuario"
           />
         </mat-form-field>
 
         <mat-form-field class="pass-login example-full-width">
-          <input matInput formControlName="password" placeholder="Password" />
+          <input matInput formControlName="password" placeholder="Contraseña" />
         </mat-form-field>
       </mat-card-content>
       <button mat-stroked-button color="primary" class="btn-block">
         Log in
       </button>
+      <mat-error class="error" *ngIf="error !== ''">{{ error }}</mat-error>
     </form>
   </mat-card>
 </div>

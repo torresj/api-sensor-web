@@ -66,7 +66,15 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          this.error = error;
+          if (this.authenticationService.error !== "") {
+            this.error = this.authenticationService.error;
+            this.authenticationService.error = "";
+            this.fields.username.setErrors({ incorrect: true });
+            this.fields.password.setErrors({ incorrect: true });
+          } else {
+            this.error =
+              "Error al realizar el login. Intentelo de nuevo mas tarde";
+          }
           this.loading = false;
         }
       );
