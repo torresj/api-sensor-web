@@ -89,3 +89,10 @@
   padding-top: 1rem;
   margin-bottom: -2rem;
 }
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+}

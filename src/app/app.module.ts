@@ -20,6 +20,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -42,6 +43,7 @@ import { HomeComponent } from "./components/home/home.component";
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     MatCardModule,
     MatFormFieldModule,
     FlexLayoutModule,

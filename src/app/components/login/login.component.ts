@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
   loading = false;
+  submitted = false;
   error = "";
 
   constructor(
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     // reset alerts on submit
     this.alertService.clear();
 
