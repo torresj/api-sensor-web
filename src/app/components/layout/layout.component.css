@@ -1,5 +1,5 @@
 .app-header {
-  background-color: rgba(87, 147, 83, 0.92);
+  background-color: rgba(207, 204, 214, 0.9);
   color: white;
 }
 
@@ -39,12 +39,10 @@ footer a img {
   flex: 1 1 auto;
 }
 
-.logout {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+.logout_button {
+  background-color: #a6d785;
 }
 
-.hidden {
-  display: none;
+.logo-toolbar {
+  padding-top: 4px;
 }

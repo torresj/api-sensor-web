@@ -1,15 +1,18 @@
-<mat-toolbar class="mat-elevation-z5 app-header">
+<mat-toolbar color="primary" class="mat-elevation-z5 app-header">
   <mat-toolbar-row>
-    <span>Easydom</span>
+    <a class="logo-toolbar" [routerLink]="['/']">
+      <img src="assets/images/easydom_logo.png" height="44px" />
+    </a>
     <span class="fill-remaining-space"></span>
     <button
-      mat-icon-button
+      *ngIf="isLogged()"
+      class="logout_button tooltip"
+      mat-mini-fab
+      (click)="logout()"
       matTooltip="Log out"
       matTooltipPosition="before"
-      [className]="isLogged() ? 'logout tooltip' : 'hidden'"
-      (click)="logout()"
     >
-      <img src="assets/images/logout.png" height="40px" />
+      <mat-icon>arrow_forward</mat-icon>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>

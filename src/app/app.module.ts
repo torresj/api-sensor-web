@@ -21,6 +21,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatIconModule } from "@angular/material/icon";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -42,6 +43,7 @@ import { HomeComponent } from "./components/home/home.component";
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
+    MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
     MatCardModule,
