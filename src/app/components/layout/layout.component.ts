@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { AuthenticationService } from "../../services/authentication.service";
+import { MenuItem } from "../../models/menItem";
 
 @Component({
   selector: "app-layout",
@@ -9,6 +10,8 @@ import { AuthenticationService } from "../../services/authentication.service";
   styleUrls: ["./layout.component.css"]
 })
 export class LayoutComponent implements OnInit {
+  menuItems: MenuItem[];
+
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router
@@ -16,7 +19,7 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {}
 
-  isLogged() {
+  isLogged(): boolean {
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
       return true;
@@ -25,8 +28,21 @@ export class LayoutComponent implements OnInit {
     }
   }
 
+  getUserName(): string {
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser) {
+      return currentUser.username;
+    } else {
+      return "";
+    }
+  }
+
   logout() {
     this.authenticationService.logout();
+    this.router.navigate(["/login"]);
+  }
+
+  login() {
     this.router.navigate(["/login"]);
   }
 }

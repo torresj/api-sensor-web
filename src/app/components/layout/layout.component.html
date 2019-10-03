@@ -1,19 +1,27 @@
-<mat-toolbar color="primary" class="mat-elevation-z5 app-header">
+<mat-toolbar color="primary" class="mat-elevation-z2 app-header">
   <mat-toolbar-row>
     <a class="logo-toolbar" [routerLink]="['/']">
-      <img src="assets/images/easydom_logo.png" height="44px" />
+      <img src="assets/images/easydom_logo.png" height="40px" />
     </a>
+    <h1 class="title-toolbar">Easydom</h1>
+
     <span class="fill-remaining-space"></span>
-    <button
-      *ngIf="isLogged()"
-      class="logout_button tooltip"
-      mat-mini-fab
-      (click)="logout()"
-      matTooltip="Log out"
-      matTooltipPosition="before"
-    >
-      <mat-icon>arrow_forward</mat-icon>
+    <h1 class="menu-user-name">{{ getUserName() }}</h1>
+    <button class="user_button" mat-mini-fab [matMenuTriggerFor]="menu">
+      <mat-icon>perm_identity</mat-icon>
     </button>
+    <mat-menu class="toolbar-menu" #menu="matMenu">
+      <button
+        *ngFor="let item of menuItems"
+        mat-menu-item
+        [routerLink]="item.route"
+      >
+        {{ item.name }}
+      </button>
+      <button mat-menu-item (click)="isLogged() ? logout() : login()">
+        {{ isLogged() ? "Logout" : "Login" }}
+      </button>
+    </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
 

@@ -1,7 +1,7 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
-      <mat-card-title class="login-title">Log in</mat-card-title>
+      <mat-card-title class="login-title">Login</mat-card-title>
     </mat-card-header>
 
     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -33,7 +33,7 @@
         <div *ngIf="submitted && loading" class="spinner">
           <mat-spinner diameter="40"></mat-spinner>
         </div>
-        <span *ngIf="!loading">Log in</span>
+        <span *ngIf="!loading">Iniciar sesión</span>
       </button>
       <mat-error class="error" *ngIf="error !== ''">{{ error }}</mat-error>
     </form>
