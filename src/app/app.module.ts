@@ -26,15 +26,19 @@ import { MatDividerModule } from "@angular/material/divider";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { AlertComponent } from "./components/alert/alert.component";
 import { HomeComponent } from "./components/home/home.component";
+import { IndexComponent } from "./components/index/index.component";
+import { ProfileComponent } from "./components/profile/profile.component";
+import { AdminComponent } from "./components/admin/admin.component";
 
 @NgModule({
   declarations: [
     LayoutComponent,
     LoginComponent,
-    AlertComponent,
-    HomeComponent
+    HomeComponent,
+    IndexComponent,
+    ProfileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

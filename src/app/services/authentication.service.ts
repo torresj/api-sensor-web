@@ -40,6 +40,20 @@ export class AuthenticationService {
       );
   }
 
+  getUserData() {
+    return this.http
+      .get<any>(this.appConfig.baseApiUrl + this.appConfig.userLoggedPath, {})
+      .pipe(
+        map(user => {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          (user as User).token = this.currentUserValue.token;
+          localStorage.setItem("currentUser", JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          return user;
+        })
+      );
+  }
+
   logout() {
     // remove user from local storage and set current user to null
     localStorage.removeItem("currentUser");

@@ -1,5 +1,5 @@
 .app-header {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #673ab7;
   color: white;
 }
 
@@ -52,6 +52,6 @@ footer a img {
   margin-right: 10px;
 }
 
-.title-toolbar {
-  margin-left: 1rem;
+.toolbar-button {
+  font-size: 1rem;
 }

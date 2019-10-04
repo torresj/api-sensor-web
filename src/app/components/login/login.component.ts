@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
 
 import { AlertService } from "../../services/alert.service";
@@ -20,13 +20,12 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
     private alertService: AlertService
   ) {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["/"]);
+      this.router.navigate(["/home"]);
     }
   }
 
@@ -41,7 +40,7 @@ export class LoginComponent implements OnInit {
     });
 
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["/"]);
+      this.router.navigate(["/home"]);
     }
   }
 
@@ -60,12 +59,16 @@ export class LoginComponent implements OnInit {
       .login(this.fields.username.value, this.fields.password.value)
       .pipe(first())
       .subscribe(
-        data => {
-          if (this.returnUrl) {
-            this.router.navigate([this.returnUrl]);
-          } else {
-            this.router.navigate(["/"]);
-          }
+        dataLogin => {
+          this.authenticationService.getUserData().subscribe(
+            dataUserData => {
+              this.router.navigate(["/home"]);
+            },
+            error => {
+              this.error =
+                "Error al realizar el login. Inténtelo de nuevo más tarde";
+            }
+          );
         },
         error => {
           if (this.authenticationService.error !== "") {
@@ -75,7 +78,7 @@ export class LoginComponent implements OnInit {
             this.fields.password.setErrors({ incorrect: true });
           } else {
             this.error =
-              "Error al realizar el login. Intentelo de nuevo mas tarde";
+              "Error al realizar el login. Inténtelo de nuevo más tarde";
           }
           this.loading = false;
         }

@@ -3,7 +3,25 @@
     <a class="logo-toolbar" [routerLink]="['/']">
       <img src="assets/images/easydom_logo.png" height="40px" />
     </a>
-    <h1 class="title-toolbar">Easydom</h1>
+    <button mat-button class="toolbar-button" [routerLink]="['/']">
+      Easydom
+    </button>
+    <button
+      *ngIf="isLogged()"
+      mat-button
+      class="toolbar-button"
+      [routerLink]="['/home']"
+    >
+      Domótica
+    </button>
+    <button
+      *ngIf="isAdmin()"
+      mat-button
+      class="toolbar-button"
+      [routerLink]="['/admin']"
+    >
+      Gestión
+    </button>
 
     <span class="fill-remaining-space"></span>
     <h1 class="menu-user-name">{{ getUserName() }}</h1>
@@ -11,12 +29,8 @@
       <mat-icon>perm_identity</mat-icon>
     </button>
     <mat-menu class="toolbar-menu" #menu="matMenu">
-      <button
-        *ngFor="let item of menuItems"
-        mat-menu-item
-        [routerLink]="item.route"
-      >
-        {{ item.name }}
+      <button *ngIf="isLogged()" mat-menu-item [routerLink]="['/profile']">
+        Perfil
       </button>
       <button mat-menu-item (click)="isLogged() ? logout() : login()">
         {{ isLogged() ? "Logout" : "Login" }}

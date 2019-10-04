@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { AuthenticationService } from "../../services/authentication.service";
-import { MenuItem } from "../../models/menItem";
+import { Role } from "src/app/models/user";
 
 @Component({
   selector: "app-layout",
@@ -10,8 +10,6 @@ import { MenuItem } from "../../models/menItem";
   styleUrls: ["./layout.component.css"]
 })
 export class LayoutComponent implements OnInit {
-  menuItems: MenuItem[];
-
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router
@@ -22,6 +20,15 @@ export class LayoutComponent implements OnInit {
   isLogged(): boolean {
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isAdmin(): boolean {
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser && currentUser.role === Role.admin) {
       return true;
     } else {
       return false;
