@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="mat-elevation-z2 app-header">
+<mat-toolbar color="primary" class="mat-elevation-z8 app-header">
   <mat-toolbar-row>
     <a class="logo-toolbar" [routerLink]="['/']">
       <img src="assets/images/easydom_logo.png" height="40px" />
@@ -26,7 +26,7 @@
     <span class="fill-remaining-space"></span>
     <h1 class="menu-user-name">{{ getUserName() }}</h1>
     <button class="user_button" mat-mini-fab [matMenuTriggerFor]="menu">
-      <mat-icon>perm_identity</mat-icon>
+      <mat-icon class="user-icon">perm_identity</mat-icon>
     </button>
     <mat-menu class="toolbar-menu" #menu="matMenu">
       <button *ngIf="isLogged()" mat-menu-item [routerLink]="['/profile']">
@@ -43,15 +43,26 @@
   <router-outlet></router-outlet>
 </div>
 
-<footer>
-  <a href="https://www.linkedin.com/in/jaime-torres-benavente-b9a191a2"
-    ><img src="assets/images/linkedin.png" height="50px"
-  /></a>
-  <a href="https://github.com/torresj"
-    ><img src="assets/images/github.png" height="50px"
-  /></a>
-  <p>
+<footer fxLayout="column">
+  <div class="social" fxFlex fxLayoutAlign="center center">
+    <a
+      href="https://www.linkedin.com/in/jaime-torres-benavente-b9a191a2"
+      fxLayoutAlign="center center"
+    >
+      <mat-icon
+        color="accent"
+        class="footer-icons"
+        svgIcon="linkedin"
+      ></mat-icon
+      >linkedin</a
+    >
+    <a href="https://github.com/torresj" fxLayoutAlign="center center"
+      ><mat-icon color="accent" class="footer-icons" svgIcon="github"></mat-icon
+      >Github</a
+    >
+  </div>
+  <div class="author" fxFlex fxLayoutAlign="center center">
     <a href="mailto:jtbenavente@gmail.com"> Jaime Torres </a>
     <span class="copy-left">&copy;</span>2019
-  </p>
+  </div>
 </footer>

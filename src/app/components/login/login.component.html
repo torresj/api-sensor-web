@@ -1,21 +1,16 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card class="box">
+  <mat-card class="box mat-elevation-z8">
     <mat-card-header>
       <mat-card-title class="login-title">Login</mat-card-title>
     </mat-card-header>
 
     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <mat-card-content>
-        <mat-form-field class="user-login example-full-width" color="primary">
-          <input
-            matInput
-            color="primary"
-            formControlName="username"
-            placeholder="Usuario"
-          />
+        <mat-form-field class="user-login example-full-width" color="accent">
+          <input matInput formControlName="username" placeholder="Usuario" />
         </mat-form-field>
 
-        <mat-form-field class="pass-login example-full-width">
+        <mat-form-field class="pass-login example-full-width" color="accent">
           <input
             type="password"
             matInput
@@ -27,11 +22,11 @@
       <button
         [disabled]="loading"
         mat-stroked-button
-        color="primary"
+        color="accent"
         class="btn-block"
       >
         <div *ngIf="submitted && loading" class="spinner">
-          <mat-spinner diameter="40"></mat-spinner>
+          <mat-spinner color="accent" diameter="40"></mat-spinner>
         </div>
         <span *ngIf="!loading">Iniciar sesión</span>
       </button>

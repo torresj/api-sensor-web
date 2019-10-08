@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { DomSanitizer } from "@angular/platform-browser";
+import { MatIconRegistry } from "@angular/material/icon";
 
 import { AuthenticationService } from "../../services/authentication.service";
 import { Role } from "src/app/models/user";
@@ -12,8 +14,24 @@ import { Role } from "src/app/models/user";
 export class LayoutComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      `linkedin`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        "../assets/images/linkedin.svg"
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `github`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        "../assets/images/github.svg"
+      )
+    );
+  }
 
   ngOnInit() {}
 

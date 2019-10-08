@@ -12,35 +12,7 @@
   width: 100%;
   background: #fff;
   border-radius: 10px;
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  z-index: 5;
   max-width: 330px;
-}
-
-.box.back {
-  transform: scale(0.95);
-  -webkit-transform: scale(0.95);
-  -ms-transform: scale(0.95);
-  top: -20px;
-  opacity: 0.8;
-  z-index: -1;
-}
-
-.box:before {
-  content: "";
-  width: 100%;
-  height: 30px;
-  border-radius: 10px;
-  position: absolute;
-  top: -10px;
-  background: rgba(255, 255, 255, 0.6);
-  left: 0;
-  transform: scale(0.95);
-  -webkit-transform: scale(0.95);
-  -ms-transform: scale(0.95);
-  z-index: -1;
 }
 
 .login-wrapper .example-form {
@@ -81,7 +53,7 @@
 }
 
 .login-title {
-  color: #673ab7;
+  color: #e91e63;
 }
 
 .error {

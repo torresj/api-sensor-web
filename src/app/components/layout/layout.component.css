@@ -1,24 +1,19 @@
 .app-header {
-  background-color: #673ab7;
   color: white;
 }
 
 footer {
-  color: white;
+  background-color: #3f51b5;
+  color: #7986cb;
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding-bottom: 1rem;
-  text-align: center;
 }
 
 footer a {
   color: rgba(255, 255, 255, 0.92);
   text-decoration: none;
-}
-
-footer a img {
-  margin: 0 5px;
+  color: #7986cb;
 }
 
 .copy-left {
@@ -39,10 +34,6 @@ footer a img {
   flex: 1 1 auto;
 }
 
-.user_button {
-  background-color: #a6d785;
-}
-
 .logo-toolbar {
   padding-top: 6px;
 }
@@ -54,4 +45,17 @@ footer a img {
 
 .toolbar-button {
   font-size: 1rem;
+}
+
+.author {
+  font-size: 0.7rem;
+}
+
+.footer-icons {
+  transform: scale(1.6);
+  margin: 15px;
+}
+
+.social a {
+  margin: 5px 10px;
 }
