@@ -8,7 +8,7 @@
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menuPages="matMenu" fxShow.sm="false">
-        <button mat-menu-item [routerLink]="['/']">
+        <button mat-button [routerLink]="['/']">
           Easydom
         </button>
         <button mat-menu-item *ngIf="isLogged()" [routerLink]="['/home']">
@@ -65,7 +65,7 @@
 </div>
 
 <footer fxLayout="column">
-  <div class="social" fxFlex fxLayoutAlign="center center">
+  <div class="social" fxLayoutAlign="center center">
     <a
       href="https://www.linkedin.com/in/jaime-torres-benavente-b9a191a2"
       fxLayoutAlign="center center"
@@ -82,7 +82,7 @@
       >Github</a
     >
   </div>
-  <div class="author" fxFlex fxLayoutAlign="center center">
+  <div class="author" fxLayoutAlign="center center">
     <a href="mailto:jtbenavente@gmail.com"> Jaime Torres </a>
     <span class="copy-left">&copy;</span>2019
   </div>
