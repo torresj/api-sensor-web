@@ -1,27 +1,45 @@
-<mat-toolbar color="primary" class="mat-elevation-z8 app-header">
-  <mat-toolbar-row>
+<mat-toolbar color="primary" class="app-header" *mobxAutorun>
+  <mat-toolbar-row class="mat-elevation-z8 toolbar-header">
     <a class="logo-toolbar" [routerLink]="['/']">
       <img src="assets/images/easydom_logo.png" height="40px" />
     </a>
-    <button mat-button class="toolbar-button" [routerLink]="['/']">
-      Easydom
-    </button>
-    <button
-      *ngIf="isLogged()"
-      mat-button
-      class="toolbar-button"
-      [routerLink]="['/home']"
-    >
-      Domótica
-    </button>
-    <button
-      *ngIf="isAdmin()"
-      mat-button
-      class="toolbar-button"
-      [routerLink]="['/admin']"
-    >
-      Gestión
-    </button>
+    <div class="small-size-menu" fxHide fxShow.xs>
+      <button mat-icon-button [matMenuTriggerFor]="menuPages">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menuPages="matMenu" fxShow.sm="false">
+        <button mat-menu-item [routerLink]="['/']">
+          Easydom
+        </button>
+        <button mat-menu-item *ngIf="isLogged()" [routerLink]="['/home']">
+          Domótica
+        </button>
+        <button mat-menu-item *ngIf="isAdmin()" [routerLink]="['/admin']">
+          Gestión
+        </button>
+      </mat-menu>
+    </div>
+    <div fxHide fxShow.gt-xs>
+      <button mat-button class="toolbar-button" [routerLink]="['/']">
+        Easydom
+      </button>
+      <button
+        *ngIf="isLogged()"
+        mat-button
+        class="toolbar-button"
+        [routerLink]="['/home']"
+      >
+        Domótica
+      </button>
+      <button
+        *ngIf="isAdmin()"
+        mat-button
+        class="toolbar-button"
+        [routerLink]="['/admin']"
+      >
+        Gestión
+      </button>
+    </div>
 
     <span class="fill-remaining-space"></span>
     <h1 class="menu-user-name">{{ getUserName() }}</h1>
@@ -37,6 +55,9 @@
       </button>
     </mat-menu>
   </mat-toolbar-row>
+  <mat-toolbar-row class="mat-elevation-z2"
+    ><h1 class="subpage-title">{{ store.page }}</h1></mat-toolbar-row
+  >
 </mat-toolbar>
 
 <div class="content">

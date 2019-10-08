@@ -31,6 +31,8 @@ import { IndexComponent } from "./components/index/index.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { AdminComponent } from "./components/admin/admin.component";
 
+// Mobx
+import { MobxAngularModule } from "mobx-angular";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -58,7 +60,8 @@ import { AdminComponent } from "./components/admin/admin.component";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatDividerModule
+    MatDividerModule,
+    MobxAngularModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

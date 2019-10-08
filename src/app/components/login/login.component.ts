@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
 
 import { AlertService } from "../../services/alert.service";
 import { AuthenticationService } from "../../services/authentication.service";
+import { AppStore } from "src/app/models/stores/appstore";
 
 @Component({
   selector: "app-login",
@@ -18,14 +19,19 @@ export class LoginComponent implements OnInit {
   submitted = false;
   error = "";
 
+  @Output() toolbarEvent = new EventEmitter<string>();
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    public store: AppStore
   ) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(["/home"]);
+    } else {
+      store.page = "Login";
     }
   }
 

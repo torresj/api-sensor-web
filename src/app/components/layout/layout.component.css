@@ -59,3 +59,12 @@ footer a {
 .social a {
   margin: 5px 10px;
 }
+
+.toolbar-header {
+  max-height: 55px;
+}
+
+.subpage-title {
+  font-size: 1.6rem;
+  font-weight: 100;
+}

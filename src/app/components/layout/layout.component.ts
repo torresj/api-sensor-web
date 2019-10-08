@@ -1,22 +1,27 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Router } from "@angular/router";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material/icon";
 
 import { AuthenticationService } from "../../services/authentication.service";
 import { Role } from "src/app/models/user";
+import { AppStore } from "src/app/models/stores/appstore";
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-layout",
   templateUrl: "./layout.component.html",
   styleUrls: ["./layout.component.css"]
 })
 export class LayoutComponent implements OnInit {
+  toolbarName: string;
+
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    public store: AppStore
   ) {
     this.matIconRegistry.addSvgIcon(
       `linkedin`,
@@ -31,6 +36,8 @@ export class LayoutComponent implements OnInit {
         "../assets/images/github.svg"
       )
     );
+
+    this.toolbarName = "test";
   }
 
   ngOnInit() {}
@@ -69,5 +76,9 @@ export class LayoutComponent implements OnInit {
 
   login() {
     this.router.navigate(["/login"]);
+  }
+
+  getToolbarName($event) {
+    this.toolbarName = $event;
   }
 }

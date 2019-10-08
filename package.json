@@ -25,6 +25,8 @@
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.1",
+    "mobx": "^5.14.0",
+    "mobx-angular": "^3.0.1",
     "popper.js": "^1.15.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
