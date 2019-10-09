@@ -2,11 +2,13 @@
   color: white;
 }
 
+.content {
+  flex: 1;
+}
+
 footer {
   background-color: #3f51b5;
   color: #7986cb;
-  position: absolute;
-  bottom: 0;
   width: 100%;
 }
 

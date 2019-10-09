@@ -1,1 +1,39 @@
-<p>index works!</p>
+<article fxLayout="column">
+  <section class="dom-section" fxLayout="column" fxLayoutAlign="center center">
+    <div class="img-container">
+      <img src="assets/images/smart-home.jpg" />
+      <a class="top-right-img" href="https://www.fibaro.com/cl/why-fibaro/"
+        >FIBARO</a
+      >
+    </div>
+    <h3
+      [ngClass.gt-xs]="{ 'index-section-title-gt-xs': true }"
+      [ngClass.xs]="{ 'index-section-title-xs': true }"
+    >
+      DOMÓTICA
+    </h3>
+    <p
+      [ngClass.gt-xs]="{ 'index-section-p-gt-xs': true }"
+      [ngClass.xs]="{ 'index-section-p-xs': true }"
+    >
+      La domótica y la automatización en el hogar es ya hoy en día una realidad.
+      Las posibilidades solo están limitadas por nuestra propia imaginación.
+      Desde los sensores mas simples hasta los sistemas mas complejos, todo
+      puede ser conectado y controlado para hacer nuestras viviendas mas
+      inteligentes gracias al IoT.
+    </p>
+  </section>
+
+  <section class="tec-section" fxLayout="column" fxLayoutAlign="center center">
+    <div class="img-container">
+      <img src="assets/images/front-back.png" />
+      <a
+        class="top-right-img"
+        href="https://www.upwork.com/hiring/for-clients/frontend-vs-backend-web-development/"
+        >Upwork</a
+      >
+    </div>
+    <h3 class="index-section-title">TECNOLOGÍAS</h3>
+    <p></p>
+  </section>
+</article>
