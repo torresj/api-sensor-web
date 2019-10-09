@@ -68,3 +68,7 @@
   justify-content: center;
   margin: 0.5rem;
 }
+
+.login-xs {
+  padding: 40px 20px !important;
+}

@@ -1,5 +1,5 @@
-<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card class="box mat-elevation-z8">
+<section class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box mat-elevation-z8" [ngClass.xs]="{ 'login-xs': true }">
     <mat-card-header>
       <mat-card-title class="login-title">Login</mat-card-title>
     </mat-card-header>
@@ -33,4 +33,4 @@
       <mat-error class="error" *ngIf="error !== ''">{{ error }}</mat-error>
     </form>
   </mat-card>
-</div>
+</section>

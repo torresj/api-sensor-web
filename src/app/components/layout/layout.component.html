@@ -3,12 +3,12 @@
     <a class="logo-toolbar" [routerLink]="['/']">
       <img src="assets/images/easydom_logo.png" height="40px" />
     </a>
-    <div class="small-size-menu" fxHide fxShow.xs>
+    <nav class="small-size-menu" fxHide fxShow.xs>
       <button mat-icon-button [matMenuTriggerFor]="menuPages">
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menuPages="matMenu" fxShow.sm="false">
-        <button mat-button [routerLink]="['/']">
+        <button mat-menu-item [routerLink]="['/']">
           Easydom
         </button>
         <button mat-menu-item *ngIf="isLogged()" [routerLink]="['/home']">
@@ -18,8 +18,8 @@
           Gestión
         </button>
       </mat-menu>
-    </div>
-    <div fxHide fxShow.gt-xs>
+    </nav>
+    <nav fxHide fxShow.gt-xs>
       <button mat-button class="toolbar-button" [routerLink]="['/']">
         Easydom
       </button>
@@ -39,7 +39,7 @@
       >
         Gestión
       </button>
-    </div>
+    </nav>
 
     <span class="fill-remaining-space"></span>
     <h1 class="menu-user-name">{{ getUserName() }}</h1>
@@ -78,12 +78,12 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="content">
+<main class="content">
   <router-outlet></router-outlet>
-</div>
+</main>
 
 <footer fxLayout="column">
-  <div class="social" fxLayoutAlign="center center">
+  <section class="social" fxLayoutAlign="center center">
     <a
       href="https://www.linkedin.com/in/jaime-torres-benavente-b9a191a2"
       fxLayoutAlign="center center"
@@ -99,9 +99,9 @@
       ><mat-icon color="accent" class="footer-icons" svgIcon="github"></mat-icon
       >Github</a
     >
-  </div>
-  <div class="author" fxLayoutAlign="center center">
+  </section>
+  <section class="author" fxLayoutAlign="center center">
     <a href="mailto:jtbenavente@gmail.com"> Jaime Torres </a>
     <span class="copy-left">&copy;</span>2019
-  </div>
+  </section>
 </footer>
