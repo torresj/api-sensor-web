@@ -68,3 +68,32 @@ footer a {
   font-size: 1.6rem;
   font-weight: 100;
 }
+
+.index-toolbar-gt-xs {
+  height: 200px;
+}
+
+.index-toolbar-gt-xs h1 {
+  font-weight: 100;
+  font-size: 4rem;
+}
+
+.index-toolbar-gt-xs h2 {
+  margin-top: 30px;
+  font-weight: 100;
+}
+
+.index-toolbar-xs {
+  height: 100px;
+}
+
+.index-toolbar-xs h1 {
+  font-weight: 100;
+  font-size: 2.5rem;
+}
+
+.index-toolbar-xs h2 {
+  font-weight: 100;
+  margin-top: 10px;
+  font-size: 0.8rem;
+}

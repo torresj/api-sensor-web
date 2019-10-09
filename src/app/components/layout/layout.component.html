@@ -55,9 +55,27 @@
       </button>
     </mat-menu>
   </mat-toolbar-row>
-  <mat-toolbar-row class="mat-elevation-z2"
-    ><h1 class="subpage-title">{{ store.page }}</h1></mat-toolbar-row
-  >
+  <mat-toolbar-row
+    class="mat-elevation-z2"
+    *ngIf="store.page === 'Index' ? false : true"
+    ><h1 class="subpage-title">
+      {{ store.page }}
+    </h1>
+  </mat-toolbar-row>
+  <mat-toolbar-row
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    class="mat-elevation-z2"
+    *ngIf="store.page === 'Index' ? true : false"
+    [ngClass.gt-xs]="{ 'index-toolbar-gt-xs': true }"
+    [ngClass.xs]="{ 'index-toolbar-xs': true }"
+    ><h1>
+      Easydom
+    </h1>
+    <h2>
+      Domótica para experimentar
+    </h2>
+  </mat-toolbar-row>
 </mat-toolbar>
 
 <div class="content">
