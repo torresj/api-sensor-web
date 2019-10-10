@@ -12,28 +12,85 @@
     >
       DOMÓTICA
     </h3>
-    <p
+    <section
       [ngClass.gt-xs]="{ 'index-section-p-gt-xs': true }"
       [ngClass.xs]="{ 'index-section-p-xs': true }"
     >
-      La domótica y la automatización en el hogar es ya hoy en día una realidad.
-      Las posibilidades solo están limitadas por nuestra propia imaginación.
-      Desde los sensores mas simples hasta los sistemas mas complejos, todo
-      puede ser conectado y controlado para hacer nuestras viviendas mas
-      inteligentes gracias al IoT.
-    </p>
-  </section>
-
-  <section class="tec-section" fxLayout="column" fxLayoutAlign="center center">
-    <div class="img-container">
-      <img src="assets/images/front-back.png" />
-      <a
-        class="top-right-img"
-        href="https://www.upwork.com/hiring/for-clients/frontend-vs-backend-web-development/"
-        >Upwork</a
+      <p>
+        La domótica y la automatización en el hogar es ya hoy en día una
+        realidad. Las posibilidades solo están limitadas por nuestra propia
+        imaginación. Desde los sensores mas simples hasta los sistemas mas
+        complejos, todo puede ser conectado y controlado para hacer nuestras
+        viviendas mas inteligentes gracias al IoT.
+      </p>
+      <p>
+        Easydom es una plataforma que nace con la inquietud de poner en practica
+        diferentes tecnologías tanto software como hardware para construir un
+        sistema que realice el proceso completo desde la lectura de un sensor
+        hasta el almacenamiento y porcesado. Además de esto, también permitirá
+        interactuar con sistemas conectados a la red eléctrica.
+      </p>
+    </section>
+    <section
+      class="card-section"
+      [ngClass.lt-md]="{ 'card-section-lt-md': true, 'card-section': false }"
+      fxLayout.md="row"
+      fxLayout.lt-md="column"
+      fxLayoutAlign="center center"
+    >
+      <mat-card
+        class="card mat-elevation-z8"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        [ngClass.md]="{ card: false, 'card-md': true }"
+        [ngClass.lt-md]="{ card: false, 'card-lt-md': true }"
       >
-    </div>
-    <h3 class="index-section-title">TECNOLOGÍAS</h3>
-    <p></p>
+        <img mat-card-image src="assets/images/climate.jpg" alt="Climate" />
+        <mat-card-content>
+          <p>
+            Sensorización con lecturas de temperatura, humedad o calidad del
+            aire entre otras.
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card
+        class="card mat-elevation-z8"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        [ngClass.md]="{ card: false, 'card-md': true }"
+        [ngClass.lt-md]="{ card: false, 'card-lt-md': true }"
+      >
+        <img
+          mat-card-image
+          src="assets/images/smart_light.jpg"
+          alt="Smart light"
+        />
+        <mat-card-content>
+          <p>
+            Control de sistemas como la iluminación, la calefacción o cualquier
+            otro que funcione mediante corriente electrica.
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card
+        class="card mat-elevation-z8"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        [ngClass.md]="{ card: false, 'card-md': true }"
+        [ngClass.lt-md]="{ card: false, 'card-lt-md': true }"
+      >
+        <img mat-card-image src="assets/images/graphics.jpg" alt="Graphics" />
+        <mat-card-content>
+          <p>
+            Análisis climático con lecturas de temperatura, humedad o calidad
+            del aire entre otras.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </section>
   </section>
+  <mat-divider></mat-divider>
+  <section>test</section>
 </article>

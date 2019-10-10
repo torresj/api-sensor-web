@@ -1,5 +1,5 @@
 .dom-section {
-  padding-bottom: 10%;
+  padding-bottom: 50px;
 }
 
 .dom-section img {
@@ -27,27 +27,63 @@
 
 .index-section-title-gt-xs {
   color: rgb(161, 161, 161);
-  margin-top: 10%;
+  margin-top: 2%;
   font-size: 2rem;
 }
 
 .index-section-title-xs {
   color: rgb(161, 161, 161);
-  margin-top: 5%;
+  margin-top: 2%;
   font-size: 1.2rem;
 }
 
 .index-section-p-gt-xs {
   color: rgb(124, 124, 124);
   font-size: 1rem;
-  max-width: 620px;
-  text-align: center;
+  max-width: 650px;
+  text-align: justify;
   padding: 0px 20px;
 }
 
 .index-section-p-xs {
   color: rgb(124, 124, 124);
   font-size: 0.8rem;
-  text-align: center;
+  text-align: justify;
   padding: 0px 20px;
+}
+
+.card {
+  color: rgb(124, 124, 124);
+  width: 300px;
+  height: 284px;
+  padding-top: 30px;
+  text-align: justify;
+  margin: 0 30px;
+}
+
+.card-md {
+  color: rgb(124, 124, 124);
+  width: 300px;
+  height: 284px;
+  padding-top: 30px;
+  text-align: justify;
+  margin: 0 10px;
+}
+
+.card-lt-md {
+  color: rgb(124, 124, 124);
+  width: 300px;
+  height: 284px;
+  padding-top: 30px;
+  text-align: justify;
+  margin: 10px 10px;
+  font-size: 0.5rem;
+}
+
+.card-section {
+  margin-top: 50px;
+}
+
+.card-section-lt-md {
+  margin-top: 25px;
 }
