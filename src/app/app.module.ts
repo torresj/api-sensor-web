@@ -23,6 +23,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDividerModule } from "@angular/material/divider";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatListModule } from "@angular/material/list";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -61,7 +63,9 @@ import { MobxAngularModule } from "mobx-angular";
     BrowserAnimationsModule,
     HttpClientModule,
     MatDividerModule,
-    MobxAngularModule
+    MobxAngularModule,
+    MatTabsModule,
+    MatListModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

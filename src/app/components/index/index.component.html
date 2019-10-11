@@ -27,7 +27,7 @@
         Easydom es una plataforma que nace con la inquietud de poner en practica
         diferentes tecnologías tanto software como hardware para construir un
         sistema que realice el proceso completo desde la lectura de un sensor
-        hasta el almacenamiento y porcesado. Además de esto, también permitirá
+        hasta el almacenamiento y procesado. Además de esto, también permitirá
         interactuar con sistemas conectados a la red eléctrica.
       </p>
     </section>
@@ -84,13 +84,259 @@
         <img mat-card-image src="assets/images/graphics.jpg" alt="Graphics" />
         <mat-card-content>
           <p>
-            Análisis climático con lecturas de temperatura, humedad o calidad
-            del aire entre otras.
+            Presentación de datos mediante tablas y graficos para el seguimiento
+            y análisis.
           </p>
         </mat-card-content>
       </mat-card>
     </section>
   </section>
-  <mat-divider></mat-divider>
-  <section>test</section>
+  <mat-divider class="divider"></mat-divider>
+  <section
+    class="free-soft-section"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <h3
+      [ngClass.gt-xs]="{ 'index-section-title-gt-xs': true }"
+      [ngClass.xs]="{ 'index-section-title-xs': true }"
+    >
+      PRODUCTO LIBRE
+    </h3>
+    <section
+      [ngClass.gt-xs]="{ 'index-section-p-gt-xs': true }"
+      [ngClass.xs]="{ 'index-section-p-xs': true }"
+    >
+      <p>
+        Easydom es una plataforma basada en software y hardware libre y cuya
+        única meta es la de practicar y probar nuevas tecnologías. Cualquiera
+        que lo desee puede descargar, consultar y copiar el código de las
+        distintas partes que conforman el proyecto.
+      </p>
+    </section>
+    <section class="project-tabs-section">
+      <mat-tab-group>
+        <mat-tab label="Frontend">
+          <section class="tab-content">
+            <p
+              [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
+              [ngClass.xs]="{ 'project-tabs-section-p-xs': true }"
+            >
+              El frontend de la plataforma está realizado con Angular 8 usando
+              Material para el diseño. Es un proyecto sencillo en el que se
+              intenta construir una interfaz amigable que permita acceder a una
+              zona privada donde poder ver los datos de los sensores y
+              actuadores asociados al usuario.
+            </p>
+            <section
+              class="tab-logos"
+              fxLayout="row"
+              fxLayoutAlign="center center"
+            >
+              <a href="https://angular.io/" fxLayoutAlign="center center"
+                ><img
+                  class="angular-logo"
+                  src="assets/images/angular.png"
+                  alt="Angular logo"
+                  height="60"
+                />Angular</a
+              >
+
+              <a
+                href="https://github.com/torresj/api-sensor-web"
+                fxLayoutAlign="center center"
+                ><img
+                  src="assets/images/GitHub.png"
+                  alt="GitHub logo"
+                  height="45"
+                />Repositorio</a
+              >
+            </section>
+          </section>
+        </mat-tab>
+        <mat-tab label="Backend">
+          <section class="tab-content">
+            <p
+              [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
+              [ngClass.xs]="{ 'project-tabs-section-p-xs': true }"
+            >
+              El backend de la plataforma se basa en una aplicación Java con
+              Spring Boot, Spring cloud, y una base de datos MySql. El servidor
+              debe cumplir con varios requisitos para permitir centralizar todas
+              las operaciones de la plataforma:
+            </p>
+            <ul
+              [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
+              [ngClass.xs]="{ 'project-tabs-section-p-xs': true }"
+            >
+              <li>
+                Exponer una API Rest que permita la gestion de los diferentes
+                modelos
+              </li>
+              <li>
+                Recibir mensajes MQTT enviados desde las estaciones de sensores
+              </li>
+              <li>
+                Enviar mensajes a las estaciones para utilizar los actuadores
+              </li>
+              <li>
+                Crear un web socket para realizar envío de información en tiempo
+                real al frontend
+              </li>
+            </ul>
+            <section
+              class="tab-logos"
+              fxLayout="row"
+              fxLayoutAlign="center center"
+            >
+              <a
+                href="https://spring.io/projects/spring-boot"
+                fxLayoutAlign="center center"
+                ><img
+                  src="assets/images/springboot.png"
+                  alt="Spring boot logo"
+                  height="45"
+                />Spring Boot</a
+              >
+
+              <a
+                href="https://easydom.es:8443/services/api/swagger-ui.html#/"
+                fxLayoutAlign="center center"
+                ><img
+                  src="assets/images/swagger.png"
+                  alt="Api REST"
+                  height="52"
+                />Repositorio</a
+              >
+
+              <a
+                href="https://github.com/torresj/api-sensor-server"
+                fxLayoutAlign="center center"
+                ><img
+                  src="assets/images/GitHub.png"
+                  alt="GitHub logo"
+                  height="45"
+                />Repositorio</a
+              >
+            </section>
+          </section>
+        </mat-tab>
+        <mat-tab label="Hardware">
+          <section
+            class="tab-content"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+          >
+            <p
+              [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
+              [ngClass.xs]="{ 'project-tabs-section-p-xs': true }"
+            >
+              El hardware de la plataforma se basa la utilización de módulos
+              ESP32 con un firmware escrito en C (como cualquier proyecto con
+              Arduino) para crear una base común a todas las estaciones, que
+              permite conectarse a una red wifi para tener internet, y después
+              realizar la conexión con el backend para mandar su información y
+              la de los sensores que tengan conectadas. Practicamente se puede
+              conectar cualquier sensor por lo que según las necesidades se
+              conectan a unos u otros.
+            </p>
+            <img class="esp32-img" src="assets/images/esp32.jpg" alt="ESP32" />
+            <p
+              [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
+              [ngClass.xs]="{ 'project-tabs-section-p-xs': true }"
+            >
+              El módulo ESP32 se encarga de enviar mensajes en formato MQTT con
+              las lecturas de sus sensores. También esperará recibir comandos en
+              caso de que sea una estación actuadora.
+            </p>
+            <p
+              [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
+              [ngClass.xs]="{ 'project-tabs-section-p-xs': true }"
+            >
+              La plataforma no requiere de ningún requerimiento hardware.
+              Simplemente hay que enviar mensajes MQTT a una cola RabbitMQ, por
+              lo que cómo leamos los sensores es irrelevante.
+            </p>
+          </section>
+        </mat-tab>
+        <mat-tab label="Infraestructura">
+          <section
+            class="tab-content"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+          >
+            <p
+              [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
+              [ngClass.xs]="{ 'project-tabs-section-p-xs': true }"
+            >
+              La infraestructura de la plataforma está formada por una serie de
+              servidores que componen todo el sistema:
+            </p>
+            <ul
+              [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
+              [ngClass.xs]="{ 'project-tabs-section-p-xs': true }"
+            >
+              <li>
+                Sensor Server: Se trata del servidor que centraliza la recepción
+                de datos y expone la API rest consumida por el frontend
+              </li>
+              <li>
+                Web Server: Es la parte frontend del proyecta, encargada de la
+                aplicación web
+              </li>
+              <li>
+                Config Server: Para poder centralizar las configuraciones y
+                separarlas del servidor principal, tenemos un Spring Cloud
+                server
+              </li>
+              <li>
+                MySQL Server: Servidor de bases de datos en el que se almacenan
+                los datos
+              </li>
+              <li>
+                RabbitMQ Server: Servidor de colas al que se envían los mensajes
+                MQTT
+              </li>
+            </ul>
+            <img
+              class="diagram-img"
+              src="assets/images/diagram.png"
+              alt="Diagram"
+            />
+            <p
+              [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
+              [ngClass.xs]="{ 'project-tabs-section-p-xs': true }"
+            >
+              Para poder desplegar todo facilmente, por un lado se ha creado un
+              contendor para cada servidor creándolo con Docker y componiéndolo
+              después todo con Docker Compose, y por otro lado se ha configurado
+              Ansible, el cuál nos ayuda a realizar todo el provisionamiento y
+              ejecución de Docker Compose en el entorno de producción.
+            </p>
+            <section
+              class="tab-logos"
+              fxLayout="row"
+              fxLayoutAlign="center center"
+            >
+              <a href="https://www.docker.com/" fxLayoutAlign="center center"
+                ><img
+                  src="assets/images/docker.png"
+                  alt="Docker logo"
+                  height="45"
+                />Docker</a
+              >
+
+              <a href="https://www.ansible.com/" fxLayoutAlign="center center"
+                ><img
+                  src="assets/images/ansible.png"
+                  alt="Ansible"
+                  height="50"
+                />Ansible</a
+              >
+            </section>
+          </section>
+        </mat-tab>
+      </mat-tab-group>
+    </section>
+  </section>
 </article>
