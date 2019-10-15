@@ -116,7 +116,9 @@
     </section>
     <section class="project-tabs-section">
       <mat-tab-group>
-        <mat-tab label="Front">
+        <mat-tab
+          [label]="mediaObserver.isActive('gt-sm') ? 'Frontend' : 'Front'"
+        >
           <section class="tab-content">
             <p
               [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
@@ -154,7 +156,7 @@
             </section>
           </section>
         </mat-tab>
-        <mat-tab label="Back">
+        <mat-tab [label]="mediaObserver.isActive('gt-sm') ? 'Backend' : 'Back'">
           <section class="tab-content">
             <p
               [ngClass.gt-xs]="{ 'project-tabs-section-p-gt-xs': true }"
@@ -221,7 +223,7 @@
             </section>
           </section>
         </mat-tab>
-        <mat-tab label="HW">
+        <mat-tab [label]="mediaObserver.isActive('gt-sm') ? 'Hardware' : 'HW'">
           <section
             class="tab-content"
             fxLayout="column"
@@ -259,7 +261,9 @@
             </p>
           </section>
         </mat-tab>
-        <mat-tab label="IN">
+        <mat-tab
+          [label]="mediaObserver.isActive('gt-sm') ? 'Infraestructura' : 'IN'"
+        >
           <section
             class="tab-content"
             fxLayout="column"
@@ -337,6 +341,35 @@
           </section>
         </mat-tab>
       </mat-tab-group>
+    </section>
+  </section>
+  <mat-divider class="divider"></mat-divider>
+  <section class="tech-section" fxLayout="column">
+    <h3
+      [ngClass.gt-xs]="{ 'index-section-title-gt-xs': true }"
+      [ngClass.xs]="{ 'index-section-title-xs': true }"
+    >
+      TECNOLOGÍAS
+    </h3>
+    <section class="grid-section">
+      <mat-grid-list cols="6" rowHeight="100px" gutterSize="20px">
+        <mat-grid-tile id="arduino-logo" [colspan]="2" [rowspan]="1">
+        </mat-grid-tile>
+        <mat-grid-tile id="java-logo" [colspan]="2" [rowspan]="1">
+        </mat-grid-tile>
+        <mat-grid-tile id="ansible-logo" [colspan]="2" [rowspan]="1">
+        </mat-grid-tile>
+        <mat-grid-tile id="mysql-logo" [colspan]="2" [rowspan]="1">
+        </mat-grid-tile>
+        <mat-grid-tile id="rabbitmq-logo" [colspan]="2" [rowspan]="1">
+        </mat-grid-tile>
+        <mat-grid-tile id="angular-logo" [colspan]="2" [rowspan]="1">
+        </mat-grid-tile>
+        <mat-grid-tile id="spring-logo" [colspan]="3" [rowspan]="1">
+        </mat-grid-tile>
+        <mat-grid-tile id="docker-logo" [colspan]="3" [rowspan]="1">
+        </mat-grid-tile>
+      </mat-grid-list>
     </section>
   </section>
 </article>

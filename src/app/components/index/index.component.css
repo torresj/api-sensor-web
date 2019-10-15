@@ -154,3 +154,69 @@
   margin: 30px 0;
   max-width: 80%;
 }
+
+.grid-logo {
+  max-width: 150px;
+}
+
+.tech-section {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 40px;
+}
+
+#spring-logo {
+  background-image: url("/assets/images/spring-logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#java-logo {
+  background-image: url("/assets/images/java.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#angular-logo {
+  background-image: url("/assets/images/angular-logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#mysql-logo {
+  background-image: url("/assets/images/mysql.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#rabbitmq-logo {
+  background-image: url("/assets/images/rabbitmq-logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#docker-logo {
+  background-image: url("/assets/images/docker-logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#arduino-logo {
+  background-image: url("/assets/images/arduino.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#ansible-logo {
+  background-image: url("/assets/images/ansilbe-logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
