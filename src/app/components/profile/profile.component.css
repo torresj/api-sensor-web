@@ -1,0 +1,18 @@
+.profile-component-tabSection-info span {
+  font-size: 0.9rem;
+}
+
+.profile-component-tabSection-info__label {
+  width: 4rem;
+  text-align: end;
+  color: grey;
+}
+
+.profile-component-tabSection-info__content {
+  margin-left: 1rem;
+}
+
+.profile-component-edit__form {
+  max-width: 20rem;
+  padding: 2rem;
+}

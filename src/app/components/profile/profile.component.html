@@ -1,1 +1,114 @@
-<p>profile works!</p>
+<article class="profile-component" *mobxAutorun>
+  <section class="profile-component-tabSection">
+    <mat-tab-group>
+      <mat-tab label="Datos de usuario">
+        <mat-list class="profile-component-tabSection-info">
+          <mat-list-item>
+            <span class="profile-component-tabSection-info__label"
+              >Usuario:</span
+            >
+            <span class="profile-component-tabSection-info__content">{{
+              store.user.username
+            }}</span></mat-list-item
+          >
+          <mat-list-item>
+            <span class="profile-component-tabSection-info__label"
+              >Nombre:</span
+            >
+            <span class="profile-component-tabSection-info__content">{{
+              store.user.name
+            }}</span></mat-list-item
+          >
+          <mat-list-item>
+            <span class="profile-component-tabSection-info__label"
+              >Apellidos:</span
+            >
+            <span class="profile-component-tabSection-info__content">{{
+              store.user.lastName
+            }}</span></mat-list-item
+          >
+          <mat-list-item>
+            <span class="profile-component-tabSection-info__label">Email:</span>
+            <span class="profile-component-tabSection-info__content">{{
+              store.user.email
+            }}</span></mat-list-item
+          >
+          <mat-list-item>
+            <span class="profile-component-tabSection-info__label"
+              >Teléfono:</span
+            >
+            <span class="profile-component-tabSection-info__content">{{
+              store.user.phoneNumber
+            }}</span></mat-list-item
+          >
+          <mat-list-item>
+            <span class="profile-component-tabSection-info__label">ID:</span>
+            <span class="profile-component-tabSection-info__content">{{
+              store.user.id
+            }}</span></mat-list-item
+          >
+          <mat-list-item>
+            <span class="profile-component-tabSection-info__label">Tipo:</span>
+            <span class="profile-component-tabSection-info__content">{{
+              store.user.role
+            }}</span></mat-list-item
+          >
+        </mat-list>
+      </mat-tab>
+      <mat-tab label="Editar">
+        <form
+          class="profile-component-edit__form"
+          [formGroup]="userForm"
+          (ngSubmit)="updateUser()"
+          fxLayout="column"
+        >
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input
+              matInput
+              formControlName="username"
+              [value]="store.user.username"
+            />
+          </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Nueva contrseña</mat-label>
+            <input formControlName="password" type="password" matInput />
+          </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Confirmar contrseña</mat-label>
+            <input formControlName="checkPassword" type="password" matInput />
+          </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="name" matInput [value]="store.user.name" />
+          </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input
+              formControlName="lastName"
+              matInput
+              [value]="store.user.lastName"
+            />
+          </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              formControlName="email"
+              matInput
+              [value]="store.user.email"
+            />
+          </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Teléfono</mat-label>
+            <input
+              formControlName="phone"
+              matInput
+              [value]="store.user.phoneNumber"
+            />
+          </mat-form-field>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </section>
+</article>

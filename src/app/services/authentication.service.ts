@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 
 import { User } from "../models/user";
 import { AppConfig } from "../app.config";
+import { AppStore } from "../models/stores/appstore";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
@@ -12,7 +13,11 @@ export class AuthenticationService {
   public error: string;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient, private appConfig: AppConfig) {
+  constructor(
+    private http: HttpClient,
+    private appConfig: AppConfig,
+    private store: AppStore
+  ) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem("currentUser"))
     );
@@ -49,14 +54,15 @@ export class AuthenticationService {
           (user as User).token = this.currentUserValue.token;
           localStorage.setItem("currentUser", JSON.stringify(user));
           this.currentUserSubject.next(user);
+          this.store.setUser(user);
           return user;
         })
       );
   }
 
   logout() {
-    // remove user from local storage and set current user to null
     localStorage.removeItem("currentUser");
+    this.store.user = null;
     this.currentUserSubject.next(null);
   }
 }
