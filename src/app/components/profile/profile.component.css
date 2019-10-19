@@ -16,3 +16,15 @@
   max-width: 20rem;
   padding: 2rem;
 }
+
+.profile-component-edit__form mat-form-field {
+  margin-bottom: 1.2rem;
+}
+
+.profile-component-edit__form-lt-md {
+  padding: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}

@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit {
     private router: Router
   ) {
     store.page = "Perfil";
-    console.log(store.user);
   }
 
   ngOnInit() {
@@ -55,5 +54,11 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  updateUser() {}
+  updateUser() {
+    console.log("test");
+  }
+
+  formControl(control: string) {
+    return this.userForm.controls[control];
+  }
 }

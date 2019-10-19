@@ -61,22 +61,60 @@
           [formGroup]="userForm"
           (ngSubmit)="updateUser()"
           fxLayout="column"
+          [ngClass.lt-md]="{
+            'profile-component-edit__form': false,
+            'profile-component-edit__form-lt-md': true
+          }"
         >
           <mat-form-field color="accent" appearance="outline">
-            <mat-label>Usuario</mat-label>
+            <mat-label>Usuario *</mat-label>
             <input
               matInput
               formControlName="username"
               [value]="store.user.username"
             />
+            <mat-error
+              *ngIf="
+                formControl('username').invalid &&
+                (formControl('username').dirty ||
+                  formControl('username').touched)
+              "
+              >El campo usuario es obligatorio</mat-error
+            >
           </mat-form-field>
           <mat-form-field color="accent" appearance="outline">
-            <mat-label>Nueva contrseña</mat-label>
+            <mat-label>Nueva contrseña *</mat-label>
             <input formControlName="password" type="password" matInput />
+            <mat-error
+              *ngIf="
+                formControl('password').invalid &&
+                (formControl('password').dirty ||
+                  formControl('password').touched)
+              "
+              >El campo contraseña es obligatorio</mat-error
+            >
           </mat-form-field>
           <mat-form-field color="accent" appearance="outline">
-            <mat-label>Confirmar contrseña</mat-label>
+            <mat-label>Confirmar contrseña *</mat-label>
             <input formControlName="checkPassword" type="password" matInput />
+            <mat-error
+              *ngIf="
+                formControl('checkPassword').invalid &&
+                !formControl('checkPassword').errors.mustMatch &&
+                (formControl('checkPassword').dirty ||
+                  formControl('checkPassword').touched)
+              "
+              >El campo para confirmar contraseña es obligatorio</mat-error
+            >
+            <mat-error
+              *ngIf="
+                formControl('checkPassword').invalid &&
+                formControl('checkPassword').errors.mustMatch &&
+                (formControl('checkPassword').dirty ||
+                  formControl('checkPassword').touched)
+              "
+              >La contraseña debe coincidir</mat-error
+            >
           </mat-form-field>
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Nombre</mat-label>
@@ -98,6 +136,13 @@
               matInput
               [value]="store.user.email"
             />
+            <mat-error
+              *ngIf="
+                formControl('email').invalid &&
+                (formControl('email').dirty || formControl('email').touched)
+              "
+              >Formato de email erróneo</mat-error
+            >
           </mat-form-field>
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Teléfono</mat-label>
@@ -107,6 +152,7 @@
               [value]="store.user.phoneNumber"
             />
           </mat-form-field>
+          <button mat-raised-button color="accent">Actualizar</button>
         </form>
       </mat-tab>
     </mat-tab-group>
