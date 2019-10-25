@@ -26,6 +26,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatListModule } from "@angular/material/list";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -67,7 +68,8 @@ import { MobxAngularModule } from "mobx-angular";
     MobxAngularModule,
     MatTabsModule,
     MatListModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

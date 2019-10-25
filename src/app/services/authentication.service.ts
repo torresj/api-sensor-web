@@ -10,7 +10,6 @@ import { AppStore } from "../models/stores/appstore";
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
-  public error: string;
   public currentUser: Observable<User>;
 
   constructor(
@@ -22,7 +21,6 @@ export class AuthenticationService {
       JSON.parse(localStorage.getItem("currentUser"))
     );
     this.currentUser = this.currentUserSubject.asObservable();
-    this.error = "";
   }
 
   public get currentUserValue(): User {
@@ -62,7 +60,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem("currentUser");
-    this.store.user = null;
+    this.store.user = new User();
     this.currentUserSubject.next(null);
   }
 }

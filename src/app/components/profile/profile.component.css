@@ -17,7 +17,8 @@
   padding: 2rem;
 }
 
-.profile-component-edit__form mat-form-field {
+.profile-component-edit__form mat-form-field,
+.profile-component-edit__form-lt-md mat-form-field {
   margin-bottom: 1.2rem;
 }
 
@@ -27,4 +28,12 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+}
+
+.profile-component-edit__form__button {
+  min-width: 6.2rem;
+}
+
+.profile-component-edit__form__spinner {
+  min-height: 2.33rem;
 }

@@ -1,15 +1,15 @@
 export class User {
   id: number;
-  username: string;
-  password: string;
-  name: string;
-  lastName: string;
-  createAt: string;
-  lastConnection: string;
-  email: string;
-  phoneNumber: string;
+  username = "";
+  password = "";
+  name = "";
+  lastName = "";
+  createAt = "";
+  lastConnection = "";
+  email = "";
+  phoneNumber = "";
   role: Role;
-  token: string;
+  token = "";
 }
 
 export enum Role {

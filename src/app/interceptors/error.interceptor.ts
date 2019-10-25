@@ -9,10 +9,14 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 import { AuthenticationService } from "../services/authentication.service";
+import { AppStore } from "../models/stores/appstore";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private store: AppStore
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -25,7 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.authenticationService.logout();
           location.reload(true);
         } else if (err.status === 403) {
-          this.authenticationService.error = "Usuario o contraseña incorrectos";
+          this.store.setError("Usuario o contraseña incorrectos");
         }
 
         const error = err.error.message || err.statusText;

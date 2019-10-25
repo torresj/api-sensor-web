@@ -6,6 +6,8 @@ import { User } from "../user";
 export class AppStore {
   @observable page = "";
   @observable user = new User();
+  @observable loading = false;
+  @observable error = "";
 
   @action setFilter(newPage: string) {
     this.page = newPage;
@@ -13,5 +15,13 @@ export class AppStore {
 
   @action setUser(newUser: User) {
     this.user = newUser;
+  }
+
+  @action setError(newerror: string) {
+    this.error = newerror;
+  }
+
+  @action setLoading(newLoading: boolean) {
+    this.loading = newLoading;
   }
 }

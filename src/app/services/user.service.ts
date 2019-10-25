@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 
 import { User } from "../models/user";
 import { AppConfig } from "../app.config";
@@ -14,4 +15,21 @@ export class UserService {
     private appConfig: AppConfig,
     private store: AppStore
   ) {}
+
+  public updateUser(userToUpdate: User) {
+    const user = JSON.stringify(userToUpdate);
+    return this.http
+      .put<User>(
+        this.appConfig.baseApiUrl + this.appConfig.userPath,
+        userToUpdate
+      )
+      .pipe(
+        map(userUpdated => {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem("currentUser", JSON.stringify(userUpdated));
+          this.store.setUser(userUpdated);
+          return user;
+        })
+      );
+  }
 }

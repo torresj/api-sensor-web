@@ -67,7 +67,7 @@
           }"
         >
           <mat-form-field color="accent" appearance="outline">
-            <mat-label>Usuario *</mat-label>
+            <mat-label>Usuario</mat-label>
             <input
               matInput
               formControlName="username"
@@ -152,7 +152,21 @@
               [value]="store.user.phoneNumber"
             />
           </mat-form-field>
-          <button mat-raised-button color="accent">Actualizar</button>
+          <button
+            mat-raised-button
+            class="profile-component-edit__form__button"
+            color="accent"
+            [disabled]="store.loading"
+          >
+            <div
+              *ngIf="store.loading"
+              class="profile-component-edit__form__spinner"
+              fxLayoutAlign="center center"
+            >
+              <mat-spinner color="accent" diameter="35"></mat-spinner>
+            </div>
+            <span *ngIf="!store.loading">Actualizar</span>
+          </button>
         </form>
       </mat-tab>
     </mat-tab-group>

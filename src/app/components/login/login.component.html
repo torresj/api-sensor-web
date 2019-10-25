@@ -1,4 +1,9 @@
-<section class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<section
+  class="login-wrapper"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  *mobxAutorun
+>
   <mat-card class="box mat-elevation-z8" [ngClass.xs]="{ 'login-xs': true }">
     <mat-card-header>
       <mat-card-title class="login-title">Login</mat-card-title>
@@ -20,17 +25,19 @@
         </mat-form-field>
       </mat-card-content>
       <button
-        [disabled]="loading"
+        [disabled]="store.loading"
         mat-stroked-button
         color="accent"
         class="btn-block"
       >
-        <div *ngIf="submitted && loading" class="spinner">
+        <div *ngIf="submitted && store.loading" class="spinner">
           <mat-spinner color="accent" diameter="40"></mat-spinner>
         </div>
-        <span *ngIf="!loading">Iniciar sesión</span>
+        <span *ngIf="!store.loading">Iniciar sesión</span>
       </button>
-      <mat-error class="error" *ngIf="error !== ''">{{ error }}</mat-error>
+      <mat-error class="error" *ngIf="store.error !== ''">{{
+        store.error
+      }}</mat-error>
     </form>
   </mat-card>
 </section>
