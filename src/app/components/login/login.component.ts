@@ -67,21 +67,32 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         dataLogin => {
-          this.store.setLoading(false);
-          this.store.setError("");
-          this.router.navigate(["/home"]);
+          this.authenticationService.getUserData().subscribe(
+            data => {
+              this.store.setLoading(false);
+              this.store.setError("");
+              this.router.navigate(["/home"]);
+            },
+            error => {
+              this.errorRequest();
+            }
+          );
         },
         error => {
-          if (this.store.error !== "") {
-            this.fields.username.setErrors({ incorrect: true });
-            this.fields.password.setErrors({ incorrect: true });
-          } else {
-            this.store.setError(
-              "Error al realizar el login. Inténtelo de nuevo más tarde"
-            );
-          }
-          this.store.setLoading(false);
+          this.errorRequest();
         }
       );
+  }
+
+  private errorRequest() {
+    if (this.store.error !== "") {
+      this.fields.username.setErrors({ incorrect: true });
+      this.fields.password.setErrors({ incorrect: true });
+    } else {
+      this.store.setError(
+        "Error al realizar el login. Inténtelo de nuevo más tarde"
+      );
+    }
+    this.store.setLoading(false);
   }
 }
