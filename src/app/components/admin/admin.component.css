@@ -1,0 +1,13 @@
+.admin-component-section {
+  max-width: 70rem;
+}
+
+.admin-component__a {
+  text-decoration: none;
+}
+
+.admin-component-card {
+  max-width: 20rem;
+  min-height: 6rem;
+  margin: 2rem;
+}

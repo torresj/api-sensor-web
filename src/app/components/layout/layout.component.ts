@@ -4,7 +4,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material/icon";
 
 import { AuthenticationService } from "../../services/authentication.service";
-import { Role } from "src/app/models/user";
+import { Role } from "src/app/models/entities/user";
 import { AppStore } from "src/app/models/stores/appstore";
 
 @Component({
@@ -37,7 +37,7 @@ export class LayoutComponent implements OnInit {
       )
     );
 
-    this.toolbarName = "test";
+    this.toolbarName = "";
   }
 
   ngOnInit() {}

@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit {
     { text: "Four", cols: 3, rows: 1, color: "#D9EDD9" }
   ];
   constructor(public store: AppStore, public mediaObserver: MediaObserver) {
-    store.page = "Index";
+    store.setToolbarPage("Index");
   }
 
   ngOnInit() {}

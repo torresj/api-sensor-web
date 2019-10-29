@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(["/home"]);
     } else {
-      store.page = "Login";
+      store.setToolbarPage("Login");
     }
   }
 

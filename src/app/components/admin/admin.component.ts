@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { AuthenticationService } from "../../services/authentication.service";
-import { Role } from "../../models/user";
+import { Role } from "../../models/entities/user";
 import { AppStore } from "src/app/models/stores/appstore";
 
 @Component({
@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit {
     if (currentUser.role !== Role.admin) {
       this.router.navigate(["/home"]);
     } else {
-      store.page = "Gestión";
+      store.setToolbarPage("Gestión");
     }
   }
 

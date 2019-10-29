@@ -1,16 +1,17 @@
 import { Injectable } from "@angular/core";
 import { action, observable } from "mobx";
-import { User } from "../user";
+import { User } from "../entities/user";
+import { House } from "../entities/house";
 
 @Injectable({ providedIn: "root" })
 export class AppStore {
-  @observable page = "";
+  @observable toolbarPage = "";
   @observable user = new User();
   @observable loading = false;
   @observable error = "";
 
-  @action setFilter(newPage: string) {
-    this.page = newPage;
+  @action setToolbarPage(newPage: string) {
+    this.toolbarPage = newPage;
   }
 
   @action setUser(newUser: User) {

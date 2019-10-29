@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 import { AuthenticationService } from "../../services/authentication.service";
 import { MustMatch } from "../../helpers/must-match.validator";
 import { UserService } from "src/app/services/user.service";
-import { User } from "src/app/models/user";
+import { User } from "src/app/models/entities/user";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private snackBar: MatSnackBar
   ) {
-    store.page = "Perfil";
+    store.setToolbarPage("Perfil");
   }
 
   get fields() {

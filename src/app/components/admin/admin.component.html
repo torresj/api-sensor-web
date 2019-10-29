@@ -1,1 +1,57 @@
-<p>admin works!</p>
+<article class="admin-component" fxLayout="row" fxLayoutAlign="center center">
+  <section
+    class="admin-component-section"
+    fxLayout="row wrap"
+    fxLayoutAlign="center center"
+  >
+    <a class="admin-component__a" routerLink="/admin/houses">
+      <mat-card class="admin-component-card mat-elevation-z10"
+        ><mat-card-title>Casas</mat-card-title
+        ><mat-card-content
+          >Las casas estan compuestas por una lista de sensores. Reresentan el
+          nivel más alto de la gerarquía.</mat-card-content
+        ></mat-card
+      >
+    </a>
+
+    <a class="admin-component__a" routerLink="/admin/sensors">
+      <mat-card class="admin-component-card mat-elevation-z10"
+        ><mat-card-title>Sensores</mat-card-title
+        ><mat-card-content
+          >Los sensores representan a las unidades hardware que pueden leer las
+          diferentes variables</mat-card-content
+        ></mat-card
+      >
+    </a>
+
+    <a class="admin-component__a" routerLink="/admin/variables">
+      <mat-card class="admin-component-card mat-elevation-z10"
+        ><mat-card-title>Variables</mat-card-title
+        ><mat-card-content
+          >Las variables representan lecturas de un tipo concreto. Una variable
+          puede estar en muchos sensores</mat-card-content
+        ></mat-card
+      >
+    </a>
+
+    <a class="admin-component__a" routerLink="/admin/types">
+      <mat-card class="admin-component-card mat-elevation-z10"
+        ><mat-card-title>Tipos de sensores</mat-card-title
+        ><mat-card-content
+          >Cada sensor puede ser de un tipo distinto en funcion de las variables
+          que envía al sistema</mat-card-content
+        ></mat-card
+      >
+    </a>
+
+    <a class="admin-component__a" routerLink="/admin/records">
+      <mat-card class="admin-component-card mat-elevation-z10"
+        ><mat-card-title>Lecturas</mat-card-title
+        ><mat-card-content
+          >Cada sensor envía una lectura por cada variable que tenga
+          asociada</mat-card-content
+        ></mat-card
+      >
+    </a>
+  </section>
+</article>

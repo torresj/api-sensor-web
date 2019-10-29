@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { User } from "../models/user";
+import { User } from "../models/entities/user";
 import { AppConfig } from "../app.config";
 import { AppStore } from "../models/stores/appstore";
 

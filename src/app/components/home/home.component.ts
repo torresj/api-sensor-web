@@ -8,7 +8,7 @@ import { AppStore } from "src/app/models/stores/appstore";
 })
 export class HomeComponent implements OnInit {
   constructor(public store: AppStore) {
-    store.page = "Domótica";
+    store.setToolbarPage("Domótica");
   }
 
   ngOnInit() {}
