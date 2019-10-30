@@ -6,7 +6,7 @@ import { House } from "../entities/house";
 @Injectable({ providedIn: "root" })
 export class AppStore {
   @observable toolbarPage = "";
-  @observable user = new User();
+  @observable user: User;
   @observable loading = false;
   @observable error = "";
 

@@ -1,5 +1,5 @@
 .admin-component-section {
-  max-width: 70rem;
+  max-width: 80rem;
 }
 
 .admin-component__a {
@@ -9,5 +9,14 @@
 .admin-component-card {
   max-width: 20rem;
   min-height: 6rem;
-  margin: 2rem;
+  margin: 1.5rem;
+}
+
+.admin-component-card__title {
+  display: flex;
+  align-items: center;
+}
+
+.admin-component-card__icon {
+  margin-right: 0.5rem;
 }

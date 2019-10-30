@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
 import { User } from "../models/entities/user";
@@ -31,5 +31,13 @@ export class UserService {
           return user;
         })
       );
+  }
+
+  public getUsers(elements: number, page: number) {
+    return this.http.get(this.appConfig.baseApiUrl + this.appConfig.userPath, {
+      params: new HttpParams()
+        .set("elements", elements.toString())
+        .set("page", page.toString())
+    });
   }
 }

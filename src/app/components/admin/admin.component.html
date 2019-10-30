@@ -4,19 +4,36 @@
     fxLayout="row wrap"
     fxLayoutAlign="center center"
   >
+    <a class="admin-component__a" routerLink="/admin/users">
+      <mat-card class="admin-component-card mat-elevation-z10"
+        ><mat-card-title class="admin-component-card__title"
+          ><mat-icon class="admin-component-card__icon">people</mat-icon
+          >Usuarios</mat-card-title
+        ><mat-card-content
+          >Gestion de todos los usuarios del sistema incluida la visibilidad de
+          casas asociadas a cada uno</mat-card-content
+        ></mat-card
+      >
+    </a>
+
     <a class="admin-component__a" routerLink="/admin/houses">
       <mat-card class="admin-component-card mat-elevation-z10"
-        ><mat-card-title>Casas</mat-card-title
+        ><mat-card-title class="admin-component-card__title"
+          ><mat-icon class="admin-component-card__icon">home</mat-icon
+          >Casas</mat-card-title
         ><mat-card-content
-          >Las casas estan compuestas por una lista de sensores. Reresentan el
-          nivel más alto de la gerarquía.</mat-card-content
+          >Las casas están compuestas por una lista de sensores. Reresentan el
+          nivel más alto de la gerarquía</mat-card-content
         ></mat-card
       >
     </a>
 
     <a class="admin-component__a" routerLink="/admin/sensors">
       <mat-card class="admin-component-card mat-elevation-z10"
-        ><mat-card-title>Sensores</mat-card-title
+        ><mat-card-title class="admin-component-card__title"
+          ><mat-icon class="admin-component-card__icon"
+            >developer_board</mat-icon
+          >Sensores</mat-card-title
         ><mat-card-content
           >Los sensores representan a las unidades hardware que pueden leer las
           diferentes variables</mat-card-content
@@ -26,7 +43,9 @@
 
     <a class="admin-component__a" routerLink="/admin/variables">
       <mat-card class="admin-component-card mat-elevation-z10"
-        ><mat-card-title>Variables</mat-card-title
+        ><mat-card-title class="admin-component-card__title"
+          ><mat-icon class="admin-component-card__icon">ac_unit</mat-icon
+          >Variables</mat-card-title
         ><mat-card-content
           >Las variables representan lecturas de un tipo concreto. Una variable
           puede estar en muchos sensores</mat-card-content
@@ -36,7 +55,9 @@
 
     <a class="admin-component__a" routerLink="/admin/types">
       <mat-card class="admin-component-card mat-elevation-z10"
-        ><mat-card-title>Tipos de sensores</mat-card-title
+        ><mat-card-title class="admin-component-card__title"
+          ><mat-icon class="admin-component-card__icon">dynamic_feed</mat-icon
+          >Tipos de sensores</mat-card-title
         ><mat-card-content
           >Cada sensor puede ser de un tipo distinto en funcion de las variables
           que envía al sistema</mat-card-content
@@ -46,7 +67,9 @@
 
     <a class="admin-component__a" routerLink="/admin/records">
       <mat-card class="admin-component-card mat-elevation-z10"
-        ><mat-card-title>Lecturas</mat-card-title
+        ><mat-card-title class="admin-component-card__title"
+          ><mat-icon class="admin-component-card__icon">storage</mat-icon
+          >Lecturas</mat-card-title
         ><mat-card-content
           >Cada sensor envía una lectura por cada variable que tenga
           asociada</mat-card-content

@@ -1,15 +1,15 @@
-export class User {
+export interface User {
   id: number;
-  username = "";
-  password = "";
-  name = "";
-  lastName = "";
-  createAt = "";
-  lastConnection = "";
-  email = "";
-  phoneNumber = "";
+  username: string;
+  password: string;
+  name?: string;
+  lastName?: string;
+  createAt?: Date;
+  lastConnection?: Date;
+  email?: string;
+  phoneNumber?: string;
   role: Role;
-  token = "";
+  token?: string;
 }
 
 export enum Role {

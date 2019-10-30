@@ -1,4 +1,4 @@
-export class SensorType {
+export interface SensorType {
   createAt: Date;
   id: number;
   actions: string;

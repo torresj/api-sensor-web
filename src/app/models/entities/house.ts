@@ -1,7 +1,7 @@
-export class House {
-  address = "";
+export interface House {
+  address: string;
   createAt: Date;
-  description = "";
+  description: string;
   id: number;
   position: Position;
 }

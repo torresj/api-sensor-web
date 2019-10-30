@@ -1,4 +1,4 @@
-export class Sensor {
+export interface Sensor {
   createAt: Date;
   houseId: number;
   id: number;

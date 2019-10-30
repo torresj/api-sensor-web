@@ -72,36 +72,35 @@ export class ProfileComponent implements OnInit {
     }
 
     this.store.setLoading(true);
-
-    const user = new User();
-    user.id = this.store.user.id;
-    user.username = this.store.user.username;
-    user.password = this.fields.password.value;
-
-    user.email = !this.fields.email.dirty
-      ? this.store.user.email
-      : this.fields.email.value;
-    user.lastName = !this.fields.lastName.dirty
-      ? this.store.user.lastName
-      : this.fields.lastName.value;
-    user.name = !this.fields.name.dirty
-      ? this.store.user.name
-      : this.fields.name.value;
-    user.phoneNumber = !this.fields.phone.dirty
-      ? this.store.user.phoneNumber
-      : this.fields.phone.value;
-
-    user.role = this.store.user.role;
-    this.userService.updateUser(user).subscribe(
-      data => {
-        this.store.setLoading(false);
-        this.store.setError("");
-        this.openSnackBar();
-      },
-      error => {
-        this.store.setLoading(false);
-      }
-    );
+    this.userService
+      .updateUser({
+        id: this.store.user.id,
+        username: this.store.user.username,
+        password: this.fields.password.value,
+        email: !this.fields.email.dirty
+          ? this.store.user.email
+          : this.fields.email.value,
+        lastName: !this.fields.lastName.dirty
+          ? this.store.user.lastName
+          : this.fields.lastName.value,
+        name: !this.fields.name.dirty
+          ? this.store.user.name
+          : this.fields.name.value,
+        phoneNumber: !this.fields.phone.dirty
+          ? this.store.user.phoneNumber
+          : this.fields.phone.value,
+        role: this.store.user.role
+      })
+      .subscribe(
+        data => {
+          this.store.setLoading(false);
+          this.store.setError("");
+          this.openSnackBar();
+        },
+        error => {
+          this.store.setLoading(false);
+        }
+      );
   }
 
   formControl(control: string) {

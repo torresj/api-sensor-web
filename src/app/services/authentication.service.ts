@@ -60,7 +60,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem("currentUser");
-    this.store.user = new User();
+    this.store.user = undefined;
     this.currentUserSubject.next(null);
   }
 }

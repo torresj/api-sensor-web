@@ -27,6 +27,8 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatListModule } from "@angular/material/list";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -37,6 +39,7 @@ import { AdminComponent } from "./components/admin/admin.component";
 
 // Mobx
 import { MobxAngularModule } from "mobx-angular";
+import { AdminUsersComponent } from "./components/admin/admin-users/admin-users.component";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -44,7 +47,8 @@ import { MobxAngularModule } from "mobx-angular";
     HomeComponent,
     IndexComponent,
     ProfileComponent,
-    AdminComponent
+    AdminComponent,
+    AdminUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,9 @@ import { MobxAngularModule } from "mobx-angular";
     MatTabsModule,
     MatListModule,
     MatGridListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
