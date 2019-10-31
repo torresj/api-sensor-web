@@ -27,6 +27,9 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   displayedColumnsSubject = new BehaviorSubject<string[]>([
     "id",
     "username",
+    "name",
+    "lastName",
+    "email",
     "role",
     "lastConnection",
     "actions"
@@ -51,25 +54,36 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.watcher = mediaObserver.media$.subscribe((change: MediaChange) => {
       if (change.mqAlias === "xs") {
-        this.displayedColumnsSubject.next(["id", "username", "actions"]);
+        this.displayedColumnsSubject.next([
+          "id",
+          "username",
+          "role",
+          "actions"
+        ]);
       } else if (change.mqAlias === "sm") {
         this.displayedColumnsSubject.next([
           "id",
           "username",
           "role",
+          "lastConnection",
           "actions"
         ]);
       } else if (change.mqAlias === "md") {
         this.displayedColumnsSubject.next([
           "id",
           "username",
+          "email",
           "role",
+          "lastConnection",
           "actions"
         ]);
       } else if (change.mqAlias === "lg") {
         this.displayedColumnsSubject.next([
           "id",
           "username",
+          "name",
+          "lastName",
+          "email",
           "role",
           "lastConnection",
           "actions"
@@ -78,6 +92,9 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         this.displayedColumnsSubject.next([
           "id",
           "username",
+          "name",
+          "lastName",
+          "email",
           "role",
           "lastConnection",
           "actions"
@@ -101,5 +118,9 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   loadUsersPage() {
     this.dataSource.loadUser(this.paginator.pageSize, this.paginator.pageIndex);
+  }
+
+  removeUser() {
+    console.log("Deleting user");
   }
 }

@@ -1,45 +1,99 @@
 <article class="admin-user-component">
   <section class="admin-user-component-section mat-elevation-z8">
-    <table
-      mat-table
-      [dataSource]="dataSource"
-      class="admin-user-component__table"
+    <div
+      class="admin-user-component--loading"
+      *ngIf="dataSource.loading | async"
     >
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+    <section class="admin-user-component-container-table">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="admin-user-component__table"
+      >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef>Usuario</th>
-        <td mat-cell *matCellDef="let element">{{ element.username }}</td>
-      </ng-container>
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef>Usuario</th>
+          <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="role">
-        <th mat-header-cell *matHeaderCellDef>Role</th>
-        <td mat-cell *matCellDef="let element">{{ element.role }}</td>
-      </ng-container>
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef>Role</th>
+          <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="lastConnection">
-        <th mat-header-cell *matHeaderCellDef>Últ. Conexión</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.lastConnection | date: "medium" }}
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let element"></td>
-      </ng-container>
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+          <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns | async"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns | async"></tr>
-    </table>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastConnection">
+          <th mat-header-cell *matHeaderCellDef>Últ. Conexión</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.lastConnection | date: "medium" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let element">
+            <section class="admin-user-component__actions">
+              <a
+                [routerLink]="'/admin/users/' + element.id"
+                class="admin-user-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Ver usuario"
+                  >visibility</mat-icon
+                >
+              </a>
+              <a
+                [routerLink]="'/admin/users/' + element.id + '/editar'"
+                class="admin-user-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Editar usuario"
+                  >create</mat-icon
+                >
+              </a>
+              <a
+                [routerLink]=""
+                (click)="removeUser()"
+                class="admin-user-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Borrar usuario"
+                  >delete</mat-icon
+                >
+              </a>
+            </section>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns | async"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns | async"
+        ></tr>
+      </table>
+    </section>
 
     <mat-paginator
       [length]="dataSource.totalElements | async"
       [pageSize]="10"
-      [pageSizeOptions]="[10, 20, 30]"
+      [pageSizeOptions]="[1, 10, 20, 30]"
     ></mat-paginator>
   </section>
 </article>
