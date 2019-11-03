@@ -6,6 +6,21 @@
     >
       <mat-spinner color="accent"></mat-spinner>
     </div>
+    <mat-form-field color="accent" class="admin-user-component__filter">
+      <input type="search" matInput placeholder="Filtrar" #searchBox />
+    </mat-form-field>
+    <mat-form-field color="accent" class="admin-user-component__filter">
+      <mat-label>Tipo de usuario</mat-label>
+      <mat-select
+        [(value)]="filterTypeUser"
+        (selectionChange)="onChangeSelect()"
+      >
+        <mat-option></mat-option>
+        <mat-option value="ADMIN">Administrador</mat-option>
+        <mat-option value="USER">Usuario</mat-option>
+        <mat-option value="STATION">Estación</mat-option>
+      </mat-select>
+    </mat-form-field>
     <section class="admin-user-component-container-table">
       <table
         mat-table

@@ -3,7 +3,8 @@ import {
   OnInit,
   AfterViewInit,
   ViewChild,
-  OnDestroy
+  OnDestroy,
+  ElementRef
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "src/app/services/authentication.service";
@@ -12,9 +13,9 @@ import { Role } from "src/app/models/entities/user";
 import { UserDataSource } from "../../../datasources/user.datasource";
 import { UserService } from "src/app/services/user.service";
 import { MatPaginator } from "@angular/material/paginator";
-import { tap } from "rxjs/operators";
+import { tap, debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { MediaChange, MediaObserver } from "@angular/flex-layout";
-import { Subscription, BehaviorSubject } from "rxjs";
+import { Subscription, BehaviorSubject, fromEvent } from "rxjs";
 
 @Component({
   selector: "app-admin-users",
@@ -35,8 +36,10 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     "actions"
   ]);
   displayedColumns = this.displayedColumnsSubject.asObservable();
+  filterTypeUser: string;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild("searchBox", { static: true }) input: ElementRef;
 
   constructor(
     private router: Router,
@@ -110,6 +113,16 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngAfterViewInit() {
     this.paginator.page.pipe(tap(() => this.loadUsersPage())).subscribe();
+    fromEvent(this.input.nativeElement, "keyup")
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap(() => {
+          this.paginator.pageIndex = 0;
+          console.log(this.input.nativeElement.value);
+        })
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {
@@ -122,5 +135,9 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   removeUser() {
     console.log("Deleting user");
+  }
+
+  onChangeSelect() {
+    console.log(this.filterTypeUser);
   }
 }

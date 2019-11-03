@@ -4,8 +4,8 @@
 
 .admin-user-component-section {
   margin: 1rem;
+  padding-top: 1rem;
   position: relative;
-  background-color: green;
 }
 
 .admin-user-component__action {
@@ -23,4 +23,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.admin-user-component__filter {
+  margin: 0 1rem;
 }

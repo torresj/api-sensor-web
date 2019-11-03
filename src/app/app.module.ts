@@ -29,6 +29,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSelectModule } from "@angular/material/select";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -75,7 +76,8 @@ import { AdminUsersComponent } from "./components/admin/admin-users/admin-users.
     MatGridListModule,
     MatSnackBarModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
