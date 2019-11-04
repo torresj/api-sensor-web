@@ -25,6 +25,15 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authenticationService.getUserData().subscribe(
+      dataUserData => {},
+      error => {
+        this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
+        this.authenticationService.logout();
+        this.router.navigate(["/login"]);
+      }
+    );
+
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser.role !== Role.admin) {
       this.router.navigate(["/home"]);

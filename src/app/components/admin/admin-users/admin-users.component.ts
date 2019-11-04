@@ -107,6 +107,14 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.authenticationService.getUserData().subscribe(
+      dataUserData => {},
+      error => {
+        this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
+        this.authenticationService.logout();
+        this.router.navigate(["/login"]);
+      }
+    );
     this.dataSource = new UserDataSource(this.userService);
     this.dataSource.loadUser(10, 0);
   }

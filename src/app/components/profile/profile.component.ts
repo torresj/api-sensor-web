@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
     this.authenticationService.getUserData().subscribe(
       dataUserData => {},
       error => {
+        this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
         this.authenticationService.logout();
         this.router.navigate(["/login"]);
       }
