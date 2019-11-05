@@ -127,7 +127,7 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         distinctUntilChanged(),
         tap(() => {
           this.paginator.pageIndex = 0;
-          console.log(this.input.nativeElement.value);
+          this.loadUsersPage();
         })
       )
       .subscribe();
@@ -138,7 +138,12 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   loadUsersPage() {
-    this.dataSource.loadUser(this.paginator.pageSize, this.paginator.pageIndex);
+    this.dataSource.loadUser(
+      this.paginator.pageSize,
+      this.paginator.pageIndex,
+      this.input.nativeElement.value,
+      this.filterTypeUser
+    );
   }
 
   removeUser() {
@@ -146,6 +151,6 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   onChangeSelect() {
-    console.log(this.filterTypeUser);
+    this.loadUsersPage();
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
-import { User } from "../models/entities/user";
+import { User, Role } from "../models/entities/user";
 import { AppConfig } from "../app.config";
 import { AppStore } from "../models/stores/appstore";
 
@@ -38,6 +38,29 @@ export class UserService {
       params: new HttpParams()
         .set("elements", elements.toString())
         .set("page", page.toString())
+    });
+  }
+
+  public getUsersWithFilters(
+    filter: string,
+    role: string,
+    elements: number,
+    page: number
+  ) {
+    let httpParams = new HttpParams()
+      .set("elements", elements.toString())
+      .set("page", page.toString());
+
+    if (filter !== undefined) {
+      httpParams = httpParams.set("filter", filter);
+    }
+
+    if (role !== undefined) {
+      httpParams = httpParams.set("role", role);
+    }
+
+    return this.http.get(this.appConfig.baseApiUrl + this.appConfig.userPath, {
+      params: httpParams
     });
   }
 }

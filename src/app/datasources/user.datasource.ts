@@ -24,18 +24,32 @@ export class UserDataSource implements DataSource<User> {
     this.totalElementsSubject.complete();
   }
 
-  loadUser(elements: number, page: number) {
+  loadUser(elements: number, page: number, filter?: string, role?: string) {
     this.loadingSubject.next(true);
-    this.userService
-      .getUsers(elements, page)
-      .pipe(
-        catchError(() => of([])),
-        finalize(() => this.loadingSubject.next(false))
-      )
-      .subscribe(data => {
-        const response = data as PageableResponse<User>;
-        this.totalElementsSubject.next(response.totalElements);
-        this.usersSubject.next(response.content);
-      });
+    if (filter || role) {
+      this.userService
+        .getUsersWithFilters(filter, role, elements, page)
+        .pipe(
+          catchError(() => of([])),
+          finalize(() => this.loadingSubject.next(false))
+        )
+        .subscribe(data => {
+          const response = data as PageableResponse<User>;
+          this.totalElementsSubject.next(response.totalElements);
+          this.usersSubject.next(response.content);
+        });
+    } else {
+      this.userService
+        .getUsers(elements, page)
+        .pipe(
+          catchError(() => of([])),
+          finalize(() => this.loadingSubject.next(false))
+        )
+        .subscribe(data => {
+          const response = data as PageableResponse<User>;
+          this.totalElementsSubject.next(response.totalElements);
+          this.usersSubject.next(response.content);
+        });
+    }
   }
 }
