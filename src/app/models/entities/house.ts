@@ -1,4 +1,5 @@
 export interface House {
+  name: string;
   address: string;
   createAt: Date;
   description: string;

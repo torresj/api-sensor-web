@@ -40,7 +40,9 @@ import { AdminComponent } from "./components/admin/admin.component";
 
 // Mobx
 import { MobxAngularModule } from "mobx-angular";
-import { AdminUsersComponent } from "./components/admin/admin-users/admin-users.component";
+import { AdminUsersComponent } from "./components/admin/users/admin-users.component";
+import { AdminEditUserComponent } from "./components/admin/users/edit/admin-edit-user.component";
+import { AdminUserComponent } from "./components/admin/users/user/admin-user.component";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -49,7 +51,9 @@ import { AdminUsersComponent } from "./components/admin/admin-users/admin-users.
     IndexComponent,
     ProfileComponent,
     AdminComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    AdminEditUserComponent,
+    AdminUserComponent
   ],
   imports: [
     BrowserModule,

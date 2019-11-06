@@ -9,6 +9,7 @@ export interface User {
   email?: string;
   phoneNumber?: string;
   role: Role;
+  numLogins: number;
   token?: string;
 }
 

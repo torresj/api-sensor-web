@@ -1,15 +1,15 @@
-<article class="admin-user-component">
-  <section class="admin-user-component-section mat-elevation-z8">
+<article class="admin-users-component">
+  <section class="admin-users-component-section mat-elevation-z8">
     <div
-      class="admin-user-component--loading"
+      class="admin-users-component--loading"
       *ngIf="dataSource.loading | async"
     >
       <mat-spinner color="accent"></mat-spinner>
     </div>
-    <mat-form-field color="accent" class="admin-user-component__filter">
+    <mat-form-field color="accent" class="admin-users-component__filter">
       <input type="search" matInput placeholder="Filtrar" #searchBox />
     </mat-form-field>
-    <mat-form-field color="accent" class="admin-user-component__filter">
+    <mat-form-field color="accent" class="admin-users-component__filter">
       <mat-label>Tipo de usuario</mat-label>
       <mat-select
         [(value)]="filterTypeUser"
@@ -21,11 +21,11 @@
         <mat-option value="STATION">Estación</mat-option>
       </mat-select>
     </mat-form-field>
-    <section class="admin-user-component-container-table">
+    <section class="admin-users-component-container-table">
       <table
         mat-table
         [dataSource]="dataSource"
-        class="admin-user-component__table"
+        class="admin-users-component__table"
       >
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -40,6 +40,11 @@
         <ng-container matColumnDef="role">
           <th mat-header-cell *matHeaderCellDef>Role</th>
           <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="numLogins">
+          <th mat-header-cell *matHeaderCellDef>Logins</th>
+          <td mat-cell *matCellDef="let element">{{ element.numLogins }}</td>
         </ng-container>
 
         <ng-container matColumnDef="name">
@@ -67,18 +72,18 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell *matCellDef="let element">
-            <section class="admin-user-component__actions">
+            <section class="admin-users-component__actions">
               <a
                 [routerLink]="'/admin/users/' + element.id"
-                class="admin-user-component__action"
+                class="admin-users-component__action"
               >
                 <mat-icon color="primary" matTooltip="Ver usuario"
                   >visibility</mat-icon
                 >
               </a>
               <a
-                [routerLink]="'/admin/users/' + element.id + '/editar'"
-                class="admin-user-component__action"
+                [routerLink]="'/admin/users/' + element.id + '/edit'"
+                class="admin-users-component__action"
               >
                 <mat-icon color="primary" matTooltip="Editar usuario"
                   >create</mat-icon
@@ -87,7 +92,7 @@
               <a
                 [routerLink]=""
                 (click)="removeUser()"
-                class="admin-user-component__action"
+                class="admin-users-component__action"
               >
                 <mat-icon color="primary" matTooltip="Borrar usuario"
                   >delete</mat-icon

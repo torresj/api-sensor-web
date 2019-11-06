@@ -63,4 +63,16 @@ export class UserService {
       params: httpParams
     });
   }
+
+  public getUser(id: string) {
+    return this.http.get(
+      this.appConfig.baseApiUrl + this.appConfig.userPath + "/" + id
+    );
+  }
+
+  public getUserHouses(id: string) {
+    return this.http.get(
+      this.appConfig.baseApiUrl + this.appConfig.userPath + "/" + id + "/houses"
+    );
+  }
 }

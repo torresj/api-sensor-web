@@ -84,6 +84,7 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         this.displayedColumnsSubject.next([
           "id",
           "username",
+          "numLogins",
           "name",
           "lastName",
           "email",
@@ -96,6 +97,7 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           "id",
           "username",
           "name",
+          "numLogins",
           "lastName",
           "email",
           "role",

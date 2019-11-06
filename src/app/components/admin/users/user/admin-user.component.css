@@ -1,0 +1,30 @@
+.admin-user-component section {
+  margin: 2em;
+}
+
+.admin-user-component section h3 {
+  margin: 0;
+}
+
+.admin-user-component--error {
+  color: red;
+  margin-top: 5rem;
+}
+
+.admin-user-component-info span {
+  font-size: 0.9rem;
+}
+
+.admin-user-component-info__label {
+  width: 8rem;
+  text-align: end;
+  color: grey;
+}
+
+.admin-user-component-info__content {
+  margin-left: 1rem;
+}
+
+.admin-user-component-info-content__house {
+  margin-right: 1rem;
+}

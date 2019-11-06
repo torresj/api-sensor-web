@@ -1,18 +1,18 @@
-.admin-user-component__table {
+.admin-users-component__table {
   width: 100%;
 }
 
-.admin-user-component-section {
+.admin-users-component-section {
   margin: 1rem;
   padding-top: 1rem;
   position: relative;
 }
 
-.admin-user-component__action {
+.admin-users-component__action {
   margin-right: 1rem;
 }
 
-.admin-user-component--loading {
+.admin-users-component--loading {
   position: absolute;
   top: 0;
   left: 0;
@@ -25,6 +25,6 @@
   justify-content: center;
 }
 
-.admin-user-component__filter {
+.admin-users-component__filter {
   margin: 0 1rem;
 }

@@ -90,7 +90,8 @@ export class ProfileComponent implements OnInit {
         phoneNumber: !this.fields.phone.dirty
           ? this.store.user.phoneNumber
           : this.fields.phone.value,
-        role: this.store.user.role
+        role: this.store.user.role,
+        numLogins: this.store.user.numLogins
       })
       .subscribe(
         data => {
