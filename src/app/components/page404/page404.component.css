@@ -1,0 +1,8 @@
+.not-found-article {
+  margin-top: 4rem;
+  color: red;
+}
+
+.not-found-article h1 {
+  font-size: 2rem;
+}

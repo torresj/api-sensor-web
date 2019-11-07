@@ -10,6 +10,7 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { AdminUsersComponent } from "./components/admin/users/admin-users.component";
 import { AdminUserComponent } from "./components/admin/users/user/admin-user.component";
 import { AdminEditUserComponent } from "./components/admin/users/edit/admin-edit-user.component";
+import { Page404Component } from "./components/page404/page404.component";
 
 const routes: Routes = [
   { path: "", component: IndexComponent },
@@ -32,9 +33,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: "login", component: LoginComponent },
-
-  // otherwise redirect to home
-  { path: "**", redirectTo: "" }
+  { path: "**", component: Page404Component }
 ];
 
 @NgModule({

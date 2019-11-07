@@ -43,6 +43,7 @@ import { MobxAngularModule } from "mobx-angular";
 import { AdminUsersComponent } from "./components/admin/users/admin-users.component";
 import { AdminEditUserComponent } from "./components/admin/users/edit/admin-edit-user.component";
 import { AdminUserComponent } from "./components/admin/users/user/admin-user.component";
+import { Page404Component } from './components/page404/page404.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -53,7 +54,8 @@ import { AdminUserComponent } from "./components/admin/users/user/admin-user.com
     AdminComponent,
     AdminUsersComponent,
     AdminEditUserComponent,
-    AdminUserComponent
+    AdminUserComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,
