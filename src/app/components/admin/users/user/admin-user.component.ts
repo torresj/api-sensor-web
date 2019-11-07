@@ -36,11 +36,13 @@ export class AdminUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.setLoading(true);
     this.authenticationService.getUserData().subscribe(
       dataUserData => {},
       error => {
         this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
         this.authenticationService.logout();
+        this.store.setLoading(false);
         this.router.navigate(["/login"]);
       }
     );
@@ -53,13 +55,16 @@ export class AdminUserComponent implements OnInit {
         this.userService.getUserHouses(this.id).subscribe(
           housesData => {
             this.housesSubject.next(housesData as House[]);
+            this.store.setLoading(false);
           },
           error => {
+            this.store.setLoading(false);
             this.store.error = "Error al obtener las casas del usuario";
           }
         );
       },
       error => {
+        this.store.setLoading(false);
         this.store.error = "El usuario no existe";
       }
     );

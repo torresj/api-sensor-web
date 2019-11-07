@@ -4,11 +4,23 @@
   fxLayoutAlign="center start"
   *mobxAutorun
 >
-  <section *ngIf="store.error" class="admin-user-component--error">
+  <section
+    *ngIf="!store.error && store.loading"
+    class="admin-user-component--loading"
+  >
+    <mat-spinner
+      class="admin-user-component__spinner"
+      color="accent"
+    ></mat-spinner>
+  </section>
+  <section
+    *ngIf="store.error && !store.loading"
+    class="admin-user-component--error"
+  >
     <h1>{{ store.error }}</h1>
   </section>
   <section
-    *ngIf="!store.error"
+    *ngIf="!store.error && !store.loading"
     class="admin-user-component__user"
     fxLayout="column wrap"
     fxLayoutAlign="start center"
@@ -80,6 +92,7 @@
     </mat-list>
   </section>
   <section
+    *ngIf="!store.error && !store.loading"
     class="admin-user-component__houses"
     fxLayout="column wrap"
     fxLayoutAlign="start center"
