@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    store.setToolbarPage("Domótica");
+    store.setToolbarPage([{ label: "Domótica", url: "/home" }]);
   }
 
   ngOnInit() {

@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit {
     if (currentUser.role !== Role.admin) {
       this.router.navigate(["/home"]);
     } else {
-      store.setToolbarPage("Gestión");
+      store.setToolbarPage([{ label: "Gestión", url: "/admin" }]);
     }
   }
 

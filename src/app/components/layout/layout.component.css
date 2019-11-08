@@ -66,9 +66,18 @@ footer a {
   max-height: 55px;
 }
 
+.subpage-title-a {
+  text-decoration: none;
+  color: white;
+}
+
 .subpage-title {
   font-size: 1.6rem;
   font-weight: 100;
+}
+
+.subpage-title-separator {
+  margin: 0.3rem;
 }
 
 .index-toolbar-gt-xs {

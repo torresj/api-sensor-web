@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 export class Page404Component implements OnInit {
   url: string;
   constructor(private router: Router, public store: AppStore) {
-    store.setToolbarPage("Error 404");
+    store.setToolbarPage([{ label: "Error 404", url: "" }]);
     this.url = router.url;
   }
 

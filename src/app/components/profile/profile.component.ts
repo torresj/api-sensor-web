@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private snackBar: MatSnackBar
   ) {
-    store.setToolbarPage("Perfil");
+    store.setToolbarPage([{ label: "Perfil", url: "/profile" }]);
   }
 
   get fields() {

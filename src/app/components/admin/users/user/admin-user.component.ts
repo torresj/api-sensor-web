@@ -28,10 +28,15 @@ export class AdminUserComponent implements OnInit {
     public store: AppStore
   ) {
     const currentUser = this.authenticationService.currentUserValue;
+    this.id = this.activatedRoute.snapshot.params.id;
     if (currentUser.role !== Role.admin) {
       this.router.navigate(["/home"]);
     } else {
-      store.setToolbarPage("Gestión - Usuarios");
+      store.setToolbarPage([
+        { label: "Gestión", url: "/admin" },
+        { label: "Usuarios", url: "/admin/users" },
+        { label: "Info", url: "/admin/users/" + this.id }
+      ]);
     }
   }
 
@@ -46,8 +51,6 @@ export class AdminUserComponent implements OnInit {
         this.router.navigate(["/login"]);
       }
     );
-
-    this.id = this.activatedRoute.snapshot.params.id;
 
     this.userService.getUser(this.id).subscribe(
       userData => {

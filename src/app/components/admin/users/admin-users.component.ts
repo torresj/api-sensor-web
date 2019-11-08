@@ -52,7 +52,10 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     if (currentUser.role !== Role.admin) {
       this.router.navigate(["/home"]);
     } else {
-      store.setToolbarPage("Gestión - Usuarios");
+      store.setToolbarPage([
+        { label: "Gestión", url: "/admin" },
+        { label: "Usuarios", url: "/admin/users" }
+      ]);
     }
 
     this.watcher = mediaObserver.media$.subscribe((change: MediaChange) => {

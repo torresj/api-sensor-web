@@ -5,13 +5,13 @@ import { House } from "../entities/house";
 
 @Injectable({ providedIn: "root" })
 export class AppStore {
-  @observable toolbarPage = "";
+  @observable toolbarPageLinks: Link[] = [];
   @observable user: User;
   @observable loading = false;
   @observable error = "";
 
-  @action setToolbarPage(newPage: string) {
-    this.toolbarPage = newPage;
+  @action setToolbarPage(links: Link[]) {
+    this.toolbarPageLinks = links;
   }
 
   @action setUser(newUser: User) {
@@ -25,4 +25,9 @@ export class AppStore {
   @action setLoading(newLoading: boolean) {
     this.loading = newLoading;
   }
+}
+
+export interface Link {
+  label: string;
+  url: string;
 }

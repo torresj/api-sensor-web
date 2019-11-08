@@ -57,16 +57,37 @@
   </mat-toolbar-row>
   <mat-toolbar-row
     class="mat-elevation-z2"
-    *ngIf="store.toolbarPage === 'Index' ? false : true"
-    ><h1 class="subpage-title">
-      {{ store.toolbarPage }}
-    </h1>
+    *ngIf="
+      store.toolbarPageLinks.length > 0 &&
+      store.toolbarPageLinks[0].label === 'Inicio'
+        ? false
+        : true
+    "
+  >
+    <a
+      *ngFor="let link of store.toolbarPageLinks; index as i"
+      [routerLink]="link.url"
+      class="subpage-title-a"
+      ><h1 class="subpage-title">
+        {{ link.label
+        }}<span
+          *ngIf="i < store.toolbarPageLinks.length - 1"
+          class="subpage-title-separator"
+          >-</span
+        >
+      </h1></a
+    >
   </mat-toolbar-row>
   <mat-toolbar-row
     fxLayout="column"
     fxLayoutAlign="center center"
     class="mat-elevation-z2"
-    *ngIf="store.toolbarPage === 'Index' ? true : false"
+    *ngIf="
+      store.toolbarPageLinks.length > 0 &&
+      store.toolbarPageLinks[0].label === 'Inicio'
+        ? true
+        : false
+    "
     [ngClass.gt-xs]="{ 'index-toolbar-gt-xs': true }"
     [ngClass.xs]="{ 'index-toolbar-xs': true }"
     ><h1>
