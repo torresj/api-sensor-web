@@ -6,4 +6,6 @@ export class AppConfig {
   readonly loginPath: string = "login";
   readonly userLoggedPath: string = "v1/users/logged";
   readonly userPath: string = "v1/users";
+  readonly housePath: string = "v1/houses";
+  readonly houseAllPath: string = "v1/houses/all";
 }

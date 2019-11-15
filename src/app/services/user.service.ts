@@ -16,7 +16,7 @@ export class UserService {
     private store: AppStore
   ) {}
 
-  public updateUser(userToUpdate: User) {
+  public updateUserLogged(userToUpdate: User) {
     const user = JSON.stringify(userToUpdate);
     return this.http
       .put<User>(
@@ -31,6 +31,14 @@ export class UserService {
           return user;
         })
       );
+  }
+
+  public updateUser(userToUpdate: User) {
+    const user = JSON.stringify(userToUpdate);
+    return this.http.put<User>(
+      this.appConfig.baseApiUrl + this.appConfig.userPath,
+      userToUpdate
+    );
   }
 
   public getUsers(elements: number, page: number) {

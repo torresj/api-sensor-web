@@ -1,0 +1,26 @@
+.admin-user-edit--loading {
+  margin-top: 6rem;
+}
+
+.admin-user-edit__formSection {
+  max-width: 50rem;
+  margin: 2rem;
+}
+
+.admin-user-edit__housesPanel {
+  margin: 1rem 0 2rem 0;
+}
+
+.admin-user-edit__houseSection {
+  width: 100%;
+}
+
+.admin-user-edit-houseSection__text {
+  font-size: small;
+  padding-top: 0.3rem;
+}
+
+.admin-user-edit-housesPanels--noHouses {
+  font-size: 0.8rem;
+  color: grey;
+}

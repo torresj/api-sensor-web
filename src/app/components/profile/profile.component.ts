@@ -51,8 +51,8 @@ export class ProfileComponent implements OnInit {
     this.userForm = this.formBuilder.group(
       {
         username: [{ value: "", disabled: true }],
-        password: ["", Validators.required],
-        checkPassword: ["", Validators.required],
+        password: [""],
+        checkPassword: [""],
         name: [""],
         lastName: [""],
         email: ["", Validators.email],
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
 
     this.store.setLoading(true);
     this.userService
-      .updateUser({
+      .updateUserLogged({
         id: this.store.user.id,
         username: this.store.user.username,
         password: this.fields.password.value,
@@ -101,6 +101,7 @@ export class ProfileComponent implements OnInit {
         },
         error => {
           this.store.setLoading(false);
+          this.openSnackBar("No se pudo actualizar el usuario");
         }
       );
   }
@@ -109,11 +110,15 @@ export class ProfileComponent implements OnInit {
     return this.userForm.controls[control];
   }
 
-  openSnackBar() {
-    const snackBarRef = this.snackBar.open("Usuario actualizado", "Cerrar", {
-      duration: 5000
-    });
-
+  openSnackBar(error?: string) {
+    let snackBarRef = null;
+    if (error) {
+      snackBarRef = this.snackBar.open(error, "Cerrar");
+    } else {
+      snackBarRef = this.snackBar.open("Usuario actualizado", "Cerrar", {
+        duration: 5000
+      });
+    }
     snackBarRef.onAction().subscribe(() => {
       snackBarRef.dismiss();
     });

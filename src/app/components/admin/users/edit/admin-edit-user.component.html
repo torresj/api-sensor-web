@@ -1,1 +1,184 @@
-<p>admin-edit-user works!</p>
+<article class="admin-user-edit" fxLayout="column" *mobxAutorun>
+  <section
+    *ngIf="!store.error && store.loading && !submitted"
+    class="admin-user-edit--loading"
+    fxLayoutAlign="center center"
+  >
+    <mat-spinner class="admin-user-edit" color="accent"></mat-spinner>
+  </section>
+  <section
+    *ngIf="!(!store.error && store.loading && !submitted)"
+    class="admin-user-edit__formSection"
+  >
+    <form
+      class="admin-user-edit__form"
+      [formGroup]="editForm"
+      (ngSubmit)="updateUser()"
+      fxLayout="column"
+    >
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" [value]="(user | async)?.id" />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Usuario</mat-label>
+        <input
+          matInput
+          formControlName="username"
+          [value]="(user | async)?.username"
+        />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Núm. Logins</mat-label>
+        <input
+          matInput
+          formControlName="logins"
+          [value]="(user | async)?.numLogins"
+        />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Role *</mat-label>
+        <mat-select [value]="roleSelected">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Nueva contraseña</mat-label>
+        <input formControlName="password" type="password" matInput />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Confirmar contraseña</mat-label>
+        <input formControlName="checkPassword" type="password" matInput />
+        <mat-error
+          *ngIf="
+            formControl('checkPassword').invalid &&
+            formControl('checkPassword').errors.mustMatch &&
+            (formControl('checkPassword').dirty ||
+              formControl('checkPassword').touched)
+          "
+          >La contraseña debe coincidir</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="name" matInput [value]="(user | async)?.name" />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Apellidos</mat-label>
+        <input
+          formControlName="lastName"
+          matInput
+          [value]="(user | async)?.lastName"
+        />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          formControlName="email"
+          matInput
+          [value]="(user | async)?.email"
+        />
+        <mat-error
+          *ngIf="
+            formControl('email').invalid &&
+            (formControl('email').dirty || formControl('email').touched)
+          "
+          >Formato de email erróneo</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Teléfono</mat-label>
+        <input
+          formControlName="phone"
+          matInput
+          [value]="(user | async)?.phoneNumber"
+        />
+      </mat-form-field>
+      <mat-expansion-panel class="admin-user-edit__housesPanel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Casas
+          </mat-panel-title>
+          <mat-panel-description>
+            Casas visibles para el usuario
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <section
+          class="admin-user-edit-housesPanel__select"
+          fxLayoutAlign="space-between center"
+        >
+          <mat-form-field color="accent" appearance="standard">
+            <mat-label>Casas en el sistema</mat-label>
+            <mat-select [(value)]="houseToAdd">
+              <mat-option
+                *ngFor="let house of housesDiff | async"
+                [value]="house.id"
+              >
+                {{ house.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <section
+            class="admin-user-edit-housesPanel-select__buttons"
+            fxLayout="row wrap"
+            fxLayoutAlign="end center"
+          >
+            <button mat-icon-button color="accent" (click)="addHouse()">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="addAllHouses()">
+              <mat-icon>select_all</mat-icon>
+            </button>
+          </section>
+        </section>
+
+        <mat-list>
+          <mat-list>
+            <mat-list-item *ngIf="(houses | async).length === 0">
+              <span class="admin-user-edit-housesPanels--noHouses">
+                Usuario sin casas asociadas</span
+              ></mat-list-item
+            >
+            <mat-list-item *ngFor="let house of houses | async">
+              <section
+                class="admin-user-edit__houseSection"
+                fxLayoutAlign="space-between center"
+              >
+                <span class="admin-user-edit-houseSection__text">{{
+                  house.name
+                }}</span>
+                <button
+                  mat-icon-button
+                  color="accent"
+                  (click)="removeHouse(house.id)"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </section>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-list>
+      </mat-expansion-panel>
+      <button
+        mat-raised-button
+        class="profile-component-edit__form__button"
+        color="accent"
+        [disabled]="store.loading"
+      >
+        <div
+          *ngIf="store.loading"
+          class="profile-component-edit__form__spinner"
+          fxLayoutAlign="center center"
+        >
+          <mat-spinner color="accent" diameter="35"></mat-spinner>
+        </div>
+        <span *ngIf="!store.loading">Actualizar</span>
+      </button>
+    </form>
+  </section>
+</article>

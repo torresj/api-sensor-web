@@ -30,6 +30,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSelectModule } from "@angular/material/select";
+import { MatExpansionModule } from "@angular/material/expansion";
 
 // Flex layout
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -43,7 +44,7 @@ import { MobxAngularModule } from "mobx-angular";
 import { AdminUsersComponent } from "./components/admin/users/admin-users.component";
 import { AdminEditUserComponent } from "./components/admin/users/edit/admin-edit-user.component";
 import { AdminUserComponent } from "./components/admin/users/user/admin-user.component";
-import { Page404Component } from './components/page404/page404.component';
+import { Page404Component } from "./components/page404/page404.component";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -83,7 +84,8 @@ import { Page404Component } from './components/page404/page404.component';
     MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
