@@ -137,7 +137,7 @@ export class AdminEditUserComponent implements OnInit {
     return this.editForm.controls[control];
   }
 
-  updateUser() {
+  onSubmit() {
     if (this.editForm.invalid) {
       return;
     }
@@ -166,9 +166,24 @@ export class AdminEditUserComponent implements OnInit {
       .subscribe(
         data => {
           this.userSubject.next(data as User);
-          this.store.setLoading(false);
-          this.store.setError("");
-          this.openSnackBar();
+          const houseIds: number[] = this.housesSubject.value.map(
+            house => house.id
+          );
+          this.userService
+            .setUserHouses(user.id.toString(), houseIds)
+            .subscribe(
+              houses => {
+                this.store.setLoading(false);
+                this.store.setError("");
+                this.openSnackBar();
+              },
+              error => {
+                this.store.setLoading(false);
+                this.openSnackBar(
+                  "El usuario ha sido actualizado pero no sus casas asociadas"
+                );
+              }
+            );
         },
         error => {
           this.store.setLoading(false);
@@ -191,11 +206,11 @@ export class AdminEditUserComponent implements OnInit {
       const house = this.allHousesSubject.value.find(
         userHouse => userHouse.id === this.houseToAdd
       );
-      const usertHouses = this.housesSubject.value;
-      usertHouses.push(house);
-      this.housesSubject.next(usertHouses);
+      const userHouses = this.housesSubject.value;
+      userHouses.push(house);
+      this.housesSubject.next(userHouses);
       this.allHousesSubject.next(
-        this.getDiffHouses(usertHouses, this.allSystemHouses)
+        this.getDiffHouses(userHouses, this.allSystemHouses)
       );
       this.houseToAdd = undefined;
     }
@@ -209,7 +224,7 @@ export class AdminEditUserComponent implements OnInit {
     );
   }
 
-  private addAllHouses() {
+  addAllHouses() {
     this.housesSubject.next(this.allSystemHouses);
     this.allHousesSubject.next([]);
     this.houseToAdd = undefined;

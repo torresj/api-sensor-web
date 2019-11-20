@@ -13,7 +13,6 @@
     <form
       class="admin-user-edit__form"
       [formGroup]="editForm"
-      (ngSubmit)="updateUser()"
       fxLayout="column"
     >
       <mat-form-field color="accent" appearance="standard">
@@ -168,6 +167,7 @@
         mat-raised-button
         class="profile-component-edit__form__button"
         color="accent"
+        (click)="onSubmit()"
         [disabled]="store.loading"
       >
         <div

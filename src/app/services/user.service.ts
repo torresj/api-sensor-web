@@ -83,4 +83,15 @@ export class UserService {
       this.appConfig.baseApiUrl + this.appConfig.userPath + "/" + id + "/houses"
     );
   }
+
+  public setUserHouses(userId: string, houseIds: number[]) {
+    return this.http.post<number[]>(
+      this.appConfig.baseApiUrl +
+        this.appConfig.userPath +
+        "/" +
+        userId +
+        "/houses",
+      houseIds
+    );
+  }
 }
