@@ -41,6 +41,14 @@ export class UserService {
     );
   }
 
+  public createUser(newUser: User) {
+    const user = JSON.stringify(newUser);
+    return this.http.post<User>(
+      this.appConfig.baseApiUrl + this.appConfig.userPath,
+      newUser
+    );
+  }
+
   public getUsers(elements: number, page: number) {
     return this.http.get(this.appConfig.baseApiUrl + this.appConfig.userPath, {
       params: new HttpParams()
@@ -92,6 +100,12 @@ export class UserService {
         userId +
         "/houses",
       houseIds
+    );
+  }
+
+  public deleteUser(id: string) {
+    return this.http.delete(
+      this.appConfig.baseApiUrl + this.appConfig.userPath + "/" + id
     );
   }
 }

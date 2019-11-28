@@ -11,6 +11,7 @@ import { AdminUsersComponent } from "./components/admin/users/admin-users.compon
 import { AdminUserComponent } from "./components/admin/users/user/admin-user.component";
 import { AdminEditUserComponent } from "./components/admin/users/edit/admin-edit-user.component";
 import { Page404Component } from "./components/page404/page404.component";
+import { AdminCreateUserComponent } from "./components/admin/users/create/admin-create-user.component";
 
 const routes: Routes = [
   { path: "", component: IndexComponent },
@@ -22,6 +23,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: "admin/users/create",
+    component: AdminCreateUserComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: "admin/users/:id",
     component: AdminUserComponent,

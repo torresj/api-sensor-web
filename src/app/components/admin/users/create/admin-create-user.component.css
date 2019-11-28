@@ -1,0 +1,8 @@
+.admin-user-create-form__input {
+  font-size: 16px;
+}
+
+.admin-user-create__formSection {
+  max-width: 50rem;
+  margin: 2rem;
+}

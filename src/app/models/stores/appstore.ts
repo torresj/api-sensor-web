@@ -9,6 +9,7 @@ export class AppStore {
   @observable user: User;
   @observable loading = false;
   @observable error = "";
+  @observable httpErrorCode: number;
 
   @action setToolbarPage(links: Link[]) {
     this.toolbarPageLinks = links;
@@ -20,6 +21,10 @@ export class AppStore {
 
   @action setError(newerror: string) {
     this.error = newerror;
+  }
+
+  @action setHttpErrorCode(newerror: number) {
+    this.httpErrorCode = newerror;
   }
 
   @action setLoading(newLoading: boolean) {

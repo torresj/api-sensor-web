@@ -45,6 +45,8 @@ import { AdminUsersComponent } from "./components/admin/users/admin-users.compon
 import { AdminEditUserComponent } from "./components/admin/users/edit/admin-edit-user.component";
 import { AdminUserComponent } from "./components/admin/users/user/admin-user.component";
 import { Page404Component } from "./components/page404/page404.component";
+import { AdminCreateUserComponent } from "./components/admin/users/create/admin-create-user.component";
+import { DeleteUserDialogComponent } from "./components/dialogs/delete-user-dialog/delete-user-dialog.component";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -56,7 +58,9 @@ import { Page404Component } from "./components/page404/page404.component";
     AdminUsersComponent,
     AdminEditUserComponent,
     AdminUserComponent,
-    Page404Component
+    Page404Component,
+    AdminCreateUserComponent,
+    DeleteUserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +91,7 @@ import { Page404Component } from "./components/page404/page404.component";
     MatSelectModule,
     MatExpansionModule
   ],
+  entryComponents: [DeleteUserDialogComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

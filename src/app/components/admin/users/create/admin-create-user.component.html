@@ -1,0 +1,94 @@
+<article class="admin-user-create" fxLayout="column" *mobxAutorun>
+  <section class="admin-user-create__formSection">
+    <form
+      class="admin-user-create__form"
+      [formGroup]="createForm"
+      fxLayout="column"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Usuario *</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error *ngIf="formControl('username').invalid"
+          >Este campo es obligatorio</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Role *</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl('role').invalid"
+          >Este campo es obligatorio</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Nueva contraseña *</mat-label>
+        <input formControlName="password" type="password" matInput />
+        <mat-error *ngIf="formControl('password').invalid"
+          >Este campo es obligatorio</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Confirmar contraseña *</mat-label>
+        <input formControlName="checkPassword" type="password" matInput />
+        <mat-error
+          *ngIf="
+            formControl('checkPassword').invalid &&
+            formControl('checkPassword').errors.mustMatch &&
+            (formControl('checkPassword').dirty ||
+              formControl('checkPassword').touched)
+          "
+          >La contraseña debe coincidir</mat-error
+        >
+        <mat-error
+          *ngIf="
+            formControl('checkPassword').invalid &&
+            !formControl('checkPassword').errors.mustMatch
+          "
+          >Este campo es obligatorio</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="name" matInput />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Apellidos</mat-label>
+        <input formControlName="lastName" matInput />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Email</mat-label>
+        <input type="email" formControlName="email" matInput />
+        <mat-error
+          *ngIf="
+            formControl('email').invalid &&
+            (formControl('email').dirty || formControl('email').touched)
+          "
+          >Formato de email erróneo</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Teléfono</mat-label>
+        <input formControlName="phone" matInput />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        class="profile-component-create__form__button"
+        color="accent"
+        [disabled]="store.loading"
+      >
+        <div
+          *ngIf="store.loading"
+          class="profile-component-edit__form__spinner"
+          fxLayoutAlign="center center"
+        >
+          <mat-spinner color="accent" diameter="35"></mat-spinner>
+        </div>
+        <span *ngIf="!store.loading">Crear</span>
+      </button>
+    </form>
+  </section>
+</article>

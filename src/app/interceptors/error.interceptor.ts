@@ -30,8 +30,11 @@ export class ErrorInterceptor implements HttpInterceptor {
           location.reload(true);
         } else if (err.status === 403) {
           this.store.setError("Usuario o contraseña incorrectos");
+        } else if (err.status === 304) {
+          this.store.setError("Entidad no modificada");
         }
 
+        this.store.setHttpErrorCode(err.status);
         const error = err.error.message || err.statusText;
         return throwError(error);
       })

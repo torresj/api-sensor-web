@@ -142,8 +142,6 @@ export class AdminEditUserComponent implements OnInit {
       return;
     }
 
-    console.log("updating");
-
     this.submitted = true;
     this.store.setLoading(true);
     const user = this.userSubject.value;

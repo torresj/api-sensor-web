@@ -21,6 +21,14 @@
         <mat-option value="STATION">Estación</mat-option>
       </mat-select>
     </mat-form-field>
+    <button
+      color="primary"
+      class="admin-users-component__new-user"
+      mat-raised-button
+      [routerLink]="'/admin/users/create'"
+    >
+      Crear usuario
+    </button>
     <section class="admin-users-component-container-table">
       <table
         mat-table
@@ -91,7 +99,7 @@
               </a>
               <a
                 [routerLink]=""
-                (click)="removeUser()"
+                (click)="removeUser(element)"
                 class="admin-users-component__action"
               >
                 <mat-icon color="primary" matTooltip="Borrar usuario"

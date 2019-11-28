@@ -126,10 +126,20 @@
             fxLayout="row wrap"
             fxLayoutAlign="end center"
           >
-            <button mat-icon-button color="accent" (click)="addHouse()">
+            <button
+              mat-icon-button
+              color="accent"
+              (click)="addHouse()"
+              matTooltip="Añadir"
+            >
               <mat-icon>add</mat-icon>
             </button>
-            <button mat-icon-button color="accent" (click)="addAllHouses()">
+            <button
+              mat-icon-button
+              color="accent"
+              (click)="addAllHouses()"
+              matTooltip="Añadir todas"
+            >
               <mat-icon>select_all</mat-icon>
             </button>
           </section>
@@ -152,6 +162,7 @@
                 }}</span>
                 <button
                   mat-icon-button
+                  matTooltip="Borrar"
                   color="accent"
                   (click)="removeHouse(house.id)"
                 >
@@ -169,6 +180,7 @@
         color="accent"
         (click)="onSubmit()"
         [disabled]="store.loading"
+        matTooltip="Info about the action"
       >
         <div
           *ngIf="store.loading"
