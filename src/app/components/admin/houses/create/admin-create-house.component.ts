@@ -1,26 +1,25 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { HouseService } from "src/app/services/house.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthenticationService } from "src/app/services/authentication.service";
-import { UserService } from "src/app/services/user.service";
 import { AppStore } from "src/app/models/stores/appstore";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar } from "@angular/material";
 import { Role } from "src/app/models/entities/user";
-import { MustMatch } from "src/app/helpers/must-match.validator";
 
 @Component({
-  selector: "app-admin-create-user",
-  templateUrl: "./admin-create-user.component.html",
-  styleUrls: ["./admin-create-user.component.css"]
+  selector: "app-admin-create-house",
+  templateUrl: "./admin-create-house.component.html",
+  styleUrls: ["./admin-create-house.component.css"]
 })
-export class AdminCreateUserComponent implements OnInit {
+export class AdminCreateHouseComponent implements OnInit {
   createForm: FormGroup;
-  roles: Role[] = [Role.admin, Role.station, Role.user];
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService,
+    private houseService: HouseService,
+    private activatedRoute: ActivatedRoute,
     public store: AppStore,
     private snackBar: MatSnackBar
   ) {
@@ -30,8 +29,8 @@ export class AdminCreateUserComponent implements OnInit {
     } else {
       store.setToolbarPage([
         { label: "Gestión", url: "/admin" },
-        { label: "Usuarios", url: "/admin/users" },
-        { label: "Crear", url: "/admin/users/create" }
+        { label: "Casas", url: "/admin/houses" },
+        { label: "Crear", url: "/admin/houses/create" }
       ]);
     }
   }
@@ -49,21 +48,13 @@ export class AdminCreateUserComponent implements OnInit {
       }
     );
 
-    this.createForm = this.formBuilder.group(
-      {
-        username: ["", Validators.required],
-        role: ["", Validators.required],
-        password: ["", Validators.required],
-        checkPassword: ["", Validators.required],
-        name: [""],
-        lastName: [""],
-        email: ["", Validators.email],
-        phone: [""]
-      },
-      {
-        validator: MustMatch("password", "checkPassword")
-      }
-    );
+    this.createForm = this.formBuilder.group({
+      name: ["", Validators.required],
+      address: [""],
+      description: [""],
+      latitude: [""],
+      longitude: [""]
+    });
   }
 
   get fields() {
@@ -78,17 +69,18 @@ export class AdminCreateUserComponent implements OnInit {
     if (this.createForm.invalid) {
       return;
     }
+    console.log("Creating house");
 
     this.store.setLoading(true);
-    this.userService
-      .createUser({
-        username: this.fields.username.value,
-        password: this.fields.password.value,
-        email: this.fields.email.value,
-        lastName: this.fields.lastName.value,
+    this.houseService
+      .createHouse({
         name: this.fields.name.value,
-        phoneNumber: this.fields.phone.value,
-        role: this.fields.role.value
+        description: this.fields.description.value,
+        address: this.fields.address.value,
+        position: {
+          latitude: this.fields.latitude.value,
+          longitude: this.fields.longitude.value
+        }
       })
       .subscribe(
         data => {
@@ -100,12 +92,12 @@ export class AdminCreateUserComponent implements OnInit {
           this.store.setLoading(false);
           if (this.store.httpErrorCode === 304) {
             this.openSnackBar(
-              "No se pudo crear el usuario '" +
-                this.fields.username.value +
+              "No se pudo crear la casa '" +
+                this.fields.name.value +
                 "', ya existe"
             );
           } else {
-            this.openSnackBar("No se pudo crear el usuario");
+            this.openSnackBar("No se pudo crear la casa");
           }
         }
       );
@@ -116,7 +108,7 @@ export class AdminCreateUserComponent implements OnInit {
     if (error) {
       snackBarRef = this.snackBar.open(error, "Cerrar");
     } else {
-      snackBarRef = this.snackBar.open("Usuario creado", "Cerrar", {
+      snackBarRef = this.snackBar.open("Casa creada", "Cerrar", {
         duration: 5000
       });
     }

@@ -1,0 +1,36 @@
+.admin-house-component section {
+  margin: 2rem;
+}
+
+.admin-house-component section h3 {
+  margin: 0;
+  color: #ff4081;
+  font-size: 1.5rem;
+}
+
+.admin-house-component--error {
+  color: red;
+  margin-top: 5rem;
+}
+
+.admin-house-component-info span {
+  font-size: 0.9rem;
+}
+
+.admin-house-component-info__label {
+  width: 8rem;
+  text-align: end;
+  color: grey;
+}
+
+.admin-house-component-info__content {
+  margin-left: 1rem;
+}
+
+.admin-house-component-info-content__house {
+  margin-right: 1rem;
+}
+
+.admin-house-component--loading {
+  padding-top: 5rem;
+}

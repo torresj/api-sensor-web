@@ -1,0 +1,114 @@
+<article
+  class="admin-house-component"
+  fxLayout="row wrap"
+  fxLayoutAlign="center start"
+  *mobxAutorun
+>
+  <section
+    *ngIf="!store.error && store.loading"
+    class="admin-house-component--loading"
+  >
+    <mat-spinner
+      class="admin-house-component__spinner"
+      color="accent"
+    ></mat-spinner>
+  </section>
+  <section
+    *ngIf="store.error && !store.loading"
+    class="admin-house-component--error"
+  >
+    <h1>{{ store.error }}</h1>
+  </section>
+  <section
+    *ngIf="!store.error && !store.loading"
+    class="admin-house-component__house"
+    fxLayout="column wrap"
+    fxLayoutAlign="start center"
+  >
+    <h3>Información de la casa</h3>
+    <mat-list class="admin-house-component-info">
+      <mat-list-item>
+        <span class="admin-house-component-info__label">ID:</span>
+        <span class="admin-house-component-info__content">{{
+          (house | async)?.id
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-house-component-info__label">Nombre:</span>
+        <span class="admin-house-component-info__content">{{
+          (house | async)?.name
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-house-component-info__label">Descripción:</span>
+        <span class="admin-house-component-info__content">{{
+          (house | async)?.description
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-house-component-info__label">Dirección:</span>
+        <span class="admin-house-component-info__content">{{
+          (house | async)?.description
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-house-component-info__label"
+          >Fecha de creación:</span
+        >
+        <span class="admin-house-component-info__content">{{
+          (house | async)?.createAt | date: "medium"
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-house-component-info__label">Latitud:</span>
+        <span class="admin-house-component-info__content">{{
+          (house | async)?.position?.latitude
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-house-component-info__label">Longitud:</span>
+        <span class="admin-house-component-info__content">{{
+          (house | async)?.position?.longitude
+        }}</span></mat-list-item
+      >
+    </mat-list>
+  </section>
+  <section
+    *ngIf="!store.error && !store.loading"
+    class="admin-house-component__users"
+    fxLayout="column wrap"
+    fxLayoutAlign="start center"
+  >
+    <h3>Usuarios</h3>
+    <mat-list>
+      <mat-list>
+        <mat-list-item *ngIf="(users | async).length === 0">
+          Casa sin usuarios asociadas</mat-list-item
+        >
+        <mat-list-item *ngFor="let user of users | async">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <a [routerLink]="'/admin/users/' + user.id">{{ user.username }}</a>
+        </mat-list-item>
+      </mat-list>
+    </mat-list>
+  </section>
+  <section
+    *ngIf="!store.error && !store.loading"
+    class="admin-house-component__sensors"
+    fxLayout="column wrap"
+    fxLayoutAlign="start center"
+  >
+    <h3>Sensores</h3>
+    <mat-list>
+      <mat-list>
+        <mat-list-item *ngIf="(sensors | async).length === 0">
+          Casa sin sensores asociadas</mat-list-item
+        >
+        <mat-list-item *ngFor="let sensor of sensors | async">
+          <mat-icon mat-list-icon>developer_board</mat-icon>
+          <a [routerLink]="'/admin/sensors/' + sensor.id">{{ sensor.name }}</a>
+        </mat-list-item>
+      </mat-list>
+    </mat-list>
+  </section>
+</article>

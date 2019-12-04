@@ -2,43 +2,44 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  ViewChild,
   OnDestroy,
+  ViewChild,
   ElementRef
 } from "@angular/core";
+import { HouseDataSource } from "src/app/datasources/house.datasource";
+import { Subscription, BehaviorSubject, fromEvent } from "rxjs";
+import {
+  MatPaginator,
+  MatDialog,
+  MatSnackBar,
+  MatDialogConfig
+} from "@angular/material";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "src/app/services/authentication.service";
+import { MediaObserver, MediaChange } from "@angular/flex-layout";
 import { AppStore } from "src/app/models/stores/appstore";
-import { Role, User } from "src/app/models/entities/user";
-import { UserDataSource } from "../../../datasources/user.datasource";
-import { UserService } from "src/app/services/user.service";
-import { MatPaginator } from "@angular/material/paginator";
+import { Role } from "src/app/models/entities/user";
+import { HouseService } from "src/app/services/house.service";
 import { tap, debounceTime, distinctUntilChanged } from "rxjs/operators";
-import { MediaChange, MediaObserver } from "@angular/flex-layout";
-import { Subscription, BehaviorSubject, fromEvent } from "rxjs";
-import { MatDialog, MatDialogConfig, MatSnackBar } from "@angular/material";
+import { House } from "src/app/models/entities/house";
 import { DeleteDialogComponent } from "../../dialogs/delete-dialog/delete-dialog.component";
 
 @Component({
-  selector: "app-admin-users",
-  templateUrl: "./admin-users.component.html",
-  styleUrls: ["./admin-users.component.css"]
+  selector: "app-admin-houses",
+  templateUrl: "./admin-houses.component.html",
+  styleUrls: ["./admin-houses.component.css"]
 })
-export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
-  dataSource: UserDataSource;
+export class AdminHousesComponent implements AfterViewInit, OnInit, OnDestroy {
+  dataSource: HouseDataSource;
   watcher: Subscription;
   displayedColumnsSubject = new BehaviorSubject<string[]>([
     "id",
-    "username",
     "name",
-    "lastName",
-    "email",
-    "role",
-    "lastConnection",
-    "actions"
+    "description",
+    "address",
+    "createAt"
   ]);
   displayedColumns = this.displayedColumnsSubject.asObservable();
-  filterTypeUser: string;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild("searchBox", { static: true }) input: ElementRef;
@@ -46,7 +47,7 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService,
+    private houseService: HouseService,
     private mediaObserver: MediaObserver,
     public store: AppStore,
     private dialog: MatDialog,
@@ -58,57 +59,43 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     } else {
       store.setToolbarPage([
         { label: "Gestión", url: "/admin" },
-        { label: "Usuarios", url: "/admin/users" }
+        { label: "Casas", url: "/admin/houses" }
       ]);
     }
 
     this.watcher = mediaObserver.media$.subscribe((change: MediaChange) => {
       if (change.mqAlias === "xs") {
-        this.displayedColumnsSubject.next([
-          "id",
-          "username",
-          "role",
-          "actions"
-        ]);
+        this.displayedColumnsSubject.next(["id", "name", "actions"]);
       } else if (change.mqAlias === "sm") {
         this.displayedColumnsSubject.next([
           "id",
-          "username",
-          "role",
-          "lastConnection",
+          "name",
+          "description",
           "actions"
         ]);
       } else if (change.mqAlias === "md") {
         this.displayedColumnsSubject.next([
           "id",
-          "username",
-          "email",
-          "role",
-          "lastConnection",
+          "name",
+          "description",
           "actions"
         ]);
       } else if (change.mqAlias === "lg") {
         this.displayedColumnsSubject.next([
           "id",
-          "username",
-          "numLogins",
           "name",
-          "lastName",
-          "email",
-          "role",
-          "lastConnection",
+          "description",
+          "address",
+          "createAt",
           "actions"
         ]);
       } else if (change.mqAlias === "xl") {
         this.displayedColumnsSubject.next([
           "id",
-          "username",
           "name",
-          "numLogins",
-          "lastName",
-          "email",
-          "role",
-          "lastConnection",
+          "description",
+          "address",
+          "createAt",
           "actions"
         ]);
       }
@@ -125,19 +112,19 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         this.router.navigate(["/login"]);
       }
     );
-    this.dataSource = new UserDataSource(this.userService);
-    this.dataSource.loadUser(10, 0);
+    this.dataSource = new HouseDataSource(this.houseService);
+    this.dataSource.loadHouses(10, 0);
   }
 
   ngAfterViewInit() {
-    this.paginator.page.pipe(tap(() => this.loadUsersPage())).subscribe();
+    this.paginator.page.pipe(tap(() => this.loadHousesPage())).subscribe();
     fromEvent(this.input.nativeElement, "keyup")
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
         tap(() => {
           this.paginator.pageIndex = 0;
-          this.loadUsersPage();
+          this.loadHousesPage();
         })
       )
       .subscribe();
@@ -147,43 +134,42 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.watcher.unsubscribe();
   }
 
-  loadUsersPage() {
-    this.dataSource.loadUser(
+  onChangeSelect() {
+    this.loadHousesPage();
+  }
+
+  loadHousesPage() {
+    this.dataSource.loadHouses(
       this.paginator.pageSize,
       this.paginator.pageIndex,
-      this.input.nativeElement.value,
-      this.filterTypeUser
+      this.input.nativeElement.value
     );
   }
 
-  removeUser(user: User) {
+  removeHouse(house: House) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.data = {
-      title: "Borrar usuario",
-      mainText: "¿Desea eliminar al usuario " + user.username + "?"
+      title: "Borrar casa",
+      mainText: "¿Desea eliminar la casa " + house.name + "?"
     };
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.userService.deleteUser(user.id.toString()).subscribe(
+        this.houseService.deleteHouse(house.id.toString()).subscribe(
           data => {
             this.store.setError("");
-            this.loadUsersPage();
+            this.loadHousesPage();
           },
           error => {
             this.openSnackBar(
-              "No se pudo borrar al usuario usuario " + user.username
+              "No se pudo borrar al usuario usuario " + house.name
             );
           }
         );
       }
     });
-  }
-
-  onChangeSelect() {
-    this.loadUsersPage();
   }
 
   openSnackBar(error?: string) {

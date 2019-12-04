@@ -1,0 +1,34 @@
+.admin-houses-component__table {
+  width: 100%;
+}
+
+.admin-houses-component-section {
+  margin: 1rem;
+  padding-top: 1rem;
+  position: relative;
+}
+
+.admin-houses-component__action {
+  margin-right: 1rem;
+}
+
+.admin-houses-component--loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-houses-component__filter {
+  margin: 0 1rem;
+}
+
+.admin-houses-component__new-house {
+  margin: 1rem;
+}

@@ -21,6 +21,9 @@ export class AppStore {
 
   @action setError(newerror: string) {
     this.error = newerror;
+    if (newerror === "") {
+      this.httpErrorCode = 0;
+    }
   }
 
   @action setHttpErrorCode(newerror: number) {

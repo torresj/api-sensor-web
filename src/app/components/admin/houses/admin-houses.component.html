@@ -1,0 +1,99 @@
+<article class="admin-houses-component">
+  <section class="admin-houses-component-section mat-elevation-z8">
+    <div
+      class="admin-houses-component--loading"
+      *ngIf="dataSource.loading | async"
+    >
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+    <mat-form-field color="accent" class="admin-houses-component__filter">
+      <input type="search" matInput placeholder="Filtrar" #searchBox />
+    </mat-form-field>
+    <button
+      color="primary"
+      class="admin-houses-component__new-house"
+      mat-raised-button
+      [routerLink]="'/admin/houses/create'"
+    >
+      Crear casa
+    </button>
+    <section class="admin-houses-component-container-table">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="admin-houses-component__table"
+      >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Dirección</th>
+          <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="createAt">
+          <th mat-header-cell *matHeaderCellDef>Fecha creación</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.createAt | date: "medium" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let element">
+            <section class="admin-houses-component__actions">
+              <a
+                [routerLink]="'/admin/houses/' + element.id"
+                class="admin-houses-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Ver casa"
+                  >visibility</mat-icon
+                >
+              </a>
+              <a
+                [routerLink]="'/admin/houses/' + element.id + '/edit'"
+                class="admin-houses-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Editar casa"
+                  >create</mat-icon
+                >
+              </a>
+              <a
+                [routerLink]=""
+                (click)="removeHouse(element)"
+                class="admin-houses-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Borrar casa"
+                  >delete</mat-icon
+                >
+              </a>
+            </section>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns | async"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns | async"
+        ></tr>
+      </table>
+    </section>
+    <mat-paginator
+      [length]="dataSource.totalElements | async"
+      [pageSize]="10"
+      [pageSizeOptions]="[1, 10, 20, 30]"
+    ></mat-paginator>
+  </section>
+</article>

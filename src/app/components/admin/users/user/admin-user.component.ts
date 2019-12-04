@@ -42,6 +42,7 @@ export class AdminUserComponent implements OnInit {
 
   ngOnInit() {
     this.store.setLoading(true);
+    this.store.setError("");
     this.authenticationService.getUserData().subscribe(
       dataUserData => {},
       error => {
@@ -59,16 +60,21 @@ export class AdminUserComponent implements OnInit {
           housesData => {
             this.housesSubject.next(housesData as House[]);
             this.store.setLoading(false);
+            this.store.setError("");
           },
           error => {
             this.store.setLoading(false);
-            this.store.error = "Error al obtener las casas del usuario";
+            this.store.setError("Error al obtener las casas del usuario");
           }
         );
       },
       error => {
         this.store.setLoading(false);
-        this.store.error = "El usuario no existe";
+        if (this.store.httpErrorCode === 404) {
+          this.store.setError("El usuario no existe");
+        } else {
+          this.store.setError("Servidor no disponible");
+        }
       }
     );
   }

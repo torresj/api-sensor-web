@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Borrar usuario</h1>
+<h1 mat-dialog-title>{{ dialogData.title }}</h1>
 <div mat-dialog-content>
-  <p>¿Está seguro que desea eliminar al usuario {{ data }}?</p>
+  <p>{{ dialogData.mainText }}</p>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancelar</button>

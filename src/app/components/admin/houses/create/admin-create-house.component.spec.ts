@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteUserDialogComponent } from './delete-user-dialog.component';
+import { AdminCreateHouseComponent } from './admin-create-house.component';
 
-describe('DeleteUserDialogComponent', () => {
-  let component: DeleteUserDialogComponent;
-  let fixture: ComponentFixture<DeleteUserDialogComponent>;
+describe('AdminCreateHouseComponent', () => {
+  let component: AdminCreateHouseComponent;
+  let fixture: ComponentFixture<AdminCreateHouseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteUserDialogComponent ]
+      declarations: [ AdminCreateHouseComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteUserDialogComponent);
+    fixture = TestBed.createComponent(AdminCreateHouseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

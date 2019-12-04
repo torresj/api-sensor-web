@@ -12,6 +12,9 @@ import { AdminUserComponent } from "./components/admin/users/user/admin-user.com
 import { AdminEditUserComponent } from "./components/admin/users/edit/admin-edit-user.component";
 import { Page404Component } from "./components/page404/page404.component";
 import { AdminCreateUserComponent } from "./components/admin/users/create/admin-create-user.component";
+import { AdminHousesComponent } from "./components/admin/houses/admin-houses.component";
+import { AdminCreateHouseComponent } from "./components/admin/houses/create/admin-create-house.component";
+import { AdminHouseComponent } from "./components/admin/houses/house/admin-house.component";
 
 const routes: Routes = [
   { path: "", component: IndexComponent },
@@ -36,6 +39,21 @@ const routes: Routes = [
   {
     path: "admin/users/:id/edit",
     component: AdminEditUserComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin/houses",
+    component: AdminHousesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin/houses/create",
+    component: AdminCreateHouseComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin/houses/:id",
+    component: AdminHouseComponent,
     canActivate: [AuthGuard]
   },
   { path: "login", component: LoginComponent },
