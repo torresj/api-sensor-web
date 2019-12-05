@@ -1,5 +1,5 @@
 .admin-house-component section {
-  margin: 2rem;
+  margin: 1.5rem;
 }
 
 .admin-house-component section h3 {
@@ -33,4 +33,8 @@
 
 .admin-house-component--loading {
   padding-top: 5rem;
+}
+
+.admin-house-component__map {
+  margin: 0rem 1.5rem 1.5rem 1.5rem;
 }

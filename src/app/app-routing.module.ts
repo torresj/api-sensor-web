@@ -15,6 +15,7 @@ import { AdminCreateUserComponent } from "./components/admin/users/create/admin-
 import { AdminHousesComponent } from "./components/admin/houses/admin-houses.component";
 import { AdminCreateHouseComponent } from "./components/admin/houses/create/admin-create-house.component";
 import { AdminHouseComponent } from "./components/admin/houses/house/admin-house.component";
+import { MapsComponent } from "./components/maps/maps.component";
 
 const routes: Routes = [
   { path: "", component: IndexComponent },
@@ -55,6 +56,10 @@ const routes: Routes = [
     path: "admin/houses/:id",
     component: AdminHouseComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "maps",
+    component: MapsComponent
   },
   { path: "login", component: LoginComponent },
   { path: "**", component: Page404Component }

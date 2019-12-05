@@ -1,4 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit
+} from "@angular/core";
 import { HouseService } from "src/app/services/house.service";
 import { Role, User } from "src/app/models/entities/user";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -13,14 +19,16 @@ import { Sensor } from "src/app/models/entities/sensor";
   templateUrl: "./admin-house.component.html",
   styleUrls: ["./admin-house.component.css"]
 })
-export class AdminHouseComponent implements OnInit {
+export class AdminHouseComponent implements OnInit, AfterViewInit {
   private id: string;
   houseSubject = new BehaviorSubject<House>(null);
   usersSubject = new BehaviorSubject<User[]>([]);
   sensorsSubject = new BehaviorSubject<Sensor[]>([]);
+  positionsSubject = new BehaviorSubject<google.maps.LatLng[]>([]);
   house = this.houseSubject.asObservable();
   users = this.usersSubject.asObservable();
   sensors = this.sensorsSubject.asObservable();
+  positions = this.positionsSubject.asObservable();
 
   constructor(
     private router: Router,
@@ -42,6 +50,8 @@ export class AdminHouseComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {}
+
   ngOnInit() {
     this.store.setLoading(true);
     this.store.setError("");
@@ -58,6 +68,7 @@ export class AdminHouseComponent implements OnInit {
     this.houseService.getHouse(this.id).subscribe(
       houseData => {
         this.houseSubject.next(houseData as House);
+        this.updateMerkers(houseData as House);
         this.houseService.getUsersHouse(this.id).subscribe(
           usersData => {
             this.usersSubject.next(usersData as User[]);
@@ -90,5 +101,15 @@ export class AdminHouseComponent implements OnInit {
         }
       }
     );
+  }
+  updateMerkers(house: House) {
+    house.position
+      ? this.positionsSubject.next([
+          new google.maps.LatLng(
+            house.position.latitude,
+            house.position.longitude
+          )
+        ])
+      : this.positionsSubject.next([new google.maps.LatLng(0, 0)]);
   }
 }

@@ -50,6 +50,7 @@ import { DeleteDialogComponent } from "./components/dialogs/delete-dialog/delete
 import { AdminHousesComponent } from "./components/admin/houses/admin-houses.component";
 import { AdminCreateHouseComponent } from "./components/admin/houses/create/admin-create-house.component";
 import { AdminHouseComponent } from "./components/admin/houses/house/admin-house.component";
+import { MapsComponent } from "./components/maps/maps.component";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -66,7 +67,8 @@ import { AdminHouseComponent } from "./components/admin/houses/house/admin-house
     DeleteDialogComponent,
     AdminHousesComponent,
     AdminCreateHouseComponent,
-    AdminHouseComponent
+    AdminHouseComponent,
+    MapsComponent
   ],
   imports: [
     BrowserModule,
@@ -97,6 +99,7 @@ import { AdminHouseComponent } from "./components/admin/houses/house/admin-house
     MatSelectModule,
     MatExpansionModule
   ],
+  exports: [MapsComponent],
   entryComponents: [DeleteDialogComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

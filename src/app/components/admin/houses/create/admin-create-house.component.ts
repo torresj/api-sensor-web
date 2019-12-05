@@ -69,7 +69,6 @@ export class AdminCreateHouseComponent implements OnInit {
     if (this.createForm.invalid) {
       return;
     }
-    console.log("Creating house");
 
     this.store.setLoading(true);
     this.houseService
