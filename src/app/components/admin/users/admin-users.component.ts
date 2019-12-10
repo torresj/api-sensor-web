@@ -37,7 +37,7 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     "lastConnection",
     "actions"
   ]);
-  displayedColumns = this.displayedColumnsSubject.asObservable();
+  displayedColumns$ = this.displayedColumnsSubject.asObservable();
   filterTypeUser: string;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -117,7 +117,7 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.setError("");
-    this.authenticationService.getUserData().subscribe(
+    this.authenticationService.getUserData$().subscribe(
       dataUserData => {},
       error => {
         this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
@@ -167,7 +167,7 @@ export class AdminUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.userService.deleteUser(user.id.toString()).subscribe(
+        this.userService.deleteUser$(user.id.toString()).subscribe(
           data => {
             this.store.setError("");
             this.loadUsersPage();

@@ -30,25 +30,25 @@
       <mat-list-item>
         <span class="admin-house-component-info__label">ID:</span>
         <span class="admin-house-component-info__content">{{
-          (house | async)?.id
+          (house$ | async)?.id
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-house-component-info__label">Nombre:</span>
         <span class="admin-house-component-info__content">{{
-          (house | async)?.name
+          (house$ | async)?.name
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-house-component-info__label">Descripción:</span>
         <span class="admin-house-component-info__content">{{
-          (house | async)?.description
+          (house$ | async)?.description
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-house-component-info__label">Dirección:</span>
         <span class="admin-house-component-info__content">{{
-          (house | async)?.description
+          (house$ | async)?.description
         }}</span></mat-list-item
       >
       <mat-list-item>
@@ -56,19 +56,19 @@
           >Fecha de creación:</span
         >
         <span class="admin-house-component-info__content">{{
-          (house | async)?.createAt | date: "medium"
+          (house$ | async)?.createAt | date: "medium"
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-house-component-info__label">Latitud:</span>
         <span class="admin-house-component-info__content">{{
-          (house | async)?.position?.latitude
+          (house$ | async)?.position?.latitude
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-house-component-info__label">Longitud:</span>
         <span class="admin-house-component-info__content">{{
-          (house | async)?.position?.longitude
+          (house$ | async)?.position?.longitude
         }}</span></mat-list-item
       >
     </mat-list>
@@ -82,10 +82,10 @@
     <h3>Usuarios</h3>
     <mat-list>
       <mat-list>
-        <mat-list-item *ngIf="(users | async).length === 0">
+        <mat-list-item *ngIf="(users$ | async).length === 0">
           Casa sin usuarios asociadas</mat-list-item
         >
-        <mat-list-item *ngFor="let user of users | async">
+        <mat-list-item *ngFor="let user of users$ | async">
           <mat-icon mat-list-icon>person</mat-icon>
           <a [routerLink]="'/admin/users/' + user.id">{{ user.username }}</a>
         </mat-list-item>
@@ -101,10 +101,10 @@
     <h3>Sensores</h3>
     <mat-list>
       <mat-list>
-        <mat-list-item *ngIf="(sensors | async).length === 0">
+        <mat-list-item *ngIf="(sensors$ | async).length === 0">
           Casa sin sensores asociadas</mat-list-item
         >
-        <mat-list-item *ngFor="let sensor of sensors | async">
+        <mat-list-item *ngFor="let sensor of sensors$ | async">
           <mat-icon mat-list-icon>developer_board</mat-icon>
           <a [routerLink]="'/admin/sensors/' + sensor.id">{{ sensor.name }}</a>
         </mat-list-item>
@@ -112,6 +112,9 @@
     </mat-list>
   </section>
 </article>
-<section class="admin-house-component__map">
-  <app-maps [positions]="positions"></app-maps>
+<section
+  class="admin-house-component__map"
+  *ngIf="!store.error && !store.loading"
+>
+  <app-maps [positions]="positions$"></app-maps>
 </section>

@@ -30,55 +30,55 @@
       <mat-list-item>
         <span class="admin-user-component-info__label">ID:</span>
         <span class="admin-user-component-info__content">{{
-          (user | async)?.id
+          (user$ | async)?.id
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-user-component-info__label">Usuario:</span>
         <span class="admin-user-component-info__content">{{
-          (user | async)?.username
+          (user$ | async)?.username
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-user-component-info__label">Num. Logins:</span>
         <span class="admin-user-component-info__content">{{
-          (user | async)?.numLogins ? (user | async)?.numLogins : 0
+          (user$ | async)?.numLogins ? (user$ | async)?.numLogins : 0
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-user-component-info__label">Nombre:</span>
         <span class="admin-user-component-info__content">{{
-          (user | async)?.name
+          (user$ | async)?.name
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-user-component-info__label">Apellidos:</span>
         <span class="admin-user-component-info__content">{{
-          (user | async)?.lastName
+          (user$ | async)?.lastName
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-user-component-info__label">Email:</span>
         <span class="admin-user-component-info__content">{{
-          (user | async)?.email
+          (user$ | async)?.email
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-user-component-info__label">Teléfono:</span>
         <span class="admin-user-component-info__content">{{
-          (user | async)?.phoneNumber
+          (user$ | async)?.phoneNumber
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-user-component-info__label">Tipo:</span>
         <span class="admin-user-component-info__content">{{
-          (user | async)?.role
+          (user$ | async)?.role
         }}</span></mat-list-item
       >
       <mat-list-item>
         <span class="admin-user-component-info__label">Fecha creación:</span>
         <span class="admin-user-component-info__content">{{
-          (user | async)?.createAt | date: "medium"
+          (user$ | async)?.createAt | date: "medium"
         }}</span></mat-list-item
       >
       <mat-list-item>
@@ -86,7 +86,7 @@
           >Fecha últ. conexión:</span
         >
         <span class="admin-user-component-info__content">{{
-          (user | async)?.lastConnection | date: "medium"
+          (user$ | async)?.lastConnection | date: "medium"
         }}</span></mat-list-item
       >
     </mat-list>
@@ -100,10 +100,10 @@
     <h3>Casas</h3>
     <mat-list>
       <mat-list>
-        <mat-list-item *ngIf="(houses | async).length === 0">
+        <mat-list-item *ngIf="(houses$ | async).length === 0">
           Usuario sin casas asociadas</mat-list-item
         >
-        <mat-list-item *ngFor="let house of houses | async">
+        <mat-list-item *ngFor="let house of houses$ | async">
           <mat-icon mat-list-icon>home</mat-icon>
           <a [routerLink]="'/admin/houses/' + house.id">{{ house.name }}</a>
         </mat-list-item>

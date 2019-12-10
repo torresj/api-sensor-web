@@ -39,7 +39,7 @@ export class AdminHousesComponent implements AfterViewInit, OnInit, OnDestroy {
     "address",
     "createAt"
   ]);
-  displayedColumns = this.displayedColumnsSubject.asObservable();
+  displayedColumns$ = this.displayedColumnsSubject.asObservable();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild("searchBox", { static: true }) input: ElementRef;
@@ -104,7 +104,7 @@ export class AdminHousesComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.setError("");
-    this.authenticationService.getUserData().subscribe(
+    this.authenticationService.getUserData$().subscribe(
       dataUserData => {},
       error => {
         this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
@@ -157,7 +157,7 @@ export class AdminHousesComponent implements AfterViewInit, OnInit, OnDestroy {
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.houseService.deleteHouse(house.id.toString()).subscribe(
+        this.houseService.deleteHouse$(house.id.toString()).subscribe(
           data => {
             this.store.setError("");
             this.loadHousesPage();

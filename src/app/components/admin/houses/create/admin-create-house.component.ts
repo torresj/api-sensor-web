@@ -38,7 +38,7 @@ export class AdminCreateHouseComponent implements OnInit {
   ngOnInit() {
     this.store.setError("");
     this.store.setLoading(false);
-    this.authenticationService.getUserData().subscribe(
+    this.authenticationService.getUserData$().subscribe(
       dataUserData => {},
       error => {
         this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
@@ -72,7 +72,7 @@ export class AdminCreateHouseComponent implements OnInit {
 
     this.store.setLoading(true);
     this.houseService
-      .createHouse({
+      .createHouse$({
         name: this.fields.name.value,
         description: this.fields.description.value,
         address: this.fields.address.value,

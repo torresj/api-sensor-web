@@ -9,8 +9,8 @@ export class HouseDataSource implements DataSource<House> {
   private housesSubject = new BehaviorSubject<House[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
   private totalElementsSubject = new BehaviorSubject<number>(0);
-  public loading = this.loadingSubject.asObservable();
-  public totalElements = this.totalElementsSubject.asObservable();
+  public loading$ = this.loadingSubject.asObservable();
+  public totalElements$ = this.totalElementsSubject.asObservable();
 
   constructor(private houseService: HouseService) {}
 
@@ -28,7 +28,7 @@ export class HouseDataSource implements DataSource<House> {
     this.loadingSubject.next(true);
     if (filter) {
       this.houseService
-        .getHousesWithFilters(filter, elements, page)
+        .getHousesWithFilters$(filter, elements, page)
         .pipe(
           catchError(() => of([])),
           finalize(() => this.loadingSubject.next(false))
@@ -40,7 +40,7 @@ export class HouseDataSource implements DataSource<House> {
         });
     } else {
       this.houseService
-        .getHouses(elements, page)
+        .getHouses$(elements, page)
         .pipe(
           catchError(() => of([])),
           finalize(() => this.loadingSubject.next(false))

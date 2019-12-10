@@ -63,11 +63,11 @@ export class LoginComponent implements OnInit {
     this.store.setError("");
     this.store.setLoading(true);
     this.authenticationService
-      .login(this.fields.username.value, this.fields.password.value)
+      .login$(this.fields.username.value, this.fields.password.value)
       .pipe(first())
       .subscribe(
         dataLogin => {
-          this.authenticationService.getUserData().subscribe(
+          this.authenticationService.getUserData$().subscribe(
             data => {
               this.store.setLoading(false);
               this.store.setError("");

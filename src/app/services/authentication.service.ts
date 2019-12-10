@@ -10,7 +10,7 @@ import { AppStore } from "../models/stores/appstore";
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  public currentUser$: Observable<User>;
 
   constructor(
     private http: HttpClient,
@@ -20,14 +20,14 @@ export class AuthenticationService {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem("currentUser"))
     );
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentUser$ = this.currentUserSubject.asObservable();
   }
 
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
+  login$(username: string, password: string) {
     return this.http
       .post<any>(this.appConfig.baseApiUrl + this.appConfig.loginPath, {
         username,
@@ -43,7 +43,7 @@ export class AuthenticationService {
       );
   }
 
-  getUserData() {
+  getUserData$() {
     return this.http
       .get<any>(this.appConfig.baseApiUrl + this.appConfig.userLoggedPath, {})
       .pipe(

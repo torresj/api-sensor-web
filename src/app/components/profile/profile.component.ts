@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticationService.getUserData().subscribe(
+    this.authenticationService.getUserData$().subscribe(
       dataUserData => {},
       error => {
         this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
 
     this.store.setLoading(true);
     this.userService
-      .updateUserLogged({
+      .updateUserLogged$({
         id: this.store.user.id,
         username: this.store.user.username,
         password: this.fields.password.value,

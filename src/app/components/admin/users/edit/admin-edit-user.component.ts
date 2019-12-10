@@ -25,9 +25,9 @@ export class AdminEditUserComponent implements OnInit {
   userSubject = new BehaviorSubject<User>(null);
   housesSubject = new BehaviorSubject<House[]>([]);
   allHousesSubject = new BehaviorSubject<House[]>([]);
-  user = this.userSubject.asObservable();
-  houses = this.housesSubject.asObservable();
-  housesDiff = this.allHousesSubject.asObservable();
+  user$ = this.userSubject.asObservable();
+  houses$ = this.housesSubject.asObservable();
+  housesDiff$ = this.allHousesSubject.asObservable();
   roles: Role[] = [Role.admin, Role.station, Role.user];
   houseToAdd: number;
   roleSelected: Role;
@@ -60,7 +60,7 @@ export class AdminEditUserComponent implements OnInit {
   ngOnInit() {
     this.store.setError("");
     this.store.setLoading(true);
-    this.authenticationService.getUserData().subscribe(
+    this.authenticationService.getUserData$().subscribe(
       dataUserData => {
         this.roleSelected = (dataUserData as User).role;
       },
@@ -74,13 +74,13 @@ export class AdminEditUserComponent implements OnInit {
 
     this.id = this.activatedRoute.snapshot.params.id;
 
-    this.userService.getUser(this.id).subscribe(
+    this.userService.getUser$(this.id).subscribe(
       userData => {
         this.userSubject.next(userData as User);
-        this.userService.getUserHouses(this.id).subscribe(
+        this.userService.getUserHouses$(this.id).subscribe(
           housesData => {
             this.housesSubject.next(housesData as House[]);
-            this.houseService.getAllHouses().subscribe(
+            this.houseService.getAllHouses$().subscribe(
               allHousesData => {
                 this.allSystemHouses = allHousesData as House[];
                 this.allHousesSubject.next(
@@ -146,7 +146,7 @@ export class AdminEditUserComponent implements OnInit {
     this.store.setLoading(true);
     const user = this.userSubject.value;
     this.userService
-      .updateUser({
+      .updateUser$({
         id: user.id,
         username: user.username,
         password: this.fields.password.value,
@@ -168,7 +168,7 @@ export class AdminEditUserComponent implements OnInit {
             house => house.id
           );
           this.userService
-            .setUserHouses(user.id.toString(), houseIds)
+            .setUserHouses$(user.id.toString(), houseIds)
             .subscribe(
               houses => {
                 this.store.setLoading(false);

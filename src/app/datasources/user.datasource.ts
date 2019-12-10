@@ -9,8 +9,8 @@ export class UserDataSource implements DataSource<User> {
   private usersSubject = new BehaviorSubject<User[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
   private totalElementsSubject = new BehaviorSubject<number>(0);
-  public loading = this.loadingSubject.asObservable();
-  public totalElements = this.totalElementsSubject.asObservable();
+  public loading$ = this.loadingSubject.asObservable();
+  public totalElements$ = this.totalElementsSubject.asObservable();
 
   constructor(private userService: UserService) {}
 
@@ -28,7 +28,7 @@ export class UserDataSource implements DataSource<User> {
     this.loadingSubject.next(true);
     if (filter || role) {
       this.userService
-        .getUsersWithFilters(filter, role, elements, page)
+        .getUsersWithFilters$(filter, role, elements, page)
         .pipe(
           catchError(() => of([])),
           finalize(() => this.loadingSubject.next(false))
@@ -40,7 +40,7 @@ export class UserDataSource implements DataSource<User> {
         });
     } else {
       this.userService
-        .getUsers(elements, page)
+        .getUsers$(elements, page)
         .pipe(
           catchError(() => of([])),
           finalize(() => this.loadingSubject.next(false))

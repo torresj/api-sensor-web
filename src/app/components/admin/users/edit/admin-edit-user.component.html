@@ -24,7 +24,7 @@
         <input
           matInput
           formControlName="username"
-          [value]="(user | async)?.username"
+          [value]="(user$ | async)?.username"
         />
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
@@ -32,7 +32,7 @@
         <input
           matInput
           formControlName="logins"
-          [value]="(user | async)?.numLogins"
+          [value]="(user$ | async)?.numLogins"
         />
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
@@ -62,14 +62,18 @@
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
         <mat-label>Nombre</mat-label>
-        <input formControlName="name" matInput [value]="(user | async)?.name" />
+        <input
+          formControlName="name"
+          matInput
+          [value]="(user$ | async)?.name"
+        />
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
         <mat-label>Apellidos</mat-label>
         <input
           formControlName="lastName"
           matInput
-          [value]="(user | async)?.lastName"
+          [value]="(user$ | async)?.lastName"
         />
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
@@ -78,7 +82,7 @@
           type="email"
           formControlName="email"
           matInput
-          [value]="(user | async)?.email"
+          [value]="(user$ | async)?.email"
         />
         <mat-error
           *ngIf="
@@ -93,7 +97,7 @@
         <input
           formControlName="phone"
           matInput
-          [value]="(user | async)?.phoneNumber"
+          [value]="(user$ | async)?.phoneNumber"
         />
       </mat-form-field>
       <mat-expansion-panel class="admin-user-edit__housesPanel">
@@ -114,7 +118,7 @@
             <mat-label>Casas en el sistema</mat-label>
             <mat-select [(value)]="houseToAdd">
               <mat-option
-                *ngFor="let house of housesDiff | async"
+                *ngFor="let house of housesDiff$ | async"
                 [value]="house.id"
               >
                 {{ house.name }}
@@ -147,12 +151,12 @@
 
         <mat-list>
           <mat-list>
-            <mat-list-item *ngIf="(houses | async).length === 0">
+            <mat-list-item *ngIf="(houses$ | async).length === 0">
               <span class="admin-user-edit-housesPanels--noHouses">
                 Usuario sin casas asociadas</span
               ></mat-list-item
             >
-            <mat-list-item *ngFor="let house of houses | async">
+            <mat-list-item *ngFor="let house of houses$ | async">
               <section
                 class="admin-user-edit__houseSection"
                 fxLayoutAlign="space-between center"

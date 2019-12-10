@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticationService.getUserData().subscribe(
+    this.authenticationService.getUserData$().subscribe(
       dataUserData => {},
       error => {
         this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";

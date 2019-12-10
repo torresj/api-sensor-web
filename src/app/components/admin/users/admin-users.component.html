@@ -2,7 +2,7 @@
   <section class="admin-users-component-section mat-elevation-z8">
     <div
       class="admin-users-component--loading"
-      *ngIf="dataSource.loading | async"
+      *ngIf="dataSource.loading$ | async"
     >
       <mat-spinner color="accent"></mat-spinner>
     </div>
@@ -110,16 +110,16 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns | async"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns$ | async"></tr>
         <tr
           mat-row
-          *matRowDef="let row; columns: displayedColumns | async"
+          *matRowDef="let row; columns: displayedColumns$ | async"
         ></tr>
       </table>
     </section>
 
     <mat-paginator
-      [length]="dataSource.totalElements | async"
+      [length]="dataSource.totalElements$ | async"
       [pageSize]="10"
       [pageSizeOptions]="[1, 10, 20, 30]"
     ></mat-paginator>

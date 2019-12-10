@@ -25,10 +25,10 @@ export class AdminHouseComponent implements OnInit, AfterViewInit {
   usersSubject = new BehaviorSubject<User[]>([]);
   sensorsSubject = new BehaviorSubject<Sensor[]>([]);
   positionsSubject = new BehaviorSubject<google.maps.LatLng[]>([]);
-  house = this.houseSubject.asObservable();
-  users = this.usersSubject.asObservable();
-  sensors = this.sensorsSubject.asObservable();
-  positions = this.positionsSubject.asObservable();
+  house$ = this.houseSubject.asObservable();
+  users$ = this.usersSubject.asObservable();
+  sensors$ = this.sensorsSubject.asObservable();
+  positions$ = this.positionsSubject.asObservable();
 
   constructor(
     private router: Router,
@@ -55,7 +55,7 @@ export class AdminHouseComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.store.setLoading(true);
     this.store.setError("");
-    this.authenticationService.getUserData().subscribe(
+    this.authenticationService.getUserData$().subscribe(
       dataUserData => {},
       error => {
         this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
@@ -65,14 +65,14 @@ export class AdminHouseComponent implements OnInit, AfterViewInit {
       }
     );
 
-    this.houseService.getHouse(this.id).subscribe(
+    this.houseService.getHouse$(this.id).subscribe(
       houseData => {
         this.houseSubject.next(houseData as House);
         this.updateMerkers(houseData as House);
-        this.houseService.getUsersHouse(this.id).subscribe(
+        this.houseService.getUsersHouse$(this.id).subscribe(
           usersData => {
             this.usersSubject.next(usersData as User[]);
-            this.houseService.getSensorsHouse(this.id).subscribe(
+            this.houseService.getSensorsHouse$(this.id).subscribe(
               sensorsData => {
                 this.sensorsSubject.next(sensorsData as Sensor[]);
                 this.store.setLoading(false);

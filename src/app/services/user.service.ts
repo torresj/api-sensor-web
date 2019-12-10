@@ -16,7 +16,7 @@ export class UserService {
     private store: AppStore
   ) {}
 
-  public updateUserLogged(userToUpdate: User) {
+  public updateUserLogged$(userToUpdate: User) {
     const user = JSON.stringify(userToUpdate);
     return this.http
       .put<User>(
@@ -33,7 +33,7 @@ export class UserService {
       );
   }
 
-  public updateUser(userToUpdate: User) {
+  public updateUser$(userToUpdate: User) {
     const user = JSON.stringify(userToUpdate);
     return this.http.put<User>(
       this.appConfig.baseApiUrl + this.appConfig.userPath,
@@ -41,7 +41,7 @@ export class UserService {
     );
   }
 
-  public createUser(newUser: User) {
+  public createUser$(newUser: User) {
     const user = JSON.stringify(newUser);
     return this.http.post<User>(
       this.appConfig.baseApiUrl + this.appConfig.userPath,
@@ -49,7 +49,7 @@ export class UserService {
     );
   }
 
-  public getUsers(elements: number, page: number) {
+  public getUsers$(elements: number, page: number) {
     return this.http.get(this.appConfig.baseApiUrl + this.appConfig.userPath, {
       params: new HttpParams()
         .set("elements", elements.toString())
@@ -57,7 +57,7 @@ export class UserService {
     });
   }
 
-  public getUsersWithFilters(
+  public getUsersWithFilters$(
     filter: string,
     role: string,
     elements: number,
@@ -80,19 +80,19 @@ export class UserService {
     });
   }
 
-  public getUser(id: string) {
+  public getUser$(id: string) {
     return this.http.get(
       this.appConfig.baseApiUrl + this.appConfig.userPath + "/" + id
     );
   }
 
-  public getUserHouses(id: string) {
+  public getUserHouses$(id: string) {
     return this.http.get(
       this.appConfig.baseApiUrl + this.appConfig.userPath + "/" + id + "/houses"
     );
   }
 
-  public setUserHouses(userId: string, houseIds: number[]) {
+  public setUserHouses$(userId: string, houseIds: number[]) {
     return this.http.post<number[]>(
       this.appConfig.baseApiUrl +
         this.appConfig.userPath +
@@ -103,7 +103,7 @@ export class UserService {
     );
   }
 
-  public deleteUser(id: string) {
+  public deleteUser$(id: string) {
     return this.http.delete(
       this.appConfig.baseApiUrl + this.appConfig.userPath + "/" + id
     );

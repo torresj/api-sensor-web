@@ -9,13 +9,13 @@ import { House } from "../models/entities/house";
 export class HouseService {
   constructor(private http: HttpClient, private appConfig: AppConfig) {}
 
-  public getAllHouses() {
+  public getAllHouses$() {
     return this.http.get(
       this.appConfig.baseApiUrl + this.appConfig.houseAllPath
     );
   }
 
-  public getHouses(elements: number, page: number) {
+  public getHouses$(elements: number, page: number) {
     return this.http.get(this.appConfig.baseApiUrl + this.appConfig.housePath, {
       params: new HttpParams()
         .set("elements", elements.toString())
@@ -23,7 +23,7 @@ export class HouseService {
     });
   }
 
-  public getHousesWithFilters(filter: string, elements: number, page: number) {
+  public getHousesWithFilters$(filter: string, elements: number, page: number) {
     let httpParams = new HttpParams()
       .set("elements", elements.toString())
       .set("page", page.toString());
@@ -37,7 +37,7 @@ export class HouseService {
     });
   }
 
-  public createHouse(newHouse: House) {
+  public createHouse$(newHouse: House) {
     const house = JSON.stringify(newHouse);
     return this.http.post<House>(
       this.appConfig.baseApiUrl + this.appConfig.housePath,
@@ -45,25 +45,25 @@ export class HouseService {
     );
   }
 
-  public deleteHouse(id: string) {
+  public deleteHouse$(id: string) {
     return this.http.delete(
       this.appConfig.baseApiUrl + this.appConfig.housePath + "/" + id
     );
   }
 
-  public getHouse(id: string) {
+  public getHouse$(id: string) {
     return this.http.get(
       this.appConfig.baseApiUrl + this.appConfig.housePath + "/" + id
     );
   }
 
-  public getUsersHouse(id: string) {
+  public getUsersHouse$(id: string) {
     return this.http.get(
       this.appConfig.baseApiUrl + this.appConfig.housePath + "/" + id + "/users"
     );
   }
 
-  public getSensorsHouse(id: string) {
+  public getSensorsHouse$(id: string) {
     return this.http.get(
       this.appConfig.baseApiUrl +
         this.appConfig.housePath +

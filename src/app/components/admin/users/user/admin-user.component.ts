@@ -17,8 +17,8 @@ export class AdminUserComponent implements OnInit {
   private id: string;
   userSubject = new BehaviorSubject<User>(null);
   housesSubject = new BehaviorSubject<House[]>([]);
-  user = this.userSubject.asObservable();
-  houses = this.housesSubject.asObservable();
+  user$ = this.userSubject.asObservable();
+  houses$ = this.housesSubject.asObservable();
 
   constructor(
     private router: Router,
@@ -43,7 +43,7 @@ export class AdminUserComponent implements OnInit {
   ngOnInit() {
     this.store.setLoading(true);
     this.store.setError("");
-    this.authenticationService.getUserData().subscribe(
+    this.authenticationService.getUserData$().subscribe(
       dataUserData => {},
       error => {
         this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
@@ -53,10 +53,10 @@ export class AdminUserComponent implements OnInit {
       }
     );
 
-    this.userService.getUser(this.id).subscribe(
+    this.userService.getUser$(this.id).subscribe(
       userData => {
         this.userSubject.next(userData as User);
-        this.userService.getUserHouses(this.id).subscribe(
+        this.userService.getUserHouses$(this.id).subscribe(
           housesData => {
             this.housesSubject.next(housesData as House[]);
             this.store.setLoading(false);

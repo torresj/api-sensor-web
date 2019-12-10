@@ -39,7 +39,7 @@ export class AdminCreateUserComponent implements OnInit {
   ngOnInit() {
     this.store.setError("");
     this.store.setLoading(false);
-    this.authenticationService.getUserData().subscribe(
+    this.authenticationService.getUserData$().subscribe(
       dataUserData => {},
       error => {
         this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
@@ -81,7 +81,7 @@ export class AdminCreateUserComponent implements OnInit {
 
     this.store.setLoading(true);
     this.userService
-      .createUser({
+      .createUser$({
         username: this.fields.username.value,
         password: this.fields.password.value,
         email: this.fields.email.value,
