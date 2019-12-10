@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, first } from "rxjs/operators";
 
 import { User } from "../models/entities/user";
 import { AppConfig } from "../app.config";
@@ -54,7 +54,8 @@ export class AuthenticationService {
           this.currentUserSubject.next(user);
           this.store.setUser(user);
           return user;
-        })
+        }),
+        first()
       );
   }
 

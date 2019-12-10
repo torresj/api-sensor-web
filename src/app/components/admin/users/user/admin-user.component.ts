@@ -4,7 +4,7 @@ import { AuthenticationService } from "src/app/services/authentication.service";
 import { UserService } from "src/app/services/user.service";
 import { AppStore } from "src/app/models/stores/appstore";
 import { Role, User } from "src/app/models/entities/user";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, combineLatest } from "rxjs";
 import { House } from "src/app/models/entities/house";
 
 @Component({
@@ -53,27 +53,22 @@ export class AdminUserComponent implements OnInit {
       }
     );
 
-    this.userService.getUser$(this.id).subscribe(
-      userData => {
+    combineLatest(
+      this.userService.getUser$(this.id),
+      this.userService.getUserHouses$(this.id)
+    ).subscribe(
+      ([userData, housesData]) => {
         this.userSubject.next(userData as User);
-        this.userService.getUserHouses$(this.id).subscribe(
-          housesData => {
-            this.housesSubject.next(housesData as House[]);
-            this.store.setLoading(false);
-            this.store.setError("");
-          },
-          error => {
-            this.store.setLoading(false);
-            this.store.setError("Error al obtener las casas del usuario");
-          }
-        );
+        this.housesSubject.next(housesData as House[]);
+        this.store.setLoading(false);
+        this.store.setError("");
       },
       error => {
         this.store.setLoading(false);
         if (this.store.httpErrorCode === 404) {
           this.store.setError("El usuario no existe");
         } else {
-          this.store.setError("Servidor no disponible");
+          this.store.setError("Error al obtener los datos del usuario");
         }
       }
     );

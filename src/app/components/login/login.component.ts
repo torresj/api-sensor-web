@@ -11,6 +11,7 @@ import { first } from "rxjs/operators";
 
 import { AuthenticationService } from "../../services/authentication.service";
 import { AppStore } from "src/app/models/stores/appstore";
+import { combineLatest, concat } from "rxjs";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -62,26 +63,23 @@ export class LoginComponent implements OnInit {
     }
     this.store.setError("");
     this.store.setLoading(true);
-    this.authenticationService
-      .login$(this.fields.username.value, this.fields.password.value)
-      .pipe(first())
-      .subscribe(
-        dataLogin => {
-          this.authenticationService.getUserData$().subscribe(
-            data => {
-              this.store.setLoading(false);
-              this.store.setError("");
-              this.router.navigate(["/home"]);
-            },
-            error => {
-              this.errorRequest();
-            }
-          );
-        },
-        error => {
-          this.errorRequest();
-        }
-      );
+    concat(
+      this.authenticationService.login$(
+        this.fields.username.value,
+        this.fields.password.value
+      ),
+      this.authenticationService.getUserData$()
+    ).subscribe(
+      data => {},
+      error => {
+        this.errorRequest();
+      },
+      () => {
+        this.store.setLoading(false);
+        this.store.setError("");
+        this.router.navigate(["/home"]);
+      }
+    );
   }
 
   private errorRequest() {

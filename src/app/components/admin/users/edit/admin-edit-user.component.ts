@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, combineLatest } from "rxjs";
 import { User, Role } from "src/app/models/entities/user";
 import { House } from "src/app/models/entities/house";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -74,39 +74,27 @@ export class AdminEditUserComponent implements OnInit {
 
     this.id = this.activatedRoute.snapshot.params.id;
 
-    this.userService.getUser$(this.id).subscribe(
-      userData => {
+    combineLatest(
+      this.userService.getUser$(this.id),
+      this.userService.getUserHouses$(this.id),
+      this.houseService.getAllHouses$()
+    ).subscribe(
+      ([userData, housesData, allHousesData]) => {
         this.userSubject.next(userData as User);
-        this.userService.getUserHouses$(this.id).subscribe(
-          housesData => {
-            this.housesSubject.next(housesData as House[]);
-            this.houseService.getAllHouses$().subscribe(
-              allHousesData => {
-                this.allSystemHouses = allHousesData as House[];
-                this.allHousesSubject.next(
-                  this.getDiffHouses(
-                    this.housesSubject.value,
-                    this.allSystemHouses
-                  )
-                );
-
-                this.store.setLoading(false);
-              },
-              error => {
-                this.store.setLoading(false);
-                this.store.error = "Error al obtener las casas del sistema";
-              }
-            );
-          },
-          error => {
-            this.store.setLoading(false);
-            this.store.error = "Error al obtener las casas del usuario";
-          }
+        this.housesSubject.next(housesData as House[]);
+        this.allSystemHouses = allHousesData as House[];
+        this.allHousesSubject.next(
+          this.getDiffHouses(this.housesSubject.value, this.allSystemHouses)
         );
+        this.store.setLoading(false);
       },
       error => {
         this.store.setLoading(false);
-        this.store.error = "El usuario no existe";
+        if (this.store.httpErrorCode === 404) {
+          this.store.setError("La usuario no existe");
+        } else {
+          this.store.setError("Error al consultar los datos del usuario");
+        }
       }
     );
 
@@ -145,49 +133,37 @@ export class AdminEditUserComponent implements OnInit {
     this.submitted = true;
     this.store.setLoading(true);
     const user = this.userSubject.value;
-    this.userService
-      .updateUser$({
-        id: user.id,
-        username: user.username,
-        password: this.fields.password.value,
-        email: !this.fields.email.dirty ? user.email : this.fields.email.value,
-        lastName: !this.fields.lastName.dirty
-          ? user.lastName
-          : this.fields.lastName.value,
-        name: !this.fields.name.dirty ? user.name : this.fields.name.value,
-        phoneNumber: !this.fields.phone.dirty
-          ? user.phoneNumber
-          : this.fields.phone.value,
-        role: this.roleSelected,
-        numLogins: user.numLogins
-      })
-      .subscribe(
-        data => {
-          this.userSubject.next(data as User);
-          const houseIds: number[] = this.housesSubject.value.map(
-            house => house.id
-          );
-          this.userService
-            .setUserHouses$(user.id.toString(), houseIds)
-            .subscribe(
-              houses => {
-                this.store.setLoading(false);
-                this.store.setError("");
-                this.openSnackBar();
-              },
-              error => {
-                this.store.setLoading(false);
-                this.openSnackBar(
-                  "El usuario ha sido actualizado pero no sus casas asociadas"
-                );
-              }
-            );
-        },
-        error => {
-          this.store.setLoading(false);
-          this.openSnackBar("No se pudo actualizar el usuario");
-        }
-      );
+    const userToUpdate = {
+      id: user.id,
+      username: user.username,
+      password: this.fields.password.value,
+      email: !this.fields.email.dirty ? user.email : this.fields.email.value,
+      lastName: !this.fields.lastName.dirty
+        ? user.lastName
+        : this.fields.lastName.value,
+      name: !this.fields.name.dirty ? user.name : this.fields.name.value,
+      phoneNumber: !this.fields.phone.dirty
+        ? user.phoneNumber
+        : this.fields.phone.value,
+      role: this.roleSelected,
+      numLogins: user.numLogins
+    };
+    const houseIds: number[] = this.housesSubject.value.map(house => house.id);
+    combineLatest(
+      this.userService.updateUser$(userToUpdate),
+      this.userService.setUserHouses$(user.id.toString(), houseIds)
+    ).subscribe(
+      ([userData, housesData]) => {
+        this.userSubject.next(userData as User);
+        this.store.setLoading(false);
+        this.store.setError("");
+        this.openSnackBar();
+      },
+      error => {
+        this.store.setLoading(false);
+        this.openSnackBar("No se pudo actualizar el usuario");
+      }
+    );
   }
 
   removeHouse(id: number) {

@@ -10,7 +10,7 @@ import { Role, User } from "src/app/models/entities/user";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthenticationService } from "src/app/services/authentication.service";
 import { AppStore } from "src/app/models/stores/appstore";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, combineLatest } from "rxjs";
 import { House } from "src/app/models/entities/house";
 import { Sensor } from "src/app/models/entities/sensor";
 
@@ -65,39 +65,25 @@ export class AdminHouseComponent implements OnInit, AfterViewInit {
       }
     );
 
-    this.houseService.getHouse$(this.id).subscribe(
-      houseData => {
+    combineLatest(
+      this.houseService.getHouse$(this.id),
+      this.houseService.getUsersHouse$(this.id),
+      this.houseService.getSensorsHouse$(this.id)
+    ).subscribe(
+      ([houseData, usersData, sensorsData]) => {
         this.houseSubject.next(houseData as House);
         this.updateMerkers(houseData as House);
-        this.houseService.getUsersHouse$(this.id).subscribe(
-          usersData => {
-            this.usersSubject.next(usersData as User[]);
-            this.houseService.getSensorsHouse$(this.id).subscribe(
-              sensorsData => {
-                this.sensorsSubject.next(sensorsData as Sensor[]);
-                this.store.setLoading(false);
-                this.store.setError("");
-              },
-              error => {
-                this.store.setLoading(false);
-                this.store.setError(
-                  "Error al consultar los sensores de la casa"
-                );
-              }
-            );
-          },
-          error => {
-            this.store.setLoading(false);
-            this.store.setError("Error al consultar los usuarios de la casa");
-          }
-        );
+        this.usersSubject.next(usersData as User[]);
+        this.sensorsSubject.next(sensorsData as Sensor[]);
+        this.store.setLoading(false);
+        this.store.setError("");
       },
       error => {
         this.store.setLoading(false);
         if (this.store.httpErrorCode === 404) {
           this.store.setError("La casa no existe");
         } else {
-          this.store.setError("Servidor no disponible");
+          this.store.setError("Error al consultar los datos de la casa");
         }
       }
     );
