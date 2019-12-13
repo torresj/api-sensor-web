@@ -72,4 +72,12 @@ export class HouseService {
         "/sensors"
     );
   }
+
+  public updateHouse$(houseToUpdate: House) {
+    const house = JSON.stringify(houseToUpdate);
+    return this.http.put<House>(
+      this.appConfig.baseApiUrl + this.appConfig.housePath,
+      houseToUpdate
+    );
+  }
 }

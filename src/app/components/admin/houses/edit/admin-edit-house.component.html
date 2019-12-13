@@ -1,1 +1,169 @@
-<p>admin-edit-house works!</p>
+<article class="admin-house-edit" fxLayout="column" *mobxAutorun>
+  <section
+    *ngIf="!store.error && store.loading && !submitted"
+    class="admin-house-edit--loading"
+    fxLayoutAlign="center center"
+  >
+    <mat-spinner class="admin-house-edit" color="accent"></mat-spinner>
+  </section>
+  <section
+    *ngIf="!(!store.error && store.loading && !submitted)"
+    class="admin-house-edit__formSection"
+  >
+    <form
+      class="admin-house-edit__form"
+      [formGroup]="editForm"
+      fxLayout="column"
+    >
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" [value]="(house$ | async)?.id" />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Nombre *</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          [value]="(house$ | async)?.name"
+        />
+        <mat-error
+          *ngIf="
+            formControl('name').invalid &&
+            formControl('name').value !== null &&
+            (formControl('name').dirty || formControl('name').touched)
+          "
+          >El nombre es obligatorio</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Descripción</mat-label>
+        <input
+          matInput
+          formControlName="description"
+          [value]="(house$ | async)?.description"
+        />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Dirección</mat-label>
+        <input
+          matInput
+          formControlName="address"
+          [value]="(house$ | async)?.address"
+        />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Latitud</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="latitude"
+          [value]="(house$ | async)?.position?.latitude"
+        />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Longitud</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="longitude"
+          [value]="(house$ | async)?.position?.longitude"
+        />
+      </mat-form-field>
+      <mat-expansion-panel class="admin-house-edit__sensorsPanel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Estaciones
+          </mat-panel-title>
+          <mat-panel-description>
+            Estaciones asociadas a la casa
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <section
+          class="admin-house-edit-sensorsPanel__select"
+          fxLayoutAlign="space-between center"
+        >
+          <mat-form-field color="accent" appearance="standard">
+            <mat-label>Estaciones en el sistema</mat-label>
+            <mat-select [(value)]="sensorToAdd">
+              <mat-option
+                *ngFor="let sensor of sensorDiff$ | async"
+                [value]="sensor.id"
+              >
+                {{ sensor.name + " (id " + sensor.id + ")" }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <section
+            class="admin-house-edit-sensorsPanel-select__buttons"
+            fxLayout="row wrap"
+            fxLayoutAlign="end center"
+          >
+            <button
+              mat-icon-button
+              color="accent"
+              (click)="addSensor()"
+              matTooltip="Añadir"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="accent"
+              (click)="addAllSensors()"
+              matTooltip="Añadir todas"
+            >
+              <mat-icon>select_all</mat-icon>
+            </button>
+          </section>
+        </section>
+
+        <mat-list>
+          <mat-list>
+            <mat-list-item *ngIf="(houseSensors$ | async).length === 0">
+              <span class="admin-house-edit-sensorsPanels--noSensors">
+                Usuario sin casas asociadas</span
+              ></mat-list-item
+            >
+            <mat-list-item *ngFor="let sensor of houseSensors$ | async">
+              <section
+                class="admin-house-edit__sensorSection"
+                fxLayoutAlign="space-between center"
+              >
+                <span class="admin-user-edit-sensorSection__text">{{
+                  sensor.name + " (id " + sensor.id + ")"
+                }}</span>
+                <button
+                  mat-icon-button
+                  matTooltip="Borrar"
+                  color="accent"
+                  (click)="removeSensor(sensor.id)"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </section>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-list>
+      </mat-expansion-panel>
+      <button
+        mat-raised-button
+        class="admin-edit__form__button"
+        color="accent"
+        (click)="onSubmit()"
+        [disabled]="store.loading"
+        matTooltip="Actualizar casa"
+      >
+        <div
+          *ngIf="store.loading"
+          class="admin-edit__form__bspinner"
+          fxLayoutAlign="center center"
+        >
+          <mat-spinner color="accent" diameter="35"></mat-spinner>
+        </div>
+        <span *ngIf="!store.loading">Actualizar</span>
+      </button>
+    </form>
+  </section>
+</article>

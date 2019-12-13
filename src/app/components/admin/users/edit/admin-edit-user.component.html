@@ -17,7 +17,7 @@
     >
       <mat-form-field color="accent" appearance="standard">
         <mat-label>ID</mat-label>
-        <input matInput formControlName="id" [value]="(user | async)?.id" />
+        <input matInput formControlName="id" [value]="(user$ | async)?.id" />
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
         <mat-label>Usuario</mat-label>
