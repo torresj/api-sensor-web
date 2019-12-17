@@ -13,6 +13,7 @@ import { AppStore } from "src/app/models/stores/appstore";
 import { BehaviorSubject, combineLatest } from "rxjs";
 import { House } from "src/app/models/entities/house";
 import { Sensor } from "src/app/models/entities/sensor";
+import { MarkerDto } from "src/app/models/dtos/markerDto";
 
 @Component({
   selector: "app-admin-house",
@@ -24,7 +25,7 @@ export class AdminHouseComponent implements OnInit, AfterViewInit {
   houseSubject = new BehaviorSubject<House>(null);
   usersSubject = new BehaviorSubject<User[]>([]);
   sensorsSubject = new BehaviorSubject<Sensor[]>([]);
-  positionsSubject = new BehaviorSubject<google.maps.LatLng[]>([]);
+  positionsSubject = new BehaviorSubject<MarkerDto[]>([]);
   house$ = this.houseSubject.asObservable();
   users$ = this.usersSubject.asObservable();
   sensors$ = this.sensorsSubject.asObservable();
@@ -91,11 +92,29 @@ export class AdminHouseComponent implements OnInit, AfterViewInit {
   updateMerkers(house: House) {
     house.position
       ? this.positionsSubject.next([
-          new google.maps.LatLng(
-            house.position.latitude,
-            house.position.longitude
-          )
+          {
+            name: house.name,
+            latitude: house.position.latitude,
+            longitude: house.position.longitude
+          }
         ])
-      : this.positionsSubject.next([new google.maps.LatLng(0, 0)]);
+      : this.positionsSubject.next([
+          {
+            name: "",
+            latitude: 0,
+            longitude: 0
+          }
+        ]);
+  }
+
+  hasPosition() {
+    const house = this.houseSubject.value;
+    if (house.position) {
+      if (house.position.latitude === 0 || house.position.longitude === 0) {
+        return false;
+      } else {
+        return true;
+      }
+    } else return false;
   }
 }

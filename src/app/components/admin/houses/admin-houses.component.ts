@@ -23,6 +23,7 @@ import { HouseService } from "src/app/services/house.service";
 import { tap, debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { House } from "src/app/models/entities/house";
 import { DeleteDialogComponent } from "../../dialogs/delete-dialog/delete-dialog.component";
+import { MarkerDto } from "src/app/models/dtos/markerDto";
 
 @Component({
   selector: "app-admin-houses",
@@ -40,6 +41,8 @@ export class AdminHousesComponent implements AfterViewInit, OnInit, OnDestroy {
     "createAt"
   ]);
   displayedColumns$ = this.displayedColumnsSubject.asObservable();
+  positionsSubject = new BehaviorSubject<MarkerDto[]>([]);
+  positions$ = this.positionsSubject.asObservable();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild("searchBox", { static: true }) input: ElementRef;
@@ -114,6 +117,7 @@ export class AdminHousesComponent implements AfterViewInit, OnInit, OnDestroy {
     );
     this.dataSource = new HouseDataSource(this.houseService);
     this.dataSource.loadHouses(10, 0);
+    this.dataSource.houses$.subscribe(houses => this.updateMerkers(houses));
   }
 
   ngAfterViewInit() {
@@ -184,5 +188,25 @@ export class AdminHousesComponent implements AfterViewInit, OnInit, OnDestroy {
     snackBarRef.onAction().subscribe(() => {
       snackBarRef.dismiss();
     });
+  }
+
+  updateMerkers(houses: House[]) {
+    this.positionsSubject.next(
+      houses
+        .filter(
+          house =>
+            house.position &&
+            house.position.latitude !== 0 &&
+            house.position.longitude !== 0
+        )
+        .map(house => {
+          const markerDto = {
+            name: house.name,
+            latitude: house.position.latitude,
+            longitude: house.position.longitude
+          };
+          return markerDto;
+        })
+    );
   }
 }

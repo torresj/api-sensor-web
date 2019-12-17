@@ -119,7 +119,7 @@
 </article>
 <section
   class="admin-house-component__map"
-  *ngIf="!store.error && !store.loading"
+  *ngIf="!store.error && !store.loading && hasPosition()"
 >
-  <app-maps [positions]="positions$"></app-maps>
+  <app-maps [positions]="positions$" [zoom]="10"></app-maps>
 </section>

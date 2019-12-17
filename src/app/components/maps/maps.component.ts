@@ -7,6 +7,7 @@ import {
   OnInit
 } from "@angular/core";
 import { Observable } from "rxjs";
+import { MarkerDto } from "src/app/models/dtos/markerDto";
 
 @Component({
   selector: "app-maps",
@@ -16,8 +17,10 @@ import { Observable } from "rxjs";
 export class MapsComponent implements AfterViewInit, OnInit {
   @ViewChild("mapContainer", { static: false }) gmap: ElementRef;
   map: google.maps.Map;
-  @Input() positions: Observable<google.maps.LatLng[]>;
+  @Input() positions: Observable<MarkerDto[]>;
+  @Input() zoom: number;
   markers: google.maps.Marker[];
+  infoWindows: google.maps.InfoWindow[];
 
   constructor() {}
 
@@ -33,7 +36,7 @@ export class MapsComponent implements AfterViewInit, OnInit {
   mapInitializer() {
     const mapOptions: google.maps.MapOptions = {
       center: this.calculateCenter(),
-      zoom: 10
+      zoom: this.zoom
     };
 
     this.map = new google.maps.Map(this.gmap.nativeElement, mapOptions);
@@ -76,12 +79,35 @@ export class MapsComponent implements AfterViewInit, OnInit {
     }
   }
 
-  private setMarkers(positions: google.maps.LatLng[]) {
-    this.markers = positions.map(position => {
-      return new google.maps.Marker({
-        position,
+  private setMarkers(markersDto: MarkerDto[]) {
+    this.infoWindows = [];
+    this.markers = markersDto.map(markerDto => {
+      const marker = new google.maps.Marker({
+        position: new google.maps.LatLng(
+          markerDto.latitude,
+          markerDto.longitude
+        ),
         map: this.map
       });
+      const contentString =
+        '<div id="content" class="marker">' + markerDto.name + "</div>";
+
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        maxWidth: 200
+      });
+
+      this.infoWindows.push(infowindow);
+
+      marker.addListener("click", () => {
+        this.closeInfowindows();
+        infowindow.open(marker.get("map"), marker);
+      });
+      return marker;
     });
+  }
+
+  private closeInfowindows() {
+    this.infoWindows.forEach(infowindow => infowindow.close());
   }
 }

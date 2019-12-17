@@ -11,6 +11,7 @@ export class HouseDataSource implements DataSource<House> {
   private totalElementsSubject = new BehaviorSubject<number>(0);
   public loading$ = this.loadingSubject.asObservable();
   public totalElements$ = this.totalElementsSubject.asObservable();
+  public houses$ = this.housesSubject.asObservable();
 
   constructor(private houseService: HouseService) {}
 
