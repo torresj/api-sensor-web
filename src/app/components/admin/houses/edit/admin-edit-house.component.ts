@@ -136,6 +136,7 @@ export class AdminEditHouseComponent implements OnInit {
     this.submitted = true;
     this.store.setLoading(true);
     const house = this.houseSubject.value;
+    const ids = this.houseSensorsSubject.value.map(sensor => sensor.id);
     const houseToUpdate = {
       id: house.id,
       name: house.name,
@@ -154,9 +155,13 @@ export class AdminEditHouseComponent implements OnInit {
           : this.fields.longitude.value
       }
     };
-    this.houseService.updateHouse$(houseToUpdate).subscribe(
-      houseData => {
-        this.houseSubject.next(houseData as House);
+    combineLatest(
+      this.houseService.updateHouse$(houseToUpdate),
+      this.houseService.updateSensorsHouse$(this.id, ids)
+    ).subscribe(
+      ([houseData, sensorsData]) => {
+        this.houseSubject.next(houseData);
+        this.houseSensorsSubject.next(sensorsData);
         this.store.setLoading(false);
         this.store.setError("");
         this.openSnackBar();

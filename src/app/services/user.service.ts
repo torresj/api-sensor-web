@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { User, Role } from "../models/entities/user";
 import { AppConfig } from "../app.config";
 import { AppStore } from "../models/stores/appstore";
+import { House } from "../models/entities/house";
 
 @Injectable({
   providedIn: "root"
@@ -93,7 +94,7 @@ export class UserService {
   }
 
   public setUserHouses$(userId: string, houseIds: number[]) {
-    return this.http.post<number[]>(
+    return this.http.post<House[]>(
       this.appConfig.baseApiUrl +
         this.appConfig.userPath +
         "/" +

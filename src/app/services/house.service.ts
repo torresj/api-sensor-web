@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { AppConfig } from "../app.config";
 import { House } from "../models/entities/house";
+import { Sensor } from "../models/entities/sensor";
 
 @Injectable({
   providedIn: "root"
@@ -78,6 +79,18 @@ export class HouseService {
     return this.http.put<House>(
       this.appConfig.baseApiUrl + this.appConfig.housePath,
       houseToUpdate
+    );
+  }
+
+  public updateSensorsHouse$(houseId: string, sensorIds: number[]) {
+    const ids = JSON.stringify(sensorIds);
+    return this.http.put<Sensor[]>(
+      this.appConfig.baseApiUrl +
+        this.appConfig.housePath +
+        "/" +
+        houseId +
+        "/sensors",
+      ids
     );
   }
 }

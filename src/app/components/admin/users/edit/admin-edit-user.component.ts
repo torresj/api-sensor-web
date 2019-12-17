@@ -155,6 +155,7 @@ export class AdminEditUserComponent implements OnInit {
     ).subscribe(
       ([userData, housesData]) => {
         this.userSubject.next(userData as User);
+        this.housesSubject.next(housesData);
         this.store.setLoading(false);
         this.store.setError("");
         this.openSnackBar();

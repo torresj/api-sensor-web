@@ -25,7 +25,12 @@
     fxLayout="column wrap"
     fxLayoutAlign="start center"
   >
-    <h3>Información de la casa</h3>
+    <h3>
+      Información de la casa
+      <a [routerLink]="'/admin/houses/' + (house$ | async)?.id + '/edit'">
+        <mat-icon color="primary" matTooltip="Editar casa">create</mat-icon>
+      </a>
+    </h3>
     <mat-list class="admin-house-component-info">
       <mat-list-item>
         <span class="admin-house-component-info__label">ID:</span>

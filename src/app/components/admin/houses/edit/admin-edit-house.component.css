@@ -24,3 +24,8 @@
   font-size: 0.8rem;
   color: grey;
 }
+
+.admin-house-edit-sensorSection__currentHouseText {
+  font-size: 0.6rem;
+  color: red;
+}

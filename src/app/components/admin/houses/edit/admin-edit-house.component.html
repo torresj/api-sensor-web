@@ -128,11 +128,19 @@
             <mat-list-item *ngFor="let sensor of houseSensors$ | async">
               <section
                 class="admin-house-edit__sensorSection"
+                fxLayout="row wrap"
                 fxLayoutAlign="space-between center"
               >
-                <span class="admin-user-edit-sensorSection__text">{{
-                  sensor.name + " (id " + sensor.id + ")"
-                }}</span>
+                <section fxLayout="column wrap">
+                  <span class="admin-house-edit-sensorSection__text">{{
+                    sensor.name + " (id " + sensor.id + ")"
+                  }}</span>
+                  <span
+                    *ngIf="sensor.houseId"
+                    class="admin-house-edit-sensorSection__currentHouseText"
+                    >Id de la casa actual : {{ sensor.houseId }}</span
+                  >
+                </section>
                 <button
                   mat-icon-button
                   matTooltip="Borrar"
