@@ -115,6 +115,8 @@ export class AdminHouseComponent implements OnInit, AfterViewInit {
       } else {
         return true;
       }
-    } else return false;
+    } else {
+      return false;
+    }
   }
 }

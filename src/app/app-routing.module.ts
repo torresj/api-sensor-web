@@ -17,17 +17,19 @@ import { AdminCreateHouseComponent } from "./components/admin/houses/create/admi
 import { AdminHouseComponent } from "./components/admin/houses/house/admin-house.component";
 import { MapsComponent } from "./components/maps/maps.component";
 import { AdminEditHouseComponent } from "./components/admin/houses/edit/admin-edit-house.component";
+import { AdminTypesComponent } from "./components/admin/types/admin-types.component";
+import { AdminTypeComponent } from "./components/admin/types/type/admin-type.component";
 
 const routes: Routes = [
   { path: "", component: IndexComponent },
   { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
   { path: "admin", component: AdminComponent, canActivate: [AuthGuard] },
+  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
   {
     path: "admin/users",
     component: AdminUsersComponent,
     canActivate: [AuthGuard]
   },
-  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
   {
     path: "admin/users/create",
     component: AdminCreateUserComponent,
@@ -61,6 +63,16 @@ const routes: Routes = [
   {
     path: "admin/houses/:id/edit",
     component: AdminEditHouseComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin/types",
+    component: AdminTypesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin/types/:id",
+    component: AdminTypeComponent,
     canActivate: [AuthGuard]
   },
   {

@@ -1,0 +1,99 @@
+<article class="admin-types-component">
+  <section class="admin-types-component-section mat-elevation-z8">
+    <div
+      class="admin-types-component--loading"
+      *ngIf="dataSource.loading$ | async"
+    >
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+    <mat-form-field color="accent" class="admin-types-component__filter">
+      <input type="search" matInput placeholder="Filtrar" #searchBox />
+    </mat-form-field>
+    <button
+      color="primary"
+      class="admin-types-component__new-type"
+      mat-raised-button
+      [routerLink]="'/admin/types/create'"
+    >
+      Crear tipo
+    </button>
+    <section class="admin-types-component-container-table">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="admin-types-component__table"
+      >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="createAt">
+          <th mat-header-cell *matHeaderCellDef>Fecha de creación</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.createAt | date: "medium" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sensorActions">
+          <th mat-header-cell *matHeaderCellDef>Acciones asociadas al tipo</th>
+          <td mat-cell *matCellDef="let element">{{ element.actions }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let element">
+            <section class="admin-types-component__actions">
+              <a
+                [routerLink]="'/admin/types/' + element.id"
+                class="admin-types-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Ver tipo"
+                  >visibility</mat-icon
+                >
+              </a>
+              <a
+                [routerLink]="'/admin/types/' + element.id + '/edit'"
+                class="admin-types-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Editar tipo"
+                  >create</mat-icon
+                >
+              </a>
+              <a
+                [routerLink]=""
+                (click)="removeType(element)"
+                class="admin-types-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Borrar tipo"
+                  >delete</mat-icon
+                >
+              </a>
+            </section>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns$ | async"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns$ | async"
+        ></tr>
+      </table>
+    </section>
+    <mat-paginator
+      [length]="dataSource.totalElements$ | async"
+      [pageSize]="10"
+      [pageSizeOptions]="[1, 10, 20, 30]"
+    ></mat-paginator>
+  </section>
+</article>

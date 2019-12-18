@@ -52,6 +52,8 @@ import { AdminCreateHouseComponent } from "./components/admin/houses/create/admi
 import { AdminHouseComponent } from "./components/admin/houses/house/admin-house.component";
 import { MapsComponent } from "./components/maps/maps.component";
 import { AdminEditHouseComponent } from "./components/admin/houses/edit/admin-edit-house.component";
+import { AdminTypesComponent } from "./components/admin/types/admin-types.component";
+import { AdminTypeComponent } from "./components/admin/types/type/admin-type.component";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -70,7 +72,9 @@ import { AdminEditHouseComponent } from "./components/admin/houses/edit/admin-ed
     AdminCreateHouseComponent,
     AdminHouseComponent,
     MapsComponent,
-    AdminEditHouseComponent
+    AdminEditHouseComponent,
+    AdminTypesComponent,
+    AdminTypeComponent
   ],
   imports: [
     BrowserModule,
