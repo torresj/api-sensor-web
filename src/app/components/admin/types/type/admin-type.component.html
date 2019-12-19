@@ -1,1 +1,86 @@
-<p>admin-type works!</p>
+<article
+  class="admin-type-component"
+  fxLayout="row wrap"
+  fxLayoutAlign="center start"
+  *mobxAutorun
+>
+  <section
+    *ngIf="!store.error && store.loading"
+    class="admin-type-component--loading"
+  >
+    <mat-spinner
+      class="admin-type-component__spinner"
+      color="accent"
+    ></mat-spinner>
+  </section>
+  <section
+    *ngIf="store.error && !store.loading"
+    class="admin-type-component--error"
+  >
+    <h1>{{ store.error }}</h1>
+  </section>
+  <section
+    *ngIf="!store.error && !store.loading"
+    class="admin-type-component__type"
+    fxLayout="column wrap"
+    fxLayoutAlign="start center"
+  >
+    <h3>
+      Información del tipo de estación
+      <a [routerLink]="'/admin/types/' + (type$ | async)?.id + '/edit'">
+        <mat-icon color="primary" matTooltip="Editar tipo">create</mat-icon>
+      </a>
+    </h3>
+    <mat-list class="admin-type-component-info">
+      <mat-list-item>
+        <span class="admin-type-component-info__label">ID:</span>
+        <span class="admin-type-component-info__content">{{
+          (type$ | async)?.id
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-type-component-info__label">Nombre:</span>
+        <span class="admin-type-component-info__content">{{
+          (type$ | async)?.name
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-type-component-info__label">Descripción:</span>
+        <span class="admin-type-component-info__content">{{
+          (type$ | async)?.description
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-type-component-info__label">Fecha de creación:</span>
+        <span class="admin-type-component-info__content">{{
+          (type$ | async)?.createAt | date: "medium"
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
+        <span class="admin-type-component-info__label">Acciones:</span>
+        <span class="admin-type-component-info__content">{{
+          (type$ | async)?.actions | date: "medium"
+        }}</span></mat-list-item
+      >
+    </mat-list>
+  </section>
+  <section
+    *ngIf="!store.error && !store.loading"
+    class="admin-type-component__sensors"
+    fxLayout="column wrap"
+    fxLayoutAlign="start center"
+  >
+    <h3>Sensores</h3>
+    <mat-list>
+      <mat-list>
+        <mat-list-item *ngIf="(sensors$ | async).length === 0">
+          Tipo sin sensores asociadas</mat-list-item
+        >
+        <mat-list-item *ngFor="let sensor of sensors$ | async">
+          <mat-icon mat-list-icon>developer_board</mat-icon>
+          <a [routerLink]="'/admin/sensors/' + sensor.id">{{ sensor.name }}</a>
+        </mat-list-item>
+      </mat-list>
+    </mat-list>
+  </section>
+</article>
