@@ -26,7 +26,7 @@
     fxLayoutAlign="start center"
   >
     <h3>
-      Información del tipo de estación
+      Información del tipo
       <a [routerLink]="'/admin/types/' + (type$ | async)?.id + '/edit'">
         <mat-icon color="primary" matTooltip="Editar tipo">create</mat-icon>
       </a>
@@ -45,6 +45,12 @@
         }}</span></mat-list-item
       >
       <mat-list-item>
+        <span class="admin-type-component-info__label">Acciones:</span>
+        <span class="admin-type-component-info__content">{{
+          (type$ | async)?.actions
+        }}</span></mat-list-item
+      >
+      <mat-list-item>
         <span class="admin-type-component-info__label">Descripción:</span>
         <span class="admin-type-component-info__content">{{
           (type$ | async)?.description
@@ -54,12 +60,6 @@
         <span class="admin-type-component-info__label">Fecha de creación:</span>
         <span class="admin-type-component-info__content">{{
           (type$ | async)?.createAt | date: "medium"
-        }}</span></mat-list-item
-      >
-      <mat-list-item>
-        <span class="admin-type-component-info__label">Acciones:</span>
-        <span class="admin-type-component-info__content">{{
-          (type$ | async)?.actions | date: "medium"
         }}</span></mat-list-item
       >
     </mat-list>

@@ -60,7 +60,7 @@ export class AdminTypesComponent implements AfterViewInit, OnInit, OnDestroy {
     } else {
       store.setToolbarPage([
         { label: "Gestión", url: "/admin" },
-        { label: "Tipos de sensor", url: "/admin/types" }
+        { label: "Tipos", url: "/admin/types" }
       ]);
     }
 

@@ -74,30 +74,6 @@ export class AdminEditUserComponent implements OnInit {
 
     this.id = this.activatedRoute.snapshot.params.id;
 
-    combineLatest(
-      this.userService.getUser$(this.id),
-      this.userService.getUserHouses$(this.id),
-      this.houseService.getAllHouses$()
-    ).subscribe(
-      ([userData, housesData, allHousesData]) => {
-        this.userSubject.next(userData as User);
-        this.housesSubject.next(housesData as House[]);
-        this.allSystemHouses = allHousesData as House[];
-        this.allHousesSubject.next(
-          this.getDiffHouses(this.housesSubject.value, this.allSystemHouses)
-        );
-        this.store.setLoading(false);
-      },
-      error => {
-        this.store.setLoading(false);
-        if (this.store.httpErrorCode === 404) {
-          this.store.setError("La usuario no existe");
-        } else {
-          this.store.setError("Error al consultar los datos del usuario");
-        }
-      }
-    );
-
     this.editForm = this.formBuilder.group(
       {
         id: [{ value: "", disabled: true }],
@@ -113,6 +89,41 @@ export class AdminEditUserComponent implements OnInit {
       },
       {
         validator: MustMatch("password", "checkPassword")
+      }
+    );
+
+    combineLatest(
+      this.userService.getUser$(this.id),
+      this.userService.getUserHouses$(this.id),
+      this.houseService.getAllHouses$()
+    ).subscribe(
+      ([userData, housesData, allHousesData]) => {
+        const user = userData as User;
+        this.userSubject.next(user);
+        this.editForm.patchValue({
+          id: user.id,
+          username: user.username,
+          logins: user.numLogins,
+          role: user.role,
+          name: user.name,
+          lastName: user.lastName,
+          email: user.email,
+          phone: user.phoneNumber
+        });
+        this.housesSubject.next(housesData as House[]);
+        this.allSystemHouses = allHousesData as House[];
+        this.allHousesSubject.next(
+          this.getDiffHouses(this.housesSubject.value, this.allSystemHouses)
+        );
+        this.store.setLoading(false);
+      },
+      error => {
+        this.store.setLoading(false);
+        if (this.store.httpErrorCode === 404) {
+          this.store.setError("La usuario no existe");
+        } else {
+          this.store.setError("Error al consultar los datos del usuario");
+        }
       }
     );
   }
@@ -154,7 +165,18 @@ export class AdminEditUserComponent implements OnInit {
       this.userService.setUserHouses$(user.id.toString(), houseIds)
     ).subscribe(
       ([userData, housesData]) => {
-        this.userSubject.next(userData as User);
+        const userUpdated = userData as User;
+        this.userSubject.next(userUpdated);
+        this.editForm.patchValue({
+          id: userUpdated.id,
+          username: userUpdated.username,
+          logins: userUpdated.numLogins,
+          role: userUpdated.role,
+          name: userUpdated.name,
+          lastName: userUpdated.lastName,
+          email: userUpdated.email,
+          phone: userUpdated.phoneNumber
+        });
         this.housesSubject.next(housesData);
         this.store.setLoading(false);
         this.store.setError("");

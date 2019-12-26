@@ -1,0 +1,8 @@
+.admin-type-edit--loading {
+  margin-top: 6rem;
+}
+
+.admin-type-edit__formSection {
+  max-width: 50rem;
+  margin: 2rem;
+}

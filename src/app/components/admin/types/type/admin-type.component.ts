@@ -36,7 +36,7 @@ export class AdminTypeComponent implements OnInit {
     } else {
       store.setToolbarPage([
         { label: "Gestión", url: "/admin" },
-        { label: "Tipos de sensor", url: "/admin/types" },
+        { label: "Tipos", url: "/admin/types" },
         { label: "Info", url: "/admin/types/" + this.id }
       ]);
     }

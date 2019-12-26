@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { AppConfig } from "../app.config";
+import { SensorType } from "../models/entities/sensortype";
 
 @Injectable({
   providedIn: "root"
@@ -46,9 +47,17 @@ export class SensortypeService {
     );
   }
 
-  deleteType$(id: string) {
+  public deleteType$(id: string) {
     return this.http.delete(
       this.appConfig.baseApiUrl + this.appConfig.SensorTypePath + "/" + id
+    );
+  }
+
+  public updateType$(typeToUpdate: SensorType) {
+    const type = JSON.stringify(typeToUpdate);
+    return this.http.put<SensorType>(
+      this.appConfig.baseApiUrl + this.appConfig.SensorTypePath,
+      type
     );
   }
 }

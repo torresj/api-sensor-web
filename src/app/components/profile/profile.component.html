@@ -8,7 +8,7 @@
               >Usuario:</span
             >
             <span class="profile-component-tabSection-info__content">{{
-              store.user.username
+              (user$ | async)?.username
             }}</span></mat-list-item
           >
           <mat-list-item>
@@ -16,7 +16,7 @@
               >Nombre:</span
             >
             <span class="profile-component-tabSection-info__content">{{
-              store.user.name
+              (user$ | async)?.name
             }}</span></mat-list-item
           >
           <mat-list-item>
@@ -24,13 +24,13 @@
               >Apellidos:</span
             >
             <span class="profile-component-tabSection-info__content">{{
-              store.user.lastName
+              (user$ | async)?.lastName
             }}</span></mat-list-item
           >
           <mat-list-item>
             <span class="profile-component-tabSection-info__label">Email:</span>
             <span class="profile-component-tabSection-info__content">{{
-              store.user.email
+              (user$ | async)?.email
             }}</span></mat-list-item
           >
           <mat-list-item>
@@ -38,19 +38,19 @@
               >Teléfono:</span
             >
             <span class="profile-component-tabSection-info__content">{{
-              store.user.phoneNumber
+              (user$ | async)?.phoneNumber
             }}</span></mat-list-item
           >
           <mat-list-item>
             <span class="profile-component-tabSection-info__label">ID:</span>
             <span class="profile-component-tabSection-info__content">{{
-              store.user.id
+              (user$ | async)?.id
             }}</span></mat-list-item
           >
           <mat-list-item>
             <span class="profile-component-tabSection-info__label">Tipo:</span>
             <span class="profile-component-tabSection-info__content">{{
-              store.user.role
+              (user$ | async)?.role
             }}</span></mat-list-item
           >
         </mat-list>
@@ -68,11 +68,7 @@
         >
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Usuario</mat-label>
-            <input
-              matInput
-              formControlName="username"
-              [value]="store.user.username"
-            />
+            <input matInput formControlName="username" />
             <mat-error
               *ngIf="
                 formControl('username').invalid &&
@@ -118,24 +114,15 @@
           </mat-form-field>
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Nombre</mat-label>
-            <input formControlName="name" matInput [value]="store.user.name" />
+            <input formControlName="name" matInput />
           </mat-form-field>
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Apellidos</mat-label>
-            <input
-              formControlName="lastName"
-              matInput
-              [value]="store.user.lastName"
-            />
+            <input formControlName="lastName" matInput />
           </mat-form-field>
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Email</mat-label>
-            <input
-              type="email"
-              formControlName="email"
-              matInput
-              [value]="store.user.email"
-            />
+            <input type="email" formControlName="email" matInput />
             <mat-error
               *ngIf="
                 formControl('email').invalid &&
@@ -146,11 +133,7 @@
           </mat-form-field>
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Teléfono</mat-label>
-            <input
-              formControlName="phone"
-              matInput
-              [value]="store.user.phoneNumber"
-            />
+            <input formControlName="phone" matInput />
           </mat-form-field>
           <button
             mat-raised-button

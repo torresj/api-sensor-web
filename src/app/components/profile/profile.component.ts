@@ -12,6 +12,7 @@ import { MustMatch } from "../../helpers/must-match.validator";
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/entities/user";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,6 +23,8 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class ProfileComponent implements OnInit {
   userForm: FormGroup;
   error = "";
+  userSubject = new BehaviorSubject<User>(null);
+  user$ = this.userSubject.asObservable();
 
   constructor(
     public store: AppStore,
@@ -39,15 +42,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticationService.getUserData$().subscribe(
-      dataUserData => {},
-      error => {
-        this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
-        this.authenticationService.logout();
-        this.router.navigate(["/login"]);
-      }
-    );
-
     this.userForm = this.formBuilder.group(
       {
         username: [{ value: "", disabled: true }],
@@ -63,6 +57,25 @@ export class ProfileComponent implements OnInit {
       }
     );
 
+    this.authenticationService.getUserData$().subscribe(
+      dataUserData => {
+        const user = dataUserData as User;
+        this.userSubject.next(user);
+        this.userForm.patchValue({
+          username: user.username,
+          name: user.name,
+          lastName: user.lastName,
+          email: user.email,
+          phone: user.phoneNumber
+        });
+      },
+      error => {
+        this.store.error = "Sesión caducada. Por favor, identifíquese de nuevo";
+        this.authenticationService.logout();
+        this.router.navigate(["/login"]);
+      }
+    );
+
     this.store.setLoading(false);
     this.store.setError("");
   }
@@ -73,28 +86,29 @@ export class ProfileComponent implements OnInit {
     }
 
     this.store.setLoading(true);
+    const user = this.userSubject.value;
     this.userService
       .updateUserLogged$({
         id: this.store.user.id,
-        username: this.store.user.username,
+        username: this.fields.username.value,
         password: this.fields.password.value,
-        email: !this.fields.email.dirty
-          ? this.store.user.email
-          : this.fields.email.value,
-        lastName: !this.fields.lastName.dirty
-          ? this.store.user.lastName
-          : this.fields.lastName.value,
-        name: !this.fields.name.dirty
-          ? this.store.user.name
-          : this.fields.name.value,
-        phoneNumber: !this.fields.phone.dirty
-          ? this.store.user.phoneNumber
-          : this.fields.phone.value,
-        role: this.store.user.role,
-        numLogins: this.store.user.numLogins
+        email: this.fields.email.value,
+        lastName: this.fields.lastName.value,
+        name: this.fields.name.value,
+        phoneNumber: this.fields.phone.value,
+        role: user.role,
+        numLogins: user.numLogins
       })
       .subscribe(
         data => {
+          this.userSubject.next(data);
+          this.userForm.patchValue({
+            username: data.username,
+            name: data.name,
+            lastName: data.lastName,
+            email: data.email,
+            phone: data.phoneNumber
+          });
           this.store.setLoading(false);
           this.store.setError("");
           this.openSnackBar();

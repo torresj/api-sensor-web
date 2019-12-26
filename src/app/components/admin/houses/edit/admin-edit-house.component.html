@@ -17,15 +17,11 @@
     >
       <mat-form-field color="accent" appearance="standard">
         <mat-label>ID</mat-label>
-        <input matInput formControlName="id" [value]="(house$ | async)?.id" />
+        <input matInput formControlName="id" />
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
         <mat-label>Nombre *</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          [value]="(house$ | async)?.name"
-        />
+        <input matInput formControlName="name" />
         <mat-error
           *ngIf="
             formControl('name').invalid &&
@@ -37,37 +33,19 @@
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
         <mat-label>Descripción</mat-label>
-        <input
-          matInput
-          formControlName="description"
-          [value]="(house$ | async)?.description"
-        />
+        <input matInput formControlName="description" />
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
         <mat-label>Dirección</mat-label>
-        <input
-          matInput
-          formControlName="address"
-          [value]="(house$ | async)?.address"
-        />
+        <input matInput formControlName="address" />
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
         <mat-label>Latitud</mat-label>
-        <input
-          matInput
-          type="number"
-          formControlName="latitude"
-          [value]="(house$ | async)?.position?.latitude"
-        />
+        <input matInput type="number" formControlName="latitude" />
       </mat-form-field>
       <mat-form-field color="accent" appearance="standard">
         <mat-label>Longitud</mat-label>
-        <input
-          matInput
-          type="number"
-          formControlName="longitude"
-          [value]="(house$ | async)?.position?.longitude"
-        />
+        <input matInput type="number" formControlName="longitude" />
       </mat-form-field>
       <mat-expansion-panel class="admin-house-edit__sensorsPanel">
         <mat-expansion-panel-header>

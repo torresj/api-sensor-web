@@ -1,0 +1,61 @@
+<article class="admin-type-edit" fxLayout="column" *mobxAutorun>
+  <section
+    *ngIf="!store.error && store.loading && !submitted"
+    class="admin-type-edit--loading"
+    fxLayoutAlign="center center"
+  >
+    <mat-spinner class="admin-house-edit" color="accent"></mat-spinner>
+  </section>
+  <section
+    *ngIf="!(!store.error && store.loading && !submitted)"
+    class="admin-type-edit__formSection"
+  >
+    <form
+      class="admin-house-edit__form"
+      [formGroup]="editForm"
+      fxLayout="column"
+    >
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" [value]="(type$ | async)?.id" />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error
+          *ngIf="
+            formControl('name').invalid &&
+            formControl('name').value !== null &&
+            (formControl('name').dirty || formControl('name').touched)
+          "
+          >El nombre es obligatorio</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Acciones</mat-label>
+        <input matInput formControlName="actions" />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        class="admin-edit__form__button"
+        color="accent"
+        (click)="onSubmit()"
+        [disabled]="store.loading"
+        matTooltip="Actualizar casa"
+      >
+        <div
+          *ngIf="store.loading"
+          class="admin-edit__form__bspinner"
+          fxLayoutAlign="center center"
+        >
+          <mat-spinner color="accent" diameter="35"></mat-spinner>
+        </div>
+        <span *ngIf="!store.loading">Actualizar</span>
+      </button>
+    </form>
+  </section>
+</article>

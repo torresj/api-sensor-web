@@ -92,10 +92,12 @@ export class AdminEditHouseComponent implements OnInit {
         const house = houseData as House;
         this.houseSubject.next(house);
         this.editForm.patchValue({
+          id: house.id,
           name: house.name,
           description: house.description,
           address: house.address,
-          position: house.position
+          latitude: house.position.latitude,
+          longitude: house.position.longitude
         });
         this.houseSensorsSubject.next(houseSensorsData as Sensor[]);
         this.houseUsersSubject.next(usersData as User[]);
@@ -160,7 +162,16 @@ export class AdminEditHouseComponent implements OnInit {
       this.houseService.updateSensorsHouse$(this.id, ids)
     ).subscribe(
       ([houseData, sensorsData]) => {
-        this.houseSubject.next(houseData);
+        const houseUpdated = houseData as House;
+        this.houseSubject.next(houseUpdated);
+        this.editForm.patchValue({
+          id: houseUpdated.id,
+          name: houseUpdated.name,
+          description: houseUpdated.description,
+          address: houseUpdated.address,
+          latitude: houseUpdated.position.latitude,
+          longitude: houseUpdated.position.longitude
+        });
         this.houseSensorsSubject.next(sensorsData);
         this.store.setLoading(false);
         this.store.setError("");
