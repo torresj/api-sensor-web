@@ -161,7 +161,15 @@ export class AdminTypesComponent implements AfterViewInit, OnInit, OnDestroy {
             this.loadTypePage();
           },
           error => {
-            this.openSnackBar("No se pudo borrar el tipo " + type.name);
+            if (this.store.httpErrorCode === 409) {
+              this.openSnackBar(
+                "No se pudo borrar el tipo " +
+                  type.name +
+                  ", tiene sensores asociadas"
+              );
+            } else {
+              this.openSnackBar("No se pudo borrar el tipo " + type.name);
+            }
           }
         );
       }

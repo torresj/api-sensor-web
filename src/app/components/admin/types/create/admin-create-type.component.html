@@ -1,0 +1,41 @@
+<article class="admin-type-create" fxLayout="column" *mobxAutorun>
+  <section class="admin-type-create__formSection">
+    <form
+      class="admin-type-create__form"
+      [formGroup]="createForm"
+      fxLayout="column"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Nombre *</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="formControl('name').invalid"
+          >Este campo es obligatorio</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Descricpión</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="standard">
+        <mat-label>Acciones</mat-label>
+        <input matInput formControlName="actions" />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        class="profile-component-create__form__button"
+        color="accent"
+        [disabled]="store.loading"
+      >
+        <div
+          *ngIf="store.loading"
+          class="profile-component-edit__form__spinner"
+          fxLayoutAlign="center center"
+        >
+          <mat-spinner color="accent" diameter="35"></mat-spinner>
+        </div>
+        <span *ngIf="!store.loading">Crear</span>
+      </button>
+    </form>
+  </section>
+</article>

@@ -60,4 +60,12 @@ export class SensortypeService {
       type
     );
   }
+
+  public createType$(newType: SensorType) {
+    const type = JSON.stringify(newType);
+    return this.http.post<SensorType>(
+      this.appConfig.baseApiUrl + this.appConfig.SensorTypePath,
+      type
+    );
+  }
 }

@@ -20,6 +20,7 @@ import { AdminEditHouseComponent } from "./components/admin/houses/edit/admin-ed
 import { AdminTypesComponent } from "./components/admin/types/admin-types.component";
 import { AdminTypeComponent } from "./components/admin/types/type/admin-type.component";
 import { AdminEditTypeComponent } from "./components/admin/types/edit/admin-edit-type.component";
+import { AdminCreateTypeComponent } from "./components/admin/types/create/admin-create-type.component";
 
 const routes: Routes = [
   { path: "", component: IndexComponent },
@@ -69,6 +70,11 @@ const routes: Routes = [
   {
     path: "admin/types",
     component: AdminTypesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin/types/create",
+    component: AdminCreateTypeComponent,
     canActivate: [AuthGuard]
   },
   {
