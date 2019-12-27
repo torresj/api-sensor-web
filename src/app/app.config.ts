@@ -11,4 +11,5 @@ export class AppConfig {
   readonly SensorPath: string = "v1/sensors";
   readonly houseAllPath: string = "v1/houses/all";
   readonly sensorAll: string = "v1/sensors/all";
+  readonly sensorTypeAll: string = "v1/sensortypes/all";
 }

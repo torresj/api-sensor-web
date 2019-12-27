@@ -12,13 +12,25 @@ export class SensorService {
     return this.http.get(this.appConfig.baseApiUrl + this.appConfig.sensorAll);
   }
 
-  public getSensors$(elements: number, page: number) {
+  public getSensors$(
+    elements: number,
+    page: number,
+    filter?: string,
+    typeId?: number
+  ) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.set("elements", elements.toString());
+    httpParams = httpParams.set("page", page.toString());
+    if (filter && filter !== "") {
+      httpParams = httpParams.set("filter", filter);
+    }
+    if (typeId) {
+      httpParams = httpParams.set("sensorTypeId", typeId.toString());
+    }
     return this.http.get(
       this.appConfig.baseApiUrl + this.appConfig.SensorPath,
       {
-        params: new HttpParams()
-          .set("elements", elements.toString())
-          .set("page", page.toString())
+        params: httpParams
       }
     );
   }
@@ -27,5 +39,11 @@ export class SensorService {
     return this.http.get(this.appConfig.baseApiUrl + this.appConfig.sensorAll, {
       params: new HttpParams().set("sensorTypeId", sensorType)
     });
+  }
+
+  public deleteSensor$(id: string) {
+    return this.http.delete(
+      this.appConfig.baseApiUrl + this.appConfig.SensorPath + "/" + id
+    );
   }
 }

@@ -1,0 +1,118 @@
+<article class="admin-sensors-component">
+  <section class="admin-sensors-component-section mat-elevation-z8">
+    <div
+      class="admin-sensors-component--loading"
+      *ngIf="dataSource.loading$ | async"
+    >
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+    <mat-form-field color="accent" class="admin-sensors-component__filter">
+      <input type="search" matInput placeholder="Filtrar" #searchBox />
+    </mat-form-field>
+    <mat-form-field color="accent" class="admin-sensors-component__filter">
+      <mat-label>Tipo de sensor</mat-label>
+      <mat-select
+        [(value)]="filterSensorType"
+        (selectionChange)="onChangeSelect()"
+      >
+        <mat-option></mat-option>
+        <mat-option *ngFor="let type of types" [value]="type.id">{{
+          type.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      color="primary"
+      class="admin-sensors-component__new-sensor"
+      mat-raised-button
+      [routerLink]="'/admin/sensors/create'"
+    >
+      Crear sensor
+    </button>
+    <section class="admin-sensors-component-container-table">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="admin-sensors-component__table"
+      >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="mac">
+          <th mat-header-cell *matHeaderCellDef>MAC</th>
+          <td mat-cell *matCellDef="let element">{{ element.mac }}</td>
+        </ng-container>
+        <ng-container matColumnDef="privateIp">
+          <th mat-header-cell *matHeaderCellDef>IP privada</th>
+          <td mat-cell *matCellDef="let element">{{ element.privateIp }}</td>
+        </ng-container>
+        <ng-container matColumnDef="publicIp">
+          <th mat-header-cell *matHeaderCellDef>IP Pública</th>
+          <td mat-cell *matCellDef="let element">{{ element.publicIp }}</td>
+        </ng-container>
+        <ng-container matColumnDef="houseId">
+          <th mat-header-cell *matHeaderCellDef>Casa</th>
+          <td mat-cell *matCellDef="let element">{{ element.houseId }}</td>
+        </ng-container>
+        <ng-container matColumnDef="sensorTypeId">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let element">{{ element.sensorTypeId }}</td>
+        </ng-container>
+        <ng-container matColumnDef="lastConnection">
+          <th mat-header-cell *matHeaderCellDef>Últ. Conexión</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.lastConnection | date: "medium" }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let element">
+            <section class="admin-sensors-component__actions">
+              <a
+                [routerLink]="'/admin/sensors/' + element.id"
+                class="admin-sensors-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Ver sensor"
+                  >visibility</mat-icon
+                >
+              </a>
+              <a
+                [routerLink]="'/admin/sensors/' + element.id + '/edit'"
+                class="admin-sensors-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Editar sensor"
+                  >create</mat-icon
+                >
+              </a>
+              <a
+                [routerLink]=""
+                (click)="removeSensor(element)"
+                class="admin-sensors-component__action"
+              >
+                <mat-icon color="primary" matTooltip="Borrar sensor"
+                  >delete</mat-icon
+                >
+              </a>
+            </section>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns$ | async"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns$ | async"
+        ></tr>
+      </table>
+    </section>
+    <mat-paginator
+      [length]="dataSource.totalElements$ | async"
+      [pageSize]="10"
+      [pageSizeOptions]="[1, 10, 20, 30]"
+    ></mat-paginator>
+  </section>
+</article>

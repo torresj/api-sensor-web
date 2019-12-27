@@ -21,6 +21,7 @@ import { AdminTypesComponent } from "./components/admin/types/admin-types.compon
 import { AdminTypeComponent } from "./components/admin/types/type/admin-type.component";
 import { AdminEditTypeComponent } from "./components/admin/types/edit/admin-edit-type.component";
 import { AdminCreateTypeComponent } from "./components/admin/types/create/admin-create-type.component";
+import { AdminSensorsComponent } from "./components/admin/sensors/admin-sensors.component";
 
 const routes: Routes = [
   { path: "", component: IndexComponent },
@@ -85,6 +86,11 @@ const routes: Routes = [
   {
     path: "admin/types/:id/edit",
     component: AdminEditTypeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin/sensors",
+    component: AdminSensorsComponent,
     canActivate: [AuthGuard]
   },
   {

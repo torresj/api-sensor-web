@@ -9,6 +9,12 @@ import { SensorType } from "../models/entities/sensortype";
 export class SensortypeService {
   constructor(private http: HttpClient, private appConfig: AppConfig) {}
 
+  public getAllTypes$() {
+    return this.http.get(
+      this.appConfig.baseApiUrl + this.appConfig.sensorTypeAll
+    );
+  }
+
   public getTypes$(elements: number, page: number) {
     return this.http.get(
       this.appConfig.baseApiUrl + this.appConfig.SensorTypePath,

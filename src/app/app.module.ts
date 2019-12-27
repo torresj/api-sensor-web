@@ -56,6 +56,7 @@ import { AdminTypesComponent } from "./components/admin/types/admin-types.compon
 import { AdminTypeComponent } from "./components/admin/types/type/admin-type.component";
 import { AdminEditTypeComponent } from "./components/admin/types/edit/admin-edit-type.component";
 import { AdminCreateTypeComponent } from "./components/admin/types/create/admin-create-type.component";
+import { AdminSensorsComponent } from "./components/admin/sensors/admin-sensors.component";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -78,7 +79,8 @@ import { AdminCreateTypeComponent } from "./components/admin/types/create/admin-
     AdminTypesComponent,
     AdminTypeComponent,
     AdminEditTypeComponent,
-    AdminCreateTypeComponent
+    AdminCreateTypeComponent,
+    AdminSensorsComponent
   ],
   imports: [
     BrowserModule,
